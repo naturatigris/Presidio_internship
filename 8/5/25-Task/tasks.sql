@@ -43,6 +43,57 @@ select * from Orders
 exec proc_order 'VINET';
 --task-11
 
+CREATE PROCEDURE InsertProduct(@ProductName NVARCHAR(100),@SupplierID INT,@CategoryID INT,@QuantityPerUnit NVARCHAR(50) = NULL,
+    @UnitPrice DECIMAL(10, 2),@UnitsInStock SMALLINT = 0,@UnitsOnOrder SMALLINT = 0,@ReorderLevel SMALLINT = 0,
+    @Discontinued BIT = 0)
+AS
+BEGIN
+    INSERT INTO Products 
+    VALUES (@ProductName,@SupplierID,@CategoryID,@QuantityPerUnit,
+        @UnitPrice,@UnitsInStock,@UnitsOnOrder,@ReorderLevel,@Discontinued
+    );
+END;
+EXEC InsertProduct @ProductName='Chai', @SupplierID=1, @CategoryID=1, @QuantityPerUnit='10 boxes x 20 bags', @UnitPrice=18.00, @UnitsInStock=39, @UnitsOnOrder=0, @ReorderLevel=10, @Discontinued=0;
+
+--task-12
+
+create or alter proc proc_sales(@eid int)
+as 
+begin
+select sum(od.UnitPrice * od.Quantity) as total from Orders o join [Order Details] od on od.OrderID=o.OrderID 
+join Employees e on e.EmployeeID=o.EmployeeID where o.EmployeeID=@eid group by o.EmployeeID;
+end
+
+exec proc_sales 1;
+
+--task-13
+WITH RankedProducts AS (
+    SELECT ProductID,ProductName, CategoryID,UnitPrice,
+        ROW_NUMBER() OVER (PARTITION BY CategoryID ORDER BY UnitPrice DESC) AS PriceRank FROM Products
+)
+
+select  * from RankedProducts order by CategoryID, PriceRank
+
+--task-14
+
+WITH ProductRevenue AS (SELECT p.ProductID, p.ProductName, SUM(od.UnitPrice * od.Quantity) AS TotalRevenue FROM Products p 
+JOIN [Order Details] od ON p.ProductID = od.ProductID 
+GROUP BY p.ProductID, p.ProductName) 
+SELECT * FROM ProductRevenue WHERE TotalRevenue > 10000 ORDER BY TotalRevenue DESC;
+
+--task-15
+WITH EmployeeHierarchy AS (
+    SELECT EmployeeID,FirstName,ReportsTo,1 AS Level FROM Employees WHERE ReportsTo IS NULL
+
+    UNION ALL
+
+    SELECT e.EmployeeID,e.FirstName,e.ReportsTo,eh.Level + 1FROM Employees e
+    INNER JOIN EmployeeHierarchy eh ON e.ReportsTo = eh.EmployeeID
+)
+SELECT *
+FROM EmployeeHierarchy
+ORDER BY Level, ReportsTo;
+
 
 
 
