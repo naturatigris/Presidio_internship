@@ -1,0 +1,49 @@
+1)In a transaction, if I perform multiple updates and an error happens in the third statement, but I have not used SAVEPOINT, what will happen if I issue a ROLLBACK?
+Will my first two updates persist?
+
+no, without a savepoint it will undo the entire transaction including the successful statements
+
+2)Suppose Transaction A updates Alice’s balance but does not commit. Can Transaction B read the new balance if the isolation level is set to READ COMMITTED?
+
+postgres does not support uncommitted reads, so transaction B cannot read the updated values,
+(i.e) the uncomiited changes from transaction A
+
+3)What will happen if two concurrent transactions both execute:
+UPDATE tbl_bank_accounts SET balance = balance - 100 WHERE account_name = 'Alice';
+at the same time? Will one overwrite the other?
+postgres has mvcc that locks the transaction preventing the overwrites
+so no two transactions can write to the same record simultaneously.
+Sequence of action:
+The first transaction will update it.
+
+The second will wait until the first commits or rolls back.
+
+This prevents one update from overwriting the other.
+
+4)If I issue ROLLBACK TO SAVEPOINT after_alice;, will it only undo changes made after the savepoint or everything?
+
+it will undo all the changes made after  the savepoint after_alice.
+
+5)Which isolation level in PostgreSQL prevents phantom reads?
+
+serializable
+
+6)Can Postgres perform a dirty read (reading uncommitted data from another transaction)?
+ no, postgres by default does not allow uncomitted reads, hence dirty reads are not possible.
+
+7)If autocommit is ON (default in Postgres), and I execute an UPDATE, is it safe to assume the change is immediately committed?
+In postgres the autocommit is on by default, but yes in any server if the autocommit is ON then the successful statements are then comiited 
+permanently to the database,unless the statement is run inside a transation.
+
+8)If I do this:
+
+BEGIN;
+UPDATE accounts SET balance = balance - 500 WHERE id = 1;
+-- (No COMMIT yet)
+And from another session, I run:
+
+SELECT balance FROM accounts WHERE id = 1;
+Will the second session see the deducted balance?
+
+Second session wont see the deducted balance, as the transaction is not comiited yet the second seesion will 
+read the data value that persisted before the start of the transaction.
