@@ -1,0 +1,15 @@
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\may-21.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\may-21.AssemblyInfoInputs.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\may-21.AssemblyInfo.cs
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\may-21.csproj.CoreCompileInputs.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\may-21.sourcelink.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\bin\Debug\net9.0\may-21.exe
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\bin\Debug\net9.0\may-21.deps.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\bin\Debug\net9.0\may-21.runtimeconfig.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\bin\Debug\net9.0\may-21.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\bin\Debug\net9.0\may-21.pdb
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\may-21.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\refint\may-21.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\may-21.pdb
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\may-21.genruntimeconfig.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-21\obj\Debug\net9.0\ref\may-21.dll
