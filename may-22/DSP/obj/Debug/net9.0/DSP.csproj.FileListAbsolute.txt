@@ -1,0 +1,15 @@
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\bin\Debug\net9.0\DSP.exe
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\bin\Debug\net9.0\DSP.deps.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\bin\Debug\net9.0\DSP.runtimeconfig.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\bin\Debug\net9.0\DSP.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\bin\Debug\net9.0\DSP.pdb
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\DSP.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\DSP.AssemblyInfoInputs.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\DSP.AssemblyInfo.cs
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\DSP.csproj.CoreCompileInputs.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\DSP.sourcelink.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\DSP.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\refint\DSP.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\DSP.pdb
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\DSP.genruntimeconfig.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\DSP\obj\Debug\net9.0\ref\DSP.dll
