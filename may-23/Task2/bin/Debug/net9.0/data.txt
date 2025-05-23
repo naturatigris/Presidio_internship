@@ -1,0 +1,2 @@
+Author: Sandhya Date:23-05-2025
+Hello! This is Sandhya Anand and I have successfully implemented the Proxy Design Pattern. 

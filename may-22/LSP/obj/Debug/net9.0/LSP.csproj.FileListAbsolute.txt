@@ -1,0 +1,15 @@
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\bin\Debug\net9.0\LSP.exe
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\bin\Debug\net9.0\LSP.deps.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\bin\Debug\net9.0\LSP.runtimeconfig.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\bin\Debug\net9.0\LSP.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\bin\Debug\net9.0\LSP.pdb
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\LSP.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\LSP.AssemblyInfoInputs.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\LSP.AssemblyInfo.cs
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\LSP.csproj.CoreCompileInputs.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\LSP.sourcelink.json
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\LSP.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\refint\LSP.dll
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\LSP.pdb
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\LSP.genruntimeconfig.cache
+C:\Users\VC\Documents\GitHub\Presidio_internship\may-22\LSP\obj\Debug\net9.0\ref\LSP.dll
