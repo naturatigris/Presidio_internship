@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\VC\\Documents\\GitHub\\Presidio_internship\\may-23\\may-23.csproj": {}
+    "/Users/sandhyaanand/Documents/GitHub/Presidio_internship/may-23/Task1/may-23.csproj": {}
   },
   "projects": {
-    "C:\\Users\\VC\\Documents\\GitHub\\Presidio_internship\\may-23\\may-23.csproj": {
+    "/Users/sandhyaanand/Documents/GitHub/Presidio_internship/may-23/Task1/may-23.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\VC\\Documents\\GitHub\\Presidio_internship\\may-23\\may-23.csproj",
+        "projectUniqueName": "/Users/sandhyaanand/Documents/GitHub/Presidio_internship/may-23/Task1/may-23.csproj",
         "projectName": "may-23",
-        "projectPath": "C:\\Users\\VC\\Documents\\GitHub\\Presidio_internship\\may-23\\may-23.csproj",
-        "packagesPath": "C:\\Users\\VC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\VC\\Documents\\GitHub\\Presidio_internship\\may-23\\obj\\",
+        "projectPath": "/Users/sandhyaanand/Documents/GitHub/Presidio_internship/may-23/Task1/may-23.csproj",
+        "packagesPath": "/Users/sandhyaanand/.nuget/packages/",
+        "outputPath": "/Users/sandhyaanand/Documents/GitHub/Presidio_internship/may-23/Task1/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\VC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/sandhyaanand/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
