@@ -1,0 +1,82 @@
+[
+  {
+    "question": "How can I create a new account?",
+    "answer": "To create a new account, use the Account model's createAccount method. Provide an account holder name and an initial balance."
+  },
+  {
+    "question": "How do I retrieve an account by ID?",
+    "answer": "Use the getAccountById(accountId) function in the Account model to fetch the details of a specific account."
+  },
+  {
+    "question": "How can I deposit money into an account?",
+    "answer": "Use the deposit(accountId, amount) method of the Transaction Service. It will add the specified amount to the account balance."
+  },
+  {
+    "question": "What happens if I try to withdraw more money than I have?",
+    "answer": "The system will block the transaction and raise an error due to insufficient funds."
+  },
+  {
+    "question": "How do I transfer money from one account to another?",
+    "answer": "Use the transfer(sourceAccountId, targetAccountId, amount) method of the Transaction Service."
+  },
+  {
+    "question": "Can I transfer money to the same account?",
+    "answer": "No. Transfers must happen between two different accounts."
+  },
+  {
+    "question": "What details are stored in a transaction?",
+    "answer": "Each transaction stores the transaction ID, type, amount, source and destination account IDs, and timestamp."
+  },
+  {
+    "question": "Can I create multiple accounts with the same ID?",
+    "answer": "No. Account IDs must be unique."
+  },
+  {
+    "question": "Is it possible to withdraw money from a non-existent account?",
+    "answer": "No. The account must exist to perform a withdrawal."
+  },
+  {
+    "question": "Can I check the current balance of an account?",
+    "answer": "Yes. Retrieve the account using getAccountById(accountId) and check the balance field."
+  },
+  {
+    "question": "What is a transaction?",
+    "answer": "A transaction is any operation that changes the account balance, such as deposits, withdrawals, or transfers."
+  },
+  {
+    "question": "What is a deposit?",
+    "answer": "A deposit is a transaction that increases the account balance by adding money to the account."
+  },
+  {
+    "question": "What is a withdrawal?",
+    "answer": "A withdrawal is a transaction where money is removed from an account, decreasing the account balance."
+  },
+  {
+    "question": "What is a money transfer?",
+    "answer": "A money transfer is the process of moving funds from one account to another."
+  },
+  {
+    "question": "What is an account balance?",
+    "answer": "An account balance is the amount of money currently available in a bank account."
+  },
+  {
+    "question": "What is an account ID?",
+    "answer": "An account ID is a unique identifier assigned to each bank account."
+  },
+  {
+    "question": "What happens if I try to deposit a negative amount?",
+    "answer": "The system should reject deposits with negative amounts as they are invalid."
+  },
+  {
+    "question": "How can I check if an account exists?",
+    "answer": "Use the getAccountById(accountId) method. If the account exists, it will return the account details; otherwise, it will return an error."
+  },
+  {
+    "question": "What should I do if a transaction fails?",
+    "answer": "Check the error message. Common reasons include insufficient funds, invalid account IDs, or negative amounts. Fix the issue and try again."
+  },
+  {
+    "question": "Can the transaction history be retrieved?",
+    "answer": "Yes. If implemented, a transaction log or history function can be used to view past transactions associated with an account."
+  }
+]

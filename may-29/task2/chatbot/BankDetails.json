@@ -1,0 +1,163 @@
+[
+  {
+    "question": "How can I create a new account?",
+    "answer": "To create a new account, use the Account model's createAccount method. Provide an account holder name and an initial balance."
+  },
+  {
+    "question": "How do I retrieve an account by ID?",
+    "answer": "Use the getAccountById(accountId) function in the Account model to fetch the details of a specific account."
+  },
+  {
+    "question": "How can I deposit money into an account?",
+    "answer": "Use the deposit(accountId, amount) method of the Transaction Service. It will add the specified amount to the account balance."
+  },
+  {
+    "question": "What happens if I try to withdraw more money than I have?",
+    "answer": "The system will block the transaction and raise an error due to insufficient funds."
+  },
+  {
+    "question": "How do I transfer money from one account to another?",
+    "answer": "Use the transfer(sourceAccountId, targetAccountId, amount) method of the Transaction Service."
+  },
+  {
+    "question": "Can I transfer money to the same account?",
+    "answer": "No. Transfers must happen between two different accounts."
+  },
+  {
+    "question": "What details are stored in a transaction?",
+    "answer": "Each transaction stores the transaction ID, type, amount, source and destination account IDs, and timestamp."
+  },
+  {
+    "question": "Can I create multiple accounts with the same ID?",
+    "answer": "No. Account IDs must be unique."
+  },
+  {
+    "question": "Is it possible to withdraw money from a non-existent account?",
+    "answer": "No. The account must exist to perform a withdrawal."
+  },
+  {
+    "question": "Can I check the current balance of an account?",
+    "answer": "Yes. Retrieve the account using getAccountById(accountId) and check the balance field."
+  },
+  {
+    "question": "What is a transaction?",
+    "answer": "A transaction is any operation that changes the account balance, such as deposits, withdrawals, or transfers."
+  },
+  {
+    "question": "What is a deposit?",
+    "answer": "A deposit is a transaction that increases the account balance by adding money to the account."
+  },
+  {
+    "question": "What is a withdrawal?",
+    "answer": "A withdrawal is a transaction where money is removed from an account, decreasing the account balance."
+  },
+  {
+    "question": "What is a money transfer?",
+    "answer": "A money transfer is the process of moving funds from one account to another."
+  },
+  {
+    "question": "What is an account balance?",
+    "answer": "An account balance is the amount of money currently available in a bank account."
+  },
+  {
+    "question": "What is an account ID?",
+    "answer": "An account ID is a unique identifier assigned to each bank account."
+  },
+  {
+    "question": "What happens if I try to deposit a negative amount?",
+    "answer": "The system should reject deposits with negative amounts as they are invalid."
+  },
+  {
+    "question": "How can I check if an account exists?",
+    "answer": "Use the getAccountById(accountId) method. If the account exists, it will return the account details; otherwise, it will return an error."
+  },
+  {
+    "question": "What should I do if a transaction fails?",
+    "answer": "Check the error message. Common reasons include insufficient funds, invalid account IDs, or negative amounts. Fix the issue and try again."
+  },
+  {
+    "question": "Can the transaction history be retrieved?",
+    "answer": "Yes. If implemented, a transaction log or history function can be used to view past transactions associated with an account."
+  },
+  {
+    "question": "What is a savings account?",
+    "answer": "A savings account is a bank account where customers can deposit money, earn interest, and withdraw funds, typically used for saving purposes rather than daily transactions."
+  },
+  {
+    "question": "What is a current account?",
+    "answer": "A current account is primarily used by businesses and individuals who have frequent transactions. It usually does not offer interest but provides high liquidity and overdraft facilities."
+  },
+  {
+    "question": "What is an interest rate?",
+    "answer": "An interest rate is the percentage at which a bank pays you for keeping money in your account or charges you for borrowing money."
+  },
+  {
+    "question": "What is a fixed deposit?",
+    "answer": "A fixed deposit is a financial instrument where a sum of money is locked for a fixed period at a fixed interest rate. It earns higher interest than a regular savings account."
+  },
+  {
+    "question": "What is the difference between a savings account and a current account?",
+    "answer": "A savings account is for saving money and earning interest, while a current account is for frequent transactions and usually doesn’t earn interest."
+  },
+  {
+    "question": "What is overdraft protection?",
+    "answer": "Overdraft protection is a feature that allows you to withdraw more money than your current balance, up to a certain limit, usually with interest or fees."
+  },
+  {
+    "question": "How can I apply for a debit card?",
+    "answer": "You can apply for a debit card through your bank’s website, app, or by visiting a branch. It is usually issued when opening a savings or current account."
+  },
+  {
+    "question": "What is a bank statement?",
+    "answer": "A bank statement is a summary of all transactions made in your bank account over a specific period, typically issued monthly."
+  },
+  {
+    "question": "How do I update my account information?",
+    "answer": "You can update personal information like address or phone number by logging into your account online or visiting your bank branch with valid ID proof."
+  },
+  {
+    "question": "What is the minimum balance requirement?",
+    "answer": "The minimum balance is the least amount of money that must be maintained in an account to avoid penalties or account closure."
+  },
+  {
+    "question": "What is online banking?",
+    "answer": "Online banking allows you to manage your account, make transactions, and access services through the internet without visiting the bank."
+  },
+  {
+    "question": "What is mobile banking?",
+    "answer": "Mobile banking is a service that enables banking transactions through a mobile app on smartphones or tablets."
+  },
+  {
+    "question": "What is a cheque?",
+    "answer": "A cheque is a written order directing a bank to pay a specific amount from the writer's account to the person named on the cheque."
+  },
+  {
+    "question": "What is a bounced cheque?",
+    "answer": "A cheque is said to bounce when the account does not have sufficient funds to honor the amount written, resulting in non-payment."
+  },
+  {
+    "question": "How do I close my bank account?",
+    "answer": "You must visit your bank branch or submit a closure form online (if supported), settle dues, and provide necessary identification to close your account."
+  },
+  {
+    "question": "What is a loan?",
+    "answer": "A loan is a sum of money borrowed from the bank that must be paid back with interest over a set period."
+  },
+  {
+    "question": "What is credit score and why is it important?",
+    "answer": "A credit score is a numerical expression of your creditworthiness. Banks use it to determine your eligibility for loans and credit cards."
+  },
+  {
+    "question": "How secure is online banking?",
+    "answer": "Online banking is generally secure if you use strong passwords, enable two-factor authentication, and avoid logging in from public networks."
+  },
+  {
+    "question": "What is a recurring deposit?",
+    "answer": "A recurring deposit is a type of term deposit where a customer deposits a fixed amount every month and earns interest on it."
+  },
+  {
+    "question": "What are bank charges?",
+    "answer": "Bank charges are fees that banks collect for providing services like ATM withdrawals beyond the free limit, SMS alerts, account maintenance, etc."
+  }
+
+]
