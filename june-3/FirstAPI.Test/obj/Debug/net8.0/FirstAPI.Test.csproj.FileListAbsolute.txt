@@ -1,0 +1,7 @@
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-3/FirstAPI.Test/bin/Debug/net8.0/CoverletSourceRootsMapping_FirstAPI.Test
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-3/FirstAPI.Test/obj/Debug/net8.0/FirstAPI.Test.csproj.AssemblyReference.cache
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-3/FirstAPI.Test/obj/Debug/net8.0/FirstAPI.Test.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-3/FirstAPI.Test/obj/Debug/net8.0/FirstAPI.Test.AssemblyInfoInputs.cache
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-3/FirstAPI.Test/obj/Debug/net8.0/FirstAPI.Test.AssemblyInfo.cs
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-3/FirstAPI.Test/obj/Debug/net8.0/FirstAPI.Test.csproj.CoreCompileInputs.cache
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-3/FirstAPI.Test/obj/Debug/net8.0/FirstAPI.Test.sourcelink.json
