@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DSP")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17f9b1807153f3bf0bef8b528ecfca992735fe54")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1bfe821f1ba6b2e5c7ddc7c99060a57149ba8ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("DSP")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DSP")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

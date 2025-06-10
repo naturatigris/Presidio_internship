@@ -1,0 +1,19 @@
+user:
+[key]email,name,password,hashkey,createdat,status,post collection
+
+post
+id [key][guid],useremail[foreignkey],imageurl[optional] or refer to the table,title,slug title,content,[collection] comments,status
+
+image:
+id[guid][key],postid , name,uploadedat
+comments
+id[key][guid], postid,useremail,createdat,content,status
+
+
+
+encrypt data model
+using bcrypt
+
+
+
+
