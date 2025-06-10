@@ -1,0 +1,21 @@
+<div class="customer-card">
+  <h3 class="customer-title">Customer Details</h3>
+  <div class="customer-info">
+    <p class="customer-detail"><span class="detail-label">Name:</span> {{ customer.name }}</p>
+    <p class="customer-detail"><span class="detail-label">Age:</span> {{ customer.age }}</p>
+    <p class="customer-detail"><span class="detail-label">Email:</span> {{ customer.email }}</p>
+    <p class="customer-detail"><span class="detail-label">Phone:</span> {{ customer.phone }}</p>
+    <p class="customer-detail"><span class="detail-label">Address:</span> {{ customer.address }}</p>
+  </div>
+
+  <div class="customer-feedback">
+    <button class="feedback-button like-button" (click)="like()" aria-label="Like">
+      <i class="bi bi-hand-thumbs-up"></i>
+      <span class="feedback-count">{{ likes }}</span>
+    </button>
+    <button class="feedback-button dislike-button" (click)="dislike()" aria-label="Dislike">
+      <i class="bi bi-hand-thumbs-down"></i>
+      <span class="feedback-count">{{ dislikes }}</span>
+    </button>
+  </div>
+</div>

@@ -149,3 +149,6 @@
 /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-6/bloggingplatform/bin/Debug/net9.0/Serilog.Sinks.File.dll
 /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-6/bloggingplatform/bin/Debug/net9.0/AspNetCoreRateLimit.dll
 /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-6/bloggingplatform/bin/Debug/net9.0/Newtonsoft.Json.dll
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-6/bloggingplatform/bin/Debug/net9.0/AngleSharp.dll
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-6/bloggingplatform/bin/Debug/net9.0/AngleSharp.Css.dll
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-6/bloggingplatform/bin/Debug/net9.0/HtmlSanitizer.dll

@@ -38,7 +38,10 @@ builder.Services.AddDbContext<BlogPlatformContext>(opts =>
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ModelStateValidationFilter>();
+        options.Filters.Add<SanitizeInputFilter>();
+
 })
+
     .AddJsonOptions(opt => opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 //https
 builder.Services.AddHttpContextAccessor();
@@ -160,6 +163,7 @@ builder.Services.AddScoped<IUserValidationService, UserValidationService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<RefreshTokenService>();
+builder.Services.AddScoped<SanitizeInputFilter>();
 
 
 
@@ -184,6 +188,7 @@ builder.Services.AddRateLimiter(options =>
 
 var app = builder.Build();
 app.UseMiddleware<GlobalExceptionMiddleware>();
+
 app.UseRateLimiter();
 
 
