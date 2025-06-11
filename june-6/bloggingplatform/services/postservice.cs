@@ -170,20 +170,5 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
 
             return query.ToList();
         }
-    private async Task ValidateUserEmail(string email)
-            {
-                if (string.IsNullOrWhiteSpace(email))
-                    throw new ArgumentException("Email is required.");
-
-                var user = await _userRepository.Get(email);
-            if (user == null)
-                throw new Exception("Invalid user email.");
-
-            if (user.IsDeleted)
-                throw new Exception("User is deleted.");
-                    }
-
-
-
     }
 }

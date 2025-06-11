@@ -363,3 +363,4 @@ FROM "Posts" AS p
 2025-06-10 16:55:44.767 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 547.4988 ms
 2025-06-10 16:55:44.767 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 547ms - User: Anonymous
 2025-06-10 16:55:44.767 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?UserEmail=sandhya123%40gmail.com - 200 null application/json; charset=utf-8 549.5634ms
+2025-06-10 17:56:04.191 +05:30 [INF] Application is shutting down...

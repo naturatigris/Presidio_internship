@@ -24,18 +24,18 @@ namespace BlogPlatform.Controllers
         }
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> AddComment([FromBody] CommentDto dto, string performedBy)
+        public async Task<IActionResult> AddComment([FromBody] CommentDto dto)
         {
             try
             {
                 var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
                 var role = User.FindFirst(ClaimTypes.Role)?.Value;
-                if (role != "Admin" && userEmail != performedBy)
+                if (role != "Admin" && userEmail != dto.UserEmail)
                     return Forbid();
 
 
                 var comment = _mapper.Map<Comment>(dto);
-                var created = await _commentService.AddComment(comment, performedBy);
+                var created = await _commentService.AddComment(comment, userEmail);
                 return CreatedAtAction(nameof(AddComment), new { id = created.Id }, created);
             }
             catch (Exception ex)
@@ -59,17 +59,22 @@ namespace BlogPlatform.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateComment(Guid id, [FromBody] UpdateCommentDto dto,string performedByEmail)
+        public async Task<IActionResult> UpdateComment(Guid id, [FromBody] UpdateCommentDto dto)
         {
             try
             {
+                var existing = await _commentService.GetCommentById(id);
+                if (existing == null||existing.IsDeleted) {
+                    return NotFound("no such comment");
+                }
+
                  var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
                 var role = User.FindFirst(ClaimTypes.Role)?.Value;
-                if (role != "Admin" && userEmail != performedByEmail)
+                if (role != "Admin" && userEmail != existing.UserEmail)
                     return Forbid();
 
                 var comment = _mapper.Map<Comment>(dto);
-                var updated = await _commentService.UpdateComment(id, comment, performedByEmail);
+                var updated = await _commentService.UpdateComment(id, comment, userEmail);
                 return Ok(updated);
             }
             catch (Exception ex)
@@ -97,17 +102,22 @@ namespace BlogPlatform.Controllers
         }
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteComment(Guid id,string performedByEmail)
+        public async Task<IActionResult> DeleteComment(Guid id)
         {
             try
             {
+                var existing = await _commentService.GetCommentById(id);
+                if (existing == null||existing.IsDeleted) {
+                    return NotFound("no such comment");
+                }
+
                 var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
                 var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
-                if (role != "Admin" && userEmail != performedByEmail)
+                if (role != "Admin" && userEmail != existing.UserEmail)
                     return Forbid();
 
-                var deleted = await _commentService.DeleteComment(id, performedByEmail);
+                var deleted = await _commentService.DeleteComment(id, userEmail);
                 return Ok(deleted);
             }
             catch (Exception ex)

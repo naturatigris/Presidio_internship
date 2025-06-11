@@ -13,7 +13,7 @@ namespace BlogPlatform.Repositories
 
             public override async Task<User> Get(string key)
             {
-                return await _Context.Users.SingleOrDefaultAsync(u => u.Email == key);
+            return await _Context.Users.SingleOrDefaultAsync(u => u.Email == key && !u.IsDeleted);
             }
 
         public override async Task<IEnumerable<User>> GetAll()

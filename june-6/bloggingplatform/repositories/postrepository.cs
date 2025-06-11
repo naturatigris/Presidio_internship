@@ -20,7 +20,10 @@ namespace BlogPlatform.Repositories
 
 public override async Task<IEnumerable<Post>> GetAll()
 {
-    var posts = await _Context.Posts.ToListAsync();
+    var posts = await _Context.Posts.Where(p => !p.IsDeleted)
+    .Include(p => p.User)
+    .ToListAsync();
+;
 
 
     return posts;

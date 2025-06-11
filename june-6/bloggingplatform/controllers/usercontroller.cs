@@ -79,18 +79,14 @@ namespace BlogPlatform.Controllers.v1
         }
         [Authorize]
         [HttpPut("{email}")]
-        public async Task<IActionResult> UpdateUser(string email, [FromBody] UpdateUserDto dto, [FromQuery] string performedByEmail)
+        public async Task<IActionResult> UpdateUser(string email, [FromBody] UpdateUserDto dto)
         {
                 var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
                 var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
-                if (role != "Admin" && userEmail != performedByEmail)
+                if (role != "Admin" && userEmail != email)
                     return Forbid();
 
-            var performer = await _userService.Get(performedByEmail);
-            if (performer == null || performer.IsDeleted)
-                return NotFound("Performing user not found.");
-
             var user = await _userService.Get(email);
             if (user == null)
                 return NotFound("User not found.");
@@ -99,39 +95,25 @@ namespace BlogPlatform.Controllers.v1
 
             if (!string.IsNullOrEmpty(dto.Password))
                 user.PasswordHash =  _passwordHasher.HashPassword(dto.Password);
-
-            var updated = await _userService.UpdateUser(email, user, performedByEmail);
-            return Ok(updated);
-        }
-        [Authorize]
-
-        [HttpPut("admin/{email}")]
-        public async Task<IActionResult> UpdateUserAsAdmin(string email, [FromBody] AdminUpdateUserDto dto, [FromQuery] string performedByEmail)
-        {
-                var role = User.FindFirst(ClaimTypes.Role)?.Value;
-
                 if (role != "Admin")
-                    return Forbid("Only admins or the comment author can perform this action.");
+                    {
+                        dto.Role = user.Role;
+                        dto.IsSuspended = user.IsSuspended;
+                        dto.SuspensionReason = user.SuspensionReason;
+                        dto.SuspendedUntil = user.SuspendedUntil;
+                    }
 
-            var user = await _userService.Get(email);
-            if (user == null)
-                return NotFound("User not found.");
 
-            _mapper.Map(dto, user);
-
-            if (!string.IsNullOrEmpty(dto.Password))
-                user.PasswordHash =  _passwordHasher.HashPassword(dto.Password);
-
-            var updated = await _userService.UpdateUser(email, user, performedByEmail);
+            var updated = await _userService.UpdateUser(email, user, userEmail);
             return Ok(updated);
         }
         [Authorize]
         [HttpDelete("delete/{email}")]
-        public async Task<IActionResult> DeleteUser(string email,[FromQuery] string performedByEmail)
+        public async Task<IActionResult> DeleteUser(string email)
         {    var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
             var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
-            if (role != "Admin" && userEmail != performedByEmail)
+            if (role != "Admin" && userEmail != email)
             return Forbid();
 
             var existingUser = await _userService.Get(email);
@@ -139,7 +121,7 @@ namespace BlogPlatform.Controllers.v1
                 return NotFound("User not found or already deleted");
 
 
-            var result = await _userService.DeleteUser(email, email);
+            var result = await _userService.DeleteUser(email, userEmail);
             return Ok(new { message = $"User {email} marked as deleted." });
         }
         [HttpGet("getpostbyser/{email}")]

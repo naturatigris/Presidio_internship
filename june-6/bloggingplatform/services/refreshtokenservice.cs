@@ -38,8 +38,11 @@ namespace BlogPlatform.Services
 
         public virtual async Task<RefreshToken?> Validate(string token)
         {
-            var stored = await _refreshTokenRepository.GetByToken(token);
+                var trimmedToken = token.Trim();
+
+            var stored = await _refreshTokenRepository.GetByToken(trimmedToken);
             if (stored == null || stored.IsRevoked || stored.Expires < DateTime.UtcNow)
+
                 return null;
 
             return stored;

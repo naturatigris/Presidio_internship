@@ -2,7 +2,6 @@ using AutoMapper;
 using BlogPlatform.Interfaces;
 using BlogPlatform.Models;
 using BlogPlatform.Models.DTOs;
-using BlogPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
@@ -26,19 +25,19 @@ public class PostController : ControllerBase
     }
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> CreatePost([FromForm] Postto dto, [FromQuery] string performedByEmail)
+    public async Task<IActionResult> CreatePost([FromForm] Postto dto)
     {
         try
         {    var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
             var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
-            if (role != "Admin" && userEmail != performedByEmail)
+            if (role != "Admin" && userEmail != dto.UserEmail)
                 return Forbid();
 
 
             var post = _mapper.Map<Post>(dto);
             var created = await _postService.AddPost(post, dto.UserEmail);
-            post.Images = await _imageService.SaveImagesAsync(dto.Images, created.Id, performedByEmail);
+            post.Images = await _imageService.SaveImagesAsync(dto.Images, created.Id, userEmail);
 
             return CreatedAtAction(nameof(GetPostById), new { version = "1.0", id = created.Id }, created);
         }
@@ -66,20 +65,25 @@ public class PostController : ControllerBase
     }
     [Authorize]
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePost(Guid id, [FromForm] PostUpdateDto dto, [FromQuery] string performedByEmail)
+    public async Task<IActionResult> UpdatePost(Guid id, [FromForm] PostUpdateDto dto)
     {
         try
         {
+                var post = await _postService.GetPostByID(id);
+                if (post == null || post.IsDeleted)
+                    return NotFound("Post not found");
+
+
                 var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
                 var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
-                if (role != "Admin" && userEmail != performedByEmail)
+                if (role != "Admin" && userEmail != post.UserEmail)
                     return Forbid();
 
             var updatedPost = _mapper.Map<Post>(dto);
             updatedPost.Id = id;
 
-            var result = await _postService.UpdatePost(id, performedByEmail, updatedPost, dto.Images);
+            var result = await _postService.UpdatePost(id, userEmail, updatedPost, dto.Images);
             if (result == null)
                 return NotFound($"Post with ID {id} not found");
 
@@ -92,17 +96,21 @@ public class PostController : ControllerBase
     }
     [Authorize]
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeletePost(Guid id, [FromQuery] string performedByEmail)
+    public async Task<IActionResult> DeletePost(Guid id)
     {
         try
         {
+            var post = await _postService.GetPostByID(id);
+            if (post == null || post.IsDeleted)
+                return NotFound("Post already deleted");
+
                 var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
                 var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
-                if (role != "Admin" && userEmail != performedByEmail)
+                if (role != "Admin" && userEmail != post.UserEmail)
                     return Forbid();
 
-            var result = await _postService.DeletePost(id, performedByEmail);
+            var result = await _postService.DeletePost(id, post.UserEmail);
             return Ok(result);
         }
         catch (Exception ex)

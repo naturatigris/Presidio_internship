@@ -21,7 +21,6 @@ namespace BlogPlatform.Services
 
         public async Task<Comment> AddComment(Comment comment, string performedBy)
         {
-                await _userValidationService.ValidateUserEmail(performedBy);
                 await _userValidationService.ValidateUserEmail(comment.UserEmail);
 
 
@@ -99,6 +98,7 @@ namespace BlogPlatform.Services
         }
         public async Task<IEnumerable<Comment>> GetFilteredComments(Guid? postId,string? userEmail, string? status, string? sortOrder, int? pageNumber, int? pageSize)
                 {
+
                     var comments = await _commentRepo.GetAll();
 
                     var query = comments
@@ -107,8 +107,12 @@ namespace BlogPlatform.Services
                         if (postId.HasValue)
                             query = query.Where(c => c.PostId == postId.Value);
 
-                    if (!string.IsNullOrEmpty(userEmail))
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                await _userValidationService.ValidateUserEmail(userEmail);
+
                 query = query.Where(c => c.UserEmail == userEmail);
+            }
 
                     if (!string.IsNullOrEmpty(status))
                         query = query.Where(c => c.Status.Equals(status, StringComparison.OrdinalIgnoreCase));

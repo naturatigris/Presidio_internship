@@ -1,0 +1,24 @@
+<!-- Cart Icon -->
+<div class="cart-icon-container">
+  <i class="bi bi-cart3">
+    <span class="cart-badge">
+      {{ cartCount }}
+    </span>
+  </i>
+</div>
+<!--Products-->
+
+<div class="product">
+    <h2>Product List</h2>
+<div class="products-container">
+  <div *ngFor="let product of products" class="product-card">
+    <img [src]="product.image" class="product-image" [alt]="product.name">
+    <div class="product-details">
+      <h5 class="product-name">{{ product.name }}</h5>
+      <p class="product-price">Price: ₹{{ product.price }}</p>
+      <button class="add-to-cart-btn" (click)="addToCart()">Add to Cart</button>
+    </div>
+  </div>
+</div>
+</div>
+

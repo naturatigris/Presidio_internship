@@ -14,13 +14,18 @@ namespace BlogPlatform.Services
         private readonly IRepository<string, User> _userrepository;
         private readonly IRepository<Guid, Post> _postrepository;
         private readonly IUserAuditLogRepository _auditLogRepository;
+        private readonly IUserValidationService _userValidationService;
 
-        public UserService(BlogPlatformContext context, IRepository<string, User> userrepository, IRepository<Guid, Post> postrepository, IUserAuditLogRepository auditLogRepository)
+
+
+        public UserService(BlogPlatformContext context, IRepository<string, User> userrepository, IRepository<Guid, Post> postrepository, IUserAuditLogRepository auditLogRepository,IUserValidationService userValidationService)
         {
             _context = context;
             _userrepository = userrepository;
             _postrepository = postrepository;
             _auditLogRepository = auditLogRepository;
+            _userValidationService = userValidationService;
+
 
         }
         public async Task<User> AddUser(User user, string PerformedByEmail)
@@ -68,15 +73,15 @@ namespace BlogPlatform.Services
         }
         public async Task<User> DeleteUser(string key, string performedByEmail)
         {
-            var user = await _userrepository.Get(key);
+            User user = await _userrepository.Get(key);
 
             if (user == null)
                 throw new Exception("User not found");
 
-            if (user.Status == "Deleted")
+            if (user.IsDeleted)
                 return user;
 
-            user.Status = "Deleted";
+            user.IsDeleted = true;
             await _userrepository.Update(user.Email, user);
 
             await _auditLogRepository.AddAsync(new UserAuditLog
@@ -91,10 +96,12 @@ namespace BlogPlatform.Services
             return user;
         }
 
-        public async Task<IEnumerable<Post>> GetPostByUser(string key)
+        public async Task<IEnumerable<Post>> GetPostByUser(string email)
         {
+                        await _userValidationService.ValidateUserEmail(email);
+
             var posts = await _postrepository.GetAll();
-            var final = posts.Where(p => p.UserEmail == key).ToList();
+            var final = posts.Where(p => p.UserEmail == email).ToList();
             return final;
 
         }
