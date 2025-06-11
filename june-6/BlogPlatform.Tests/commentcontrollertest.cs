@@ -50,7 +50,7 @@ namespace BlogPlatform.Tests
             _mockMapper.Setup(m => m.Map<Comment>(dto)).Returns(comment);
             _mockCommentService.Setup(s => s.AddComment(comment, "test@example.com")).ReturnsAsync(createdComment);
 
-            var result = await _controller.AddComment(dto, "test@example.com") as CreatedAtActionResult;
+            var result = await _controller.AddComment(dto) as CreatedAtActionResult;
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result.StatusCode, Is.EqualTo(201));
@@ -81,31 +81,43 @@ namespace BlogPlatform.Tests
         {
             var commentId = Guid.NewGuid();
             var dto = new UpdateCommentDto();
-            var updatedComment = new Comment { Id = commentId };
+            var userEmail = _controller.HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+
+            var updatedComment = new Comment { Id = commentId,UserEmail = userEmail };
 
             _mockMapper.Setup(m => m.Map<Comment>(dto)).Returns(updatedComment);
-            _mockCommentService.Setup(s => s.UpdateComment(commentId, updatedComment, "test@example.com")).ReturnsAsync(updatedComment);
+                _mockCommentService
+        .Setup(s => s.GetCommentById(commentId))
+        .ReturnsAsync(updatedComment);
 
-            var result = await _controller.UpdateComment(commentId, dto, "test@example.com") as OkObjectResult;
+            _mockCommentService.Setup(s => s.UpdateComment(commentId, updatedComment,userEmail)).ReturnsAsync(updatedComment);
 
-            Assert.That(result, Is.Not.Null);
-            Assert.That(((Comment)result.Value).Id, Is.EqualTo(commentId));
-        }
-
-        [Test]
-        public async Task DeleteComment_ReturnsOkResult()
-        {
-            var commentId = Guid.NewGuid();
-            var deletedComment = new Comment { Id = commentId };
-
-            _mockCommentService.Setup(s => s.DeleteComment(commentId, "test@example.com")).ReturnsAsync(deletedComment);
-
-            var result = await _controller.DeleteComment(commentId, "test@example.com") as OkObjectResult;
+            var result = await _controller.UpdateComment(commentId, dto) as OkObjectResult;
 
             Assert.That(result, Is.Not.Null);
             Assert.That(((Comment)result.Value).Id, Is.EqualTo(commentId));
         }
 
+[Test]
+public async Task DeleteComment_ReturnsOkResult()
+{
+    var commentId = Guid.NewGuid();
+    var userEmail = _controller.HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+    var deletedComment = new Comment { Id = commentId, UserEmail = userEmail };
+
+    _mockCommentService
+        .Setup(s => s.GetCommentById(commentId))
+        .ReturnsAsync(deletedComment);
+
+    _mockCommentService
+        .Setup(s => s.DeleteComment(commentId, userEmail))
+        .ReturnsAsync(deletedComment);
+
+    var result = await _controller.DeleteComment(commentId) as OkObjectResult;
+
+    Assert.That(result, Is.Not.Null, "Expected OkObjectResult but got null.");
+    Assert.That(((Comment)result.Value).Id, Is.EqualTo(commentId));
+}
         [Test]
         public async Task GetFilteredComments_ReturnsFilteredList()
         {

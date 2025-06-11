@@ -47,10 +47,10 @@ namespace BlogPlatform.Controllers.v1
         public async Task<IActionResult> GetByEmail(string email)
         {
             var user = await _userService.Get(email);
-                if (user== null)
-    {
-        return NotFound($"User with email '{email}' not found.");
-    }
+                if (user== null|| user.IsDeleted)
+            {
+                return NotFound($"User with email '{email}' not found.");
+            }
 
             return Ok(user);
         }
@@ -68,6 +68,24 @@ namespace BlogPlatform.Controllers.v1
 
                 dto.Role = "Admin";
             }
+                var existingUser = await _userService.Get(dto.Email);
+
+            if (existingUser != null)
+            {
+                if (existingUser.IsDeleted)
+                {
+                    // "Un-delete" and update the existing user
+                    _mapper.Map(dto, existingUser);
+                    existingUser.IsDeleted = false;
+                    existingUser.PasswordHash = _passwordHasher.HashPassword(dto.Password);
+
+                    var reactivatedUser = await _userService.UpdateUser(dto.Email, existingUser, dto.Email);
+                    return Ok(new { message = "User was previously deleted. Reactivated and updated.", user = reactivatedUser });
+                }
+
+                return Conflict($"A user with email '{dto.Email}' already exists.");
+            }
+
 
             var user = _mapper.Map<User>(dto);
 
@@ -88,7 +106,7 @@ namespace BlogPlatform.Controllers.v1
                     return Forbid();
 
             var user = await _userService.Get(email);
-            if (user == null)
+            if (user == null|| user.IsDeleted)
                 return NotFound("User not found.");
 
             _mapper.Map(dto, user);
@@ -129,6 +147,10 @@ namespace BlogPlatform.Controllers.v1
         {
             try
             {
+             var existingUser = await _userService.Get(email);
+            if (existingUser == null || existingUser.IsDeleted)
+                return NotFound("User not found or already deleted");
+
                 var posts = await _userService.GetPostByUser(email);
 
                 if (posts == null || !posts.Any())

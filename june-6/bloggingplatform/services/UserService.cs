@@ -98,8 +98,7 @@ namespace BlogPlatform.Services
 
         public async Task<IEnumerable<Post>> GetPostByUser(string email)
         {
-                        await _userValidationService.ValidateUserEmail(email);
-
+   
             var posts = await _postrepository.GetAll();
             var final = posts.Where(p => p.UserEmail == email).ToList();
             return final;

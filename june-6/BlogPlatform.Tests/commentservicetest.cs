@@ -65,12 +65,10 @@ namespace BlogPlatform.Tests.Services
             };
             var performedBy = "admin@example.com";
 
-            _userValidationServiceMock.Setup(v => v.ValidateUserEmail(performedBy)).Returns(Task.CompletedTask);
             _auditRepoMock.Setup(a => a.AddAsync(It.IsAny<CommentAuditLog>())).Returns(Task.CompletedTask);
 
             var result = await _service.AddComment(comment, performedBy);
 
-            _userValidationServiceMock.Verify(v => v.ValidateUserEmail(performedBy), Times.Once);
             _auditRepoMock.Verify(a => a.AddAsync(It.Is<CommentAuditLog>(log =>
                 log.Action == "Created" &&
                 log.CommentId == comment.Id &&

@@ -66,9 +66,11 @@ namespace BlogPlatform.Tests.Controllers
             Post p = new Post{ Id=postId,UserEmail=email};
 
             SetupUserWithClaims(email, "Admin");
-            _mockPostService.Setup(s => s.DeletePost(postId, email)).ReturnsAsync(p);
+            _mockPostService.Setup(s => s.GetPostByID(postId)).ReturnsAsync(p); // If needed
 
-            var result = await _controller.DeletePost(postId, email);
+            _mockPostService.Setup(s => s.DeletePost(postId,email)).ReturnsAsync(p);
+
+            var result = await _controller.DeletePost(postId);
 
             Assert.That(result, Is.TypeOf<OkObjectResult>());
         }
@@ -82,11 +84,12 @@ namespace BlogPlatform.Tests.Controllers
             var email = "admin@example.com";
 
             SetupUserWithClaims(email, "Admin");
+    _mockPostService.Setup(s => s.GetPostByID(postId)).ReturnsAsync(updatedPost); // If needed
 
-            _mockMapper.Setup(m => m.Map<Post>(dto)).Returns(updatedPost);
-            _mockPostService.Setup(s => s.UpdatePost(postId, email, updatedPost, dto.Images)).ReturnsAsync(updatedPost);
+    _mockMapper.Setup(m => m.Map<Post>(dto)).Returns(updatedPost);
+    _mockPostService.Setup(s => s.UpdatePost(postId, email, updatedPost, dto.Images)).ReturnsAsync(updatedPost);
 
-            var result = await _controller.UpdatePost(postId, dto, email);
+            var result = await _controller.UpdatePost(postId, dto);
 
             Assert.That(result, Is.TypeOf<OkObjectResult>());
             var okResult = result as OkObjectResult;

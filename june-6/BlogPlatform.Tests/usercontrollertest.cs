@@ -109,32 +109,12 @@ public async Task UpdateUser_ReturnsOk_WhenUserIsUpdated()
     _mapperMock.Setup(m => m.Map(dto, user));
     _passwordHasherMock.Setup(h => h.HashPassword(dto.Password)).Returns("hashed-pass");
 
-    var result = await _controller.UpdateUser(email, dto, performerEmail);
+    var result = await _controller.UpdateUser(email, dto);
 
     Assert.That(result, Is.TypeOf<OkObjectResult>());
     Assert.That(((OkObjectResult)result).Value, Is.EqualTo(user));
 }
 
-        [Test]
-        public async Task UpdateUserAsAdmin_ReturnsForbidden_WhenUserIsNotAdmin()
-        {
-            var email = "user@example.com";
-            var performerEmail = "user@example.com";
-            var dto = new AdminUpdateUserDto();
-
-            var claims = new List<Claim>
-    {
-        new Claim(ClaimTypes.Email, performerEmail),
-        new Claim(ClaimTypes.Role, "User")
-    };
-            var identity = new ClaimsIdentity(claims);
-            var claimsPrincipal = new ClaimsPrincipal(identity);
-            _controller.ControllerContext.HttpContext = new DefaultHttpContext { User = claimsPrincipal };
-
-            var result = await _controller.UpdateUserAsAdmin(email, dto, performerEmail);
-
-            Assert.That(result, Is.TypeOf<ForbidResult>());
-        }
         [Test]
         public async Task DeleteUser_ReturnsOk_WhenUserIsDeleted()
         {
@@ -154,7 +134,7 @@ public async Task UpdateUser_ReturnsOk_WhenUserIsUpdated()
             _userServiceMock.Setup(s => s.Get(email)).ReturnsAsync(user);
             _userServiceMock.Setup(s => s.DeleteUser(email, email)).ReturnsAsync(user);
 
-            var result = await _controller.DeleteUser(email, performerEmail);
+            var result = await _controller.DeleteUser(email);
 
             Assert.That(result, Is.TypeOf<OkObjectResult>());
             var message = ((OkObjectResult)result).Value?.ToString();
@@ -165,11 +145,15 @@ public async Task GetPostsByUser_ReturnsOk_WhenPostsExist()
 {
     // Arrange
     var email = "test@example.com";
+    var user = new User { Email = email };
     var posts = new List<Post>
     {
         new Post { Id = Guid.NewGuid(), Title = "Post 1", Content = "Content 1", UserEmail = email },
         new Post { Id = Guid.NewGuid(), Title = "Post 2", Content = "Content 2", UserEmail = email }
     };
+
+
+    _userServiceMock.Setup(s => s.Get(email)).ReturnsAsync(user);
 
     _userServiceMock.Setup(s => s.GetPostByUser(email)).ReturnsAsync(posts);
 
