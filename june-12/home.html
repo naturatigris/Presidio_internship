@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Fetch Methods</title>
+  <script src="home.js" defer></script>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Fetch Users</h2>
+    <div class="button-group">
+      <button onclick="getUsersWithCallback()">Get Users (Callback)</button>
+      <button onclick="getUsersWithPromise()">Get Users (Promise)</button>
+      <button onclick="getUsersWithAsyncAwait()">Get Users (Async/Await)</button>
+    </div>
+    <div class="loading" id="loading" style="display: none;">Loading...</div>
+
+    <div id="user-output"></div>
+  </div>
+</body>
+</html>

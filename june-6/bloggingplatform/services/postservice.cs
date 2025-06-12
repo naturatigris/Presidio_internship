@@ -2,7 +2,8 @@ using BlogPlatform.Contexts;
 using BlogPlatform.Interfaces;
 using BlogPlatform.Models;
 using BlogPlatform.Models.AuditLogs;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.SignalR;
+using BlogPlatform.Hubs;
 using System.Text.Json;
 
 namespace BlogPlatform.Services

@@ -4,6 +4,8 @@ using BlogPlatform.Models;
 using BlogPlatform.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using BlogPlatform.Hubs;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BlogPlatform.Controllers.v1
@@ -16,13 +18,15 @@ public class PostController : ControllerBase
     private readonly IPostService _postService;
     private readonly IMapper _mapper;
     private readonly IImageService _imageService;
+private readonly IHubContext<PostHub> _hubContext;
 
-    public PostController(IPostService postService, IMapper mapper, IImageService imageService)
-    {
-        _postService = postService;
-        _mapper = mapper;
-        _imageService = imageService;
-    }
+        public PostController(IPostService postService, IMapper mapper, IImageService imageService, IHubContext<PostHub> hubContext)
+        {
+            _postService = postService;
+            _mapper = mapper;
+            _imageService = imageService;
+            _hubContext = hubContext;
+        }
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> CreatePost([FromForm] Postto dto)
@@ -35,9 +39,12 @@ public class PostController : ControllerBase
                 return Forbid();
 
 
+            await _hubContext.Clients.All.SendAsync("ReceivePost",dto);
+
             var post = _mapper.Map<Post>(dto);
             var created = await _postService.AddPost(post, dto.UserEmail);
             post.Images = await _imageService.SaveImagesAsync(dto.Images, created.Id, userEmail);
+
 
             return CreatedAtAction(nameof(GetPostById), new { version = "1.0", id = created.Id }, created);
         }

@@ -9,7 +9,7 @@ using BlogPlatform.Helpers;
 using BlogPlatform.Repositories;
 using BlogPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
-using AspNetCoreRateLimit;
+using BlogPlatform.Hubs;
 using BlogPlatform.Models;
 using BlogPlatform.Validations;
 using System.Security.Claims;
@@ -19,7 +19,7 @@ using System.Text;
 using BlogPlatform.Filters;
 using BlogPlatform.Middleware;
 using Microsoft.AspNetCore.RateLimiting;
-using System.Threading.Tasks;
+using System.Threading.RateLimiting;
 
 
 
@@ -78,7 +78,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-policy.WithOrigins("http://localhost:5147", "https://localhost:5147")
+policy.WithOrigins("http://localhost:5147", "https://localhost:5147","http://127.0.0.1:55100")
        .AllowAnyHeader()
        .AllowAnyMethod()
        .AllowCredentials();
@@ -95,6 +95,8 @@ builder.Services.AddAuthorization(options =>
             return role == "Admin" || (email != null && context.Resource?.ToString() == email);
         }));
 });
+//signalR
+builder.Services.AddSignalR();
 
 
 
@@ -170,13 +172,22 @@ builder.Services.AddScoped<SanitizeInputFilter>();
 //ratelimiting
 builder.Services.AddRateLimiter(options =>
 {
-    options.AddFixedWindowLimiter(policyName: "fixed",
-        options =>
+    options.AddPolicy("fixed", context =>
+    {
+        // Determine key (user email if available, else IP)
+        var userEmail = context.User?.FindFirst(ClaimTypes.Email)?.Value;
+        var key = !string.IsNullOrEmpty(userEmail)
+            ? userEmail
+            : context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+        return RateLimitPartition.GetFixedWindowLimiter(key, _ => new FixedWindowRateLimiterOptions
         {
-            options.PermitLimit = 1000;            
-            options.QueueLimit = 0;                
-            options.Window = TimeSpan.FromHours(1); 
+            PermitLimit = 1000,
+            Window = TimeSpan.FromHours(1),
+            QueueLimit = 0,
+            AutoReplenishment = true
         });
+    });
 });
 
 
@@ -234,6 +245,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<PostHub>("/hubs/posts"); // Add this line
+
 
 
 app.Run();
