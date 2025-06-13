@@ -1,0 +1,4 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+<h2>Dashboard</h2>
+<p *ngIf="user">Welcome, {{ user?.UserName }}</p>
+<p *ngIf="!user">No user found in {{ useSession ? 'sessionStorage' : 'localStorage' }}</p>

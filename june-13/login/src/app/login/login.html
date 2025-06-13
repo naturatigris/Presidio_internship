@@ -1,0 +1,12 @@
+<!-- src/app/login/login.component.html -->
+<h2>Login</h2>
+<form #loginForm="ngForm" (ngSubmit)="login(username.value, password.value, useSession.checked)">
+  <input #username name="username" placeholder="Username" required />
+  <input #password name="password" placeholder="Password" type="password" required />
+  <label>
+    <input #useSession type="checkbox" name="useSession" />
+    Use Session Storage
+  </label>
+  <button type="submit">Login</button>
+</form>
+<p style="color:red">{{ errorMsg }}</p>

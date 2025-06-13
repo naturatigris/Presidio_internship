@@ -1,0 +1,8 @@
+<div *ngIf="weather">
+  <h3>Weather in {{ weather.city }}</h3>
+  <img [src]="weather.icon" alt="icon" />
+  <p>Temperature: {{ weather.temp }} °C</p>
+  <p>Condition: {{ weather.condition }}</p>
+  <p>Humidity: {{ weather.humidity }}%</p>
+  <p>Wind Speed: {{ weather.windSpeed }} km/h</p>
+</div>

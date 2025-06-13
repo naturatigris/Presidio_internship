@@ -1,0 +1,19 @@
+<div class="search-box">
+  <label>
+    <input [(ngModel)]="city" placeholder="Enter city name" />
+  </label>
+  <button (click)="getWeather()">Get Weather</button>
+</div>
+
+<div class="history-tags" *ngIf="history.length">
+  <h4>Recent Searches:</h4>
+  <div class="tags-container">
+    <span
+      class="tag"
+      *ngFor="let city of history"
+      (click)="useHistory(city)"
+    >
+      {{ city }}
+    </span>
+  </div>
+</div>
