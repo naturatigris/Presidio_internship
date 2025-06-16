@@ -1,6 +1,7 @@
 <button type="button" class="btn btn-primary">
   Notifications <span class="badge badge-light">{{cartCount}}</span>
 </button>
+<input type="text" [(ngModel)]="searchString" (input)="handleSearchProducts()"/>
   <div>
         @if (cartCount>0) {
             @for (item of cartItems; track item.Id) {
@@ -20,7 +21,7 @@
 @else {
     <div>
         <div class="spinner-border text-success" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only"></span>
         </div>
     </div>
 }
