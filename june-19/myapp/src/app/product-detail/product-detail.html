@@ -1,0 +1,17 @@
+<div *ngIf="loading">Loading product details...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="product">
+  <h2>{{ product.title }}</h2>
+  <img [src]="product.thumbnail" alt="{{ product.title }}" />
+  <p><strong>Price:</strong> ${{ product.price }}</p>
+  <p><strong>Description:</strong> {{ product.description }}</p>
+  <p><strong>Category:</strong> {{ product.category }}</p>
+  <p><strong>Stock:</strong> {{ product.stock }}</p>
+  <p><strong>Rating:</strong> {{ product.rating }} / 5</p>
+
+  <h4>Reviews</h4>
+  <div *ngFor="let review of product.reviews">
+    <p><strong>{{ review.reviewerName }}</strong> ({{ review.rating }}★): {{ review.comment }}</p>
+  </div>
+</div>

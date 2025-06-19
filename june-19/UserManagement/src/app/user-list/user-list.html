@@ -1,0 +1,17 @@
+
+<input #searchInput placeholder="Search by name or role">
+<select #roleSelect>
+  <option value="">All Roles</option>
+  <option value="Admin">Admin</option>
+  <option value="User">User</option>
+  <option value="Guest">Guest</option>
+</select>
+<ul>
+  <li *ngFor="let user of filteredUsers$ | async">
+    <p>{{user.id}}</p>
+    <p><strong>Name:</strong>{{user.fullName}}</p>
+    <p><strong>Age:</strong>{{user.age}}</p>
+    <p><strong>Gender:</strong>{{user.gender}}</p>
+    <p><strong>Role:</strong>{{user.role}}</p>
+  </li>
+</ul>
