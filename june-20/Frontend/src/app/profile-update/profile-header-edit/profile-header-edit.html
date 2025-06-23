@@ -1,0 +1,30 @@
+<div class="modal-backdrop" *ngIf="showDetailsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Edit Profile Details</h2>
+      <i class="bx bx-x close-icon" (click)="onCancel()"></i>
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="modal-content">
+      <label>Email (not editable)</label>
+      <input type="text" [value]="email" disabled />
+
+      <label>Name</label>
+      <input type="text" formControlName="name" [value]="name" />
+      <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched" >
+        Name is required.
+      </div>
+
+      <label>Role</label>
+      <input type="text" disabled [value]="role" />
+      <div *ngIf="profileForm.get('role')?.invalid && profileForm.get('role')?.touched">
+        Role is required.
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="save-btn" [disabled]="profileForm.invalid">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

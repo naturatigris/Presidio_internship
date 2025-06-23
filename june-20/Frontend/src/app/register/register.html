@@ -1,0 +1,63 @@
+  <div class="container">
+    <div class="left-panel">
+    </div>
+    <div class="right-panel">
+      <h2>User Signup</h2>
+      <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <input type="text" placeholder="Full Name" [(ngModel)]="user.Name" formControlName="name">
+              <div *ngIf="userForm.get('name')?.touched && userForm.get('name')?.errors?.['required']" class="error">
+                  Name is required.
+              </div>
+
+        </div>
+
+      <div class="input-group">
+        <input type="email" placeholder="Email"  [(ngModel)]="user.Email" formControlName="email">
+            <div *ngIf="userForm.get('email')?.touched">
+      <div *ngIf="userForm.get('email')?.errors?.['required']" class="error">Email is required.</div>
+      <div *ngIf="userForm.get('email')?.errors?.['email']" class="error">Invalid email format.</div>
+    </div>
+
+      </div>
+
+      <!-- Role selection -->
+      <div class="input-group">
+        <select formControlName="role" [(ngModel)]="user.Role">
+          <option value="User">User</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+
+      <!-- Admin Secret (shown only if Admin selected) -->
+      <div class="input-group" *ngIf="user.Role === 'Admin'">
+        <input type="text" placeholder="Admin Secret" [(ngModel)]="user.AdminSecret" formControlName="adminSecret" >
+            <div *ngIf="userForm.errors?.['missingAdminSecret']" class="error">Admin secret is required.</div>
+      </div>
+            <div class="input-group">
+        <input type="password" placeholder="Password"  [(ngModel)]="user.Password" formControlName="password">
+            <div *ngIf="userForm.get('password')?.touched">
+      <div *ngIf="userForm.get('password')?.errors?.['required']" class="error">Password is required.</div>
+      <div *ngIf="userForm.get('password')?.errors?.['minlength']" class="error">Minimum 8 characters required.</div>
+      <div *ngIf="userForm.get('password')?.errors?.['weakPassword']" class="error">
+        Must include at least one uppercase and one special character.
+      </div>
+    </div>
+
+      </div>
+      <div class="input-group">
+        <input type="password" placeholder="Confirm Password"  formControlName="confirmpassword">
+            <div *ngIf="userForm.get('confirmpassword')?.touched && userForm.errors?.['passwordMismatch']" class="error">
+      Passwords do not match.
+    </div>
+
+      </div>
+
+        <div class="options">
+          <label><input type="checkbox"> Remember</label>
+          <a href="#">Forgot password?</a>
+        </div>
+        <button type="submit" [disabled]="userForm.invalid" class="login-btn">Signup</button>
+      </form>
+    </div>
+  </div>

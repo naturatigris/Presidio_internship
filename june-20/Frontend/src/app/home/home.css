@@ -1,0 +1,139 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .navbar .actions button {
+      margin-left: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .navbar .actions .login {
+      background-color: transparent;
+      color: #007BFF;
+      border: 1px solid #007BFF;
+    }
+    .login a{
+        color: #007BFF;
+        text-decoration: none;
+
+    }
+    .signup a{
+      color:white;
+      text-decoration: none;
+    }
+
+    .navbar .actions .signup {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      padding: 3rem 2rem;
+      background-color: #eaf4ff;
+      text-align: center;
+      justify-content: space-around;
+    }
+
+    .hero img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    /* Why section */
+    .why {
+      padding: 4rem 2rem;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .why h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .why p {
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .social-links {
+      margin: 1rem 0;
+    }
+
+    .social-links a {
+      color: white;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+      color: #007BFF;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar .actions {
+        margin-top: 0.5rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+    }

@@ -1,0 +1,85 @@
+<div class="profile-container">
+
+  <!-- Profile Header -->
+  <div class="profile-header">
+<div class="profile-image-wrapper">
+  <img [src]="profileImageSrc" alt="profile image" class="profile-image">
+  <i class="bx bx-edit edit-icon" (click)="triggerFileInput()"></i>
+  <input type="file" #fileInput accept="image/*" (change)="onImageSelected($event)" style="display: none;" />
+</div>
+
+    <div class="profile-details">
+      <p class="name">{{ user?.name }}</p>
+      <p class="email">{{ user?.email }}</p>
+      <p class="role">{{ user?.role }}</p>
+    </div>
+
+<i class="bx bx-edit nameedit" (click)="showDetailsModal = true"></i>
+  </div>
+  <app-profile-header-edit
+  [showDetailsModal]="showDetailsModal"
+  [name]="user?.name || ''"
+  [role]="user?.role || ''"
+  [email]="user?.email || ''"  
+  (close)="showDetailsModal = false"
+  (save)="updateUserDetails($event)">
+</app-profile-header-edit>
+
+
+
+  <!-- Bio Section -->
+  <div class="profile-section">
+    <h3>Bio <i class="bx bx-edit section-edit" (click)="showBioModal = true"></i></h3>
+    <p>{{ user?.bio}}</p>
+  </div>
+  <app-bio-edit
+  [showBioModal]="showBioModal"
+  [currentBio]="user?.bio || ''"
+  (close)="showBioModal = false"
+  (save)="updateBio($event)">
+</app-bio-edit>
+
+
+  <!-- Location Section -->
+  <div class="profile-section">
+    <h3>Location <i class="bx bx-edit section-edit" (click)="showLocationModal = true"></i></h3>
+    <p>{{ user?.location}}</p>
+  </div>
+  <app-location-edit
+    [showLocationModal]="showLocationModal"
+  [currentLocation]="user?.location || ''"
+  (close)="showLocationModal = false"
+  (save)="updateLocation($event)">
+  </app-location-edit>
+
+
+  <!-- Account Status Section -->
+  <div class="profile-section">
+    <h3>Account Status <i class="bx bx-edit section-edit {{resource}}" (click)="showStatus = true"></i></h3>
+    <p>Status: {{ user?.isSuspended ? 'Suspended' : 'Active' }}</p>
+    <p *ngIf="user?.isSuspended">Reason: {{ user?.suspensionReason }}</p>
+    <p *ngIf="user?.isSuspended">Until: {{ user?.suspendedUntil | date }}</p>
+  </div>
+  <app-profile-status-edit
+      [showStatusModal]="showStatus"
+  [isSuspended]="user?.isSuspended || false"
+  [suspensionReason]="user?.suspensionReason||''" 
+  [suspendedUntil]="user?.suspendedUntil||null"
+  (close)="showStatus = false"
+  (save)="updateStatus($event)">
+
+  </app-profile-status-edit>
+
+  <!-- Security Section -->
+  <div class="profile-section">
+    <h3>Password <i class="bx bx-edit section-edit" (click)="showPasswordModal = true"></i></h3>
+    <p>********</p>
+  </div>
+  <app-password-edit
+  [showpasswordmodal]="showPasswordModal"
+  (close)="showPasswordModal = false"
+  (save)="updatePassword($event)">
+</app-password-edit>
+
+
+</div>

@@ -1,0 +1,35 @@
+<div class="settings-container">
+  <h2 class="settings-title">Settings</h2>
+
+  <form (ngSubmit)="onSubmit()" class="settings-form">
+    <div>
+      <label>Username</label>
+      <p class="settings-display">{{user?.name}}</p>
+    </div>
+
+    <div>
+      <label>Email</label>
+      <p class="settings-display">{{user?.email}}</p>
+    </div>
+
+
+    <div class="settings-checkbox-group">
+      <label class="settings-checkbox-label">
+        <input type="checkbox" [(ngModel)]="profileVisible" name="profileVisible" />
+        <span>Profile Visibility</span>
+      </label>
+
+      <label class="settings-checkbox-label">
+        <input type="checkbox" [(ngModel)]="notificationsEnabled" name="notificationsEnabled" />
+        <span>Email Notifications</span>
+      </label>
+    </div>
+
+    <div class="settings-button">
+      <button type="button" (click)="deleteAccount()" class="delete-button">
+        <span class="material-icons">delete</span>
+        <span>{{ confirmDelete ? 'Click again to confirm' : 'Delete Account' }}</span>
+      </button>
+    </div>
+  </form>
+</div>

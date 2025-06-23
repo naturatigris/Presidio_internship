@@ -1,0 +1,21 @@
+<div class="modal-backdrop" *ngIf="showLocationModal">
+  <div class="modal">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2>Edit Location</h2>
+      <i class="bx bx-x close-icon" (click)="closeLocationModal()"></i>
+    </div>
+
+    <!-- Modal Content -->
+    <div class="modal-content">
+      <label for="location">Location</label>
+      <textarea id="location" [(ngModel)]="editableLocation" rows="4" placeholder="Enter your Location..."></textarea>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeLocationModal()">Cancel</button>
+      <button class="save-btn" (click)="saveLocation()">Save</button>
+    </div>
+  </div>
+</div>

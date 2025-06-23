@@ -1,0 +1,1412 @@
+2025-06-21 00:57:18.352 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-06-21 00:57:18.653 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-06-21 00:57:18.661 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-06-21 00:57:18.662 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-06-21 00:57:18.663 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-06-21 00:57:18.670 +05:30 [INF] Applying migration '20250620192704_AddCategoryTable'.
+2025-06-21 00:57:18.736 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Categories" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    CONSTRAINT "PK_Categories" PRIMARY KEY ("Id")
+);
+2025-06-21 00:57:18.748 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "CategoryPost" (
+    "CategoriesId" uuid NOT NULL,
+    "PostsId" uuid NOT NULL,
+    CONSTRAINT "PK_CategoryPost" PRIMARY KEY ("CategoriesId", "PostsId"),
+    CONSTRAINT "FK_CategoryPost_Categories_CategoriesId" FOREIGN KEY ("CategoriesId") REFERENCES "Categories" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_CategoryPost_Posts_PostsId" FOREIGN KEY ("PostsId") REFERENCES "Posts" ("Id") ON DELETE CASCADE
+);
+2025-06-21 00:57:18.750 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_CategoryPost_PostsId" ON "CategoryPost" ("PostsId");
+2025-06-21 00:57:18.751 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250620192704_AddCategoryTable', '9.0.5');
+2025-06-21 11:09:59.343 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-06-21 11:09:59.666 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-06-21 11:09:59.673 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-06-21 11:09:59.675 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-06-21 11:09:59.675 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-06-21 11:09:59.683 +05:30 [INF] Applying migration '20250621053946_AddPostCategoryTable'.
+2025-06-21 11:09:59.709 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "CategoryPost" DROP CONSTRAINT "FK_CategoryPost_Categories_CategoriesId";
+2025-06-21 11:09:59.710 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "CategoryPost" DROP CONSTRAINT "FK_CategoryPost_Posts_PostsId";
+2025-06-21 11:09:59.711 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "CategoryPost" DROP CONSTRAINT "PK_CategoryPost";
+2025-06-21 11:09:59.714 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "CategoryPost" RENAME TO "PostCategories";
+2025-06-21 11:09:59.714 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER INDEX "IX_CategoryPost_PostsId" RENAME TO "IX_PostCategories_PostsId";
+2025-06-21 11:09:59.721 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "PostCategories" ADD CONSTRAINT "PK_PostCategories" PRIMARY KEY ("CategoriesId", "PostsId");
+2025-06-21 11:09:59.724 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "PostCategories" ADD CONSTRAINT "FK_PostCategories_Categories_CategoriesId" FOREIGN KEY ("CategoriesId") REFERENCES "Categories" ("Id") ON DELETE CASCADE;
+2025-06-21 11:09:59.730 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "PostCategories" ADD CONSTRAINT "FK_PostCategories_Posts_PostsId" FOREIGN KEY ("PostsId") REFERENCES "Posts" ("Id") ON DELETE CASCADE;
+2025-06-21 11:09:59.731 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250621053946_AddPostCategoryTable', '9.0.5');
+2025-06-21 11:10:09.005 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-21 11:10:09.170 +05:30 [INF] Now listening on: http://localhost:5147
+2025-06-21 11:10:09.172 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-21 11:10:09.172 +05:30 [INF] Hosting environment: Development
+2025-06-21 11:10:09.172 +05:30 [INF] Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-20/Backend
+2025-06-21 11:10:18.724 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/index.html - null null
+2025-06-21 11:10:18.837 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/index.html - 200 null text/html;charset=utf-8 114.4098ms
+2025-06-21 11:10:18.846 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/index.css - null null
+2025-06-21 11:10:18.846 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/swagger-ui.css - null null
+2025-06-21 11:10:18.852 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/swagger-ui-bundle.js - null null
+2025-06-21 11:10:18.862 +05:30 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-06-21 11:10:18.863 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/index.css - 200 202 text/css 18.0545ms
+2025-06-21 11:10:18.864 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/swagger-ui-standalone-preset.js - null null
+2025-06-21 11:10:18.872 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-06-21 11:10:18.872 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-06-21 11:10:18.880 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 15.2105ms
+2025-06-21 11:10:18.881 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/index.js - null null
+2025-06-21 11:10:18.880 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/swagger-ui.css - 200 154949 text/css 35.1308ms
+2025-06-21 11:10:18.883 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/index.js - 200 null application/javascript;charset=utf-8 1.9083ms
+2025-06-21 11:10:18.888 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-06-21 11:10:18.889 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/swagger-ui-bundle.js - 200 1484234 text/javascript 37.3632ms
+2025-06-21 11:10:19.115 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/v1/swagger.json - null null
+2025-06-21 11:10:19.274 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 158.8222ms
+2025-06-21 11:10:20.509 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/favicon-32x32.png - null null
+2025-06-21 11:10:20.511 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-06-21 11:10:20.511 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/favicon-32x32.png - 200 628 image/png 1.5634ms
+2025-06-21 11:11:05.671 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/swagger/v1/swagger.json - null null
+2025-06-21 11:11:05.698 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 27.3922ms
+2025-06-21 11:21:58.690 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 11:21:58.699 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-21 11:21:58.701 +05:30 [INF] CORS policy execution successful.
+2025-06-21 11:21:58.704 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 14.0149ms
+2025-06-21 11:21:58.705 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 53
+2025-06-21 11:21:58.712 +05:30 [INF] CORS policy execution successful.
+2025-06-21 11:21:58.784 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 11:21:59.025 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 11:22:00.363 +05:30 [INF] Executed DbCommand (49ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 11:22:00.745 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 11:22:00.746 +05:30 [INF] User found: True
+2025-06-21 11:22:00.746 +05:30 [INF] Password valid: False
+2025-06-21 11:22:00.747 +05:30 [ERR] Invalid credentials
+2025-06-21 11:22:00.752 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-21 11:22:00.764 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 1736.0171ms
+2025-06-21 11:22:00.764 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 11:22:00.767 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 2051.0841 ms
+2025-06-21 11:22:00.769 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 2055ms - User: Anonymous
+2025-06-21 11:22:00.777 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 2071.7441ms
+2025-06-21 11:22:10.301 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 11:22:10.302 +05:30 [INF] CORS policy execution successful.
+2025-06-21 11:22:10.302 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.4623ms
+2025-06-21 11:22:10.303 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 11:22:10.304 +05:30 [INF] CORS policy execution successful.
+2025-06-21 11:22:10.305 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 11:22:10.306 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 11:22:10.329 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 11:22:10.601 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 11:22:10.602 +05:30 [INF] User found: True
+2025-06-21 11:22:10.602 +05:30 [INF] Password valid: True
+2025-06-21 11:22:10.720 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 11:22:10.728 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 11:22:10.729 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 422.9852ms
+2025-06-21 11:22:10.729 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 11:22:10.729 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 425.2965 ms
+2025-06-21 11:22:10.730 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 425ms - User: Anonymous
+2025-06-21 11:22:10.730 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 426.9965ms
+2025-06-21 12:37:45.507 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 12:37:45.510 +05:30 [INF] CORS policy execution successful.
+2025-06-21 12:37:45.511 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 4.2076ms
+2025-06-21 12:37:45.512 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 12:37:45.513 +05:30 [INF] CORS policy execution successful.
+2025-06-21 12:37:45.519 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 12:37:45.521 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 12:37:45.643 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 12:37:45.776 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 12:37:45.776 +05:30 [INF] User found: True
+2025-06-21 12:37:45.776 +05:30 [INF] Password valid: True
+2025-06-21 12:37:45.786 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 12:37:45.787 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 12:37:45.787 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 265.9926ms
+2025-06-21 12:37:45.787 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 12:37:45.787 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 274.1409 ms
+2025-06-21 12:37:45.788 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 274ms - User: Anonymous
+2025-06-21 12:37:45.788 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 275.5972ms
+2025-06-21 12:39:36.960 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 12:39:36.960 +05:30 [INF] CORS policy execution successful.
+2025-06-21 12:39:36.960 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 0.588ms
+2025-06-21 12:39:36.961 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 12:39:36.962 +05:30 [INF] CORS policy execution successful.
+2025-06-21 12:39:36.962 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 12:39:36.962 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 12:39:36.965 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 12:39:37.108 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 12:39:37.109 +05:30 [INF] User found: True
+2025-06-21 12:39:37.109 +05:30 [INF] Password valid: True
+2025-06-21 12:39:37.113 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 12:39:37.113 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 12:39:37.114 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 151.5369ms
+2025-06-21 12:39:37.114 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 12:39:37.114 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 152.2936 ms
+2025-06-21 12:39:37.114 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 152ms - User: Anonymous
+2025-06-21 12:39:37.114 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 153.0341ms
+2025-06-21 16:17:05.040 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/ - null null
+2025-06-21 16:17:05.055 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:17:05.063 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:17:05.070 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:17:05.070 +05:30 [INF] HTTP GET /api/v1/users/ responded 405 in 13.5469 ms
+2025-06-21 16:17:05.073 +05:30 [INF] HTTP GET /api/v1/users/ responded 405 in 15ms - User: Anonymous
+2025-06-21 16:17:05.078 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/ - 405 0 null 39.984ms
+2025-06-21 16:17:19.010 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/ - null null
+2025-06-21 16:17:19.010 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:17:19.011 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:17:19.011 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:17:19.011 +05:30 [INF] HTTP GET /api/v1/users/ responded 405 in 0.5583 ms
+2025-06-21 16:17:19.011 +05:30 [INF] HTTP GET /api/v1/users/ responded 405 in 0ms - User: Anonymous
+2025-06-21 16:17:19.011 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/ - 405 0 null 1.6799ms
+2025-06-21 16:17:40.099 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:17:40.099 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:17:40.101 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 2.0575ms
+2025-06-21 16:17:40.103 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:17:40.107 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:17:40.107 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:17:40.116 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:17:40.172 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:17:40.307 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:17:40.307 +05:30 [INF] User found: True
+2025-06-21 16:17:40.307 +05:30 [INF] Password valid: False
+2025-06-21 16:17:40.308 +05:30 [ERR] Invalid credentials
+2025-06-21 16:17:40.309 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-21 16:17:40.316 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 199.1609ms
+2025-06-21 16:17:40.316 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:17:40.317 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 209.2774 ms
+2025-06-21 16:17:40.317 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 209ms - User: Anonymous
+2025-06-21 16:17:40.317 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 213.767ms
+2025-06-21 16:17:47.571 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:17:47.571 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:17:47.572 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 0.6406ms
+2025-06-21 16:17:47.573 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:17:47.573 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:17:47.573 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:17:47.574 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:17:47.579 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:17:47.721 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:17:47.721 +05:30 [INF] User found: True
+2025-06-21 16:17:47.721 +05:30 [INF] Password valid: True
+2025-06-21 16:17:47.730 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:17:47.730 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:17:47.730 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 156.4442ms
+2025-06-21 16:17:47.730 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:17:47.730 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 157.2827 ms
+2025-06-21 16:17:47.731 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 157ms - User: Anonymous
+2025-06-21 16:17:47.731 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 158.2184ms
+2025-06-21 16:17:50.391 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/ - null null
+2025-06-21 16:17:50.392 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:17:50.393 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:17:50.393 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:17:50.393 +05:30 [INF] HTTP GET /api/v1/users/ responded 405 in 1.0894 ms
+2025-06-21 16:17:50.394 +05:30 [INF] HTTP GET /api/v1/users/ responded 405 in 1ms - User: Anonymous
+2025-06-21 16:17:50.394 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/ - 405 0 null 2.7571ms
+2025-06-21 16:22:43.456 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:22:43.457 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:22:43.458 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:43.458 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:43.458 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0.4924 ms
+2025-06-21 16:22:43.458 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0ms - User: Anonymous
+2025-06-21 16:22:43.459 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - 405 0 null 2.6666ms
+2025-06-21 16:22:45.377 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:22:45.379 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:22:45.379 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:45.379 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:45.379 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0.3894 ms
+2025-06-21 16:22:45.379 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0ms - User: Anonymous
+2025-06-21 16:22:45.380 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - 405 0 null 2.3778ms
+2025-06-21 16:22:46.302 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:22:46.302 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:22:46.302 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:46.302 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:46.302 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0.3163 ms
+2025-06-21 16:22:46.303 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0ms - User: Anonymous
+2025-06-21 16:22:46.303 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - 405 0 null 1.1283ms
+2025-06-21 16:22:50.976 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:22:50.976 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:22:50.977 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:50.977 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:50.977 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0.2707 ms
+2025-06-21 16:22:50.977 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0ms - User: Anonymous
+2025-06-21 16:22:50.977 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - 405 0 null 1.0105ms
+2025-06-21 16:22:52.582 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:22:52.583 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:22:52.583 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:52.583 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:22:52.583 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0.2619 ms
+2025-06-21 16:22:52.583 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0ms - User: Anonymous
+2025-06-21 16:22:52.583 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - 405 0 null 0.9906ms
+2025-06-21 16:23:18.165 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:23:18.165 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:23:18.165 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 0.7253ms
+2025-06-21 16:23:18.166 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:23:18.167 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:23:18.167 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:23:18.168 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:23:18.184 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:23:18.325 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:23:18.326 +05:30 [INF] User found: True
+2025-06-21 16:23:18.326 +05:30 [INF] Password valid: True
+2025-06-21 16:23:18.328 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:23:18.328 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:23:18.328 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 160.1414ms
+2025-06-21 16:23:18.328 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:23:18.329 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 161.5417 ms
+2025-06-21 16:23:18.329 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 161ms - User: Anonymous
+2025-06-21 16:23:18.329 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 162.4874ms
+2025-06-21 16:24:21.268 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:24:21.270 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:24:21.272 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:24:21.273 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:24:21.273 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 2.7660 ms
+2025-06-21 16:24:21.273 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 3ms - User: Anonymous
+2025-06-21 16:24:21.273 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - 405 0 null 5.119ms
+2025-06-21 16:24:25.475 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:24:25.475 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:24:25.475 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:24:25.475 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-21 16:24:25.476 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0.3885 ms
+2025-06-21 16:24:25.476 +05:30 [INF] HTTP GET /api/v1/users/emily.johnson@x.dummyjson.com responded 405 in 0ms - User: Anonymous
+2025-06-21 16:24:25.476 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/emily.johnson@x.dummyjson.com - 405 0 null 1.8862ms
+2025-06-21 16:25:35.276 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:25:35.280 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:25:35.281 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:25:35.343 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 16:25:35.594 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:25:35.600 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-06-21 16:25:35.611 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 267.8737ms
+2025-06-21 16:25:35.611 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:25:35.613 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 332.3496 ms
+2025-06-21 16:25:35.615 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 334ms - User: Anonymous
+2025-06-21 16:25:35.616 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - 404 null text/plain; charset=utf-8 340.4787ms
+2025-06-21 16:25:43.011 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:25:43.012 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:25:43.012 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:25:43.013 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 16:25:43.038 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:25:43.039 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-06-21 16:25:43.040 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 27.2397ms
+2025-06-21 16:25:43.041 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:25:43.041 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 28.4489 ms
+2025-06-21 16:25:43.041 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 28ms - User: Anonymous
+2025-06-21 16:25:43.042 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - 404 null text/plain; charset=utf-8 30.8348ms
+2025-06-21 16:25:59.575 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:25:59.575 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:25:59.576 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:25:59.576 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 16:25:59.592 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:25:59.593 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-06-21 16:25:59.593 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 16.6641ms
+2025-06-21 16:25:59.593 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:25:59.593 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 17.6544 ms
+2025-06-21 16:25:59.594 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 17ms - User: Anonymous
+2025-06-21 16:25:59.594 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - 404 null text/plain; charset=utf-8 19.2643ms
+2025-06-21 16:26:10.983 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:26:10.983 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:26:10.984 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.5193ms
+2025-06-21 16:26:10.988 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:26:10.989 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:26:10.989 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:26:10.990 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:26:10.993 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:26:11.139 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:26:11.140 +05:30 [INF] User found: True
+2025-06-21 16:26:11.140 +05:30 [INF] Password valid: True
+2025-06-21 16:26:11.143 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:26:11.143 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:26:11.143 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 153.1226ms
+2025-06-21 16:26:11.143 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:26:11.144 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 154.6886 ms
+2025-06-21 16:26:11.144 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 154ms - User: Anonymous
+2025-06-21 16:26:11.144 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 156.2124ms
+2025-06-21 16:26:27.611 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:26:27.612 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:26:27.613 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:26:27.613 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 16:26:27.621 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:26:27.622 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-06-21 16:26:27.624 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 9.8728ms
+2025-06-21 16:26:27.624 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:26:27.624 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 11.6293 ms
+2025-06-21 16:26:27.625 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 12ms - User: Anonymous
+2025-06-21 16:26:27.626 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - 404 null text/plain; charset=utf-8 14.4347ms
+2025-06-21 16:28:25.262 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - null null
+2025-06-21 16:28:25.265 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:28:25.266 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:28:25.278 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 16:28:25.311 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:28:25.311 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2025-06-21 16:28:25.312 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 34.0249ms
+2025-06-21 16:28:25.312 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:28:25.312 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 47.0842 ms
+2025-06-21 16:28:25.313 +05:30 [INF] HTTP GET /api/v1/users/get/emily.johnson@x.dummyjson.com responded 404 in 47ms - User: Anonymous
+2025-06-21 16:28:25.313 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/emily.johnson@x.dummyjson.com - 404 null text/plain; charset=utf-8 51.4205ms
+2025-06-21 16:29:13.269 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:29:13.271 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:29:13.272 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 2.3309ms
+2025-06-21 16:29:13.273 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:29:13.274 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:29:13.274 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:29:13.275 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:29:13.278 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:29:13.424 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:29:13.424 +05:30 [INF] User found: True
+2025-06-21 16:29:13.424 +05:30 [INF] Password valid: True
+2025-06-21 16:29:13.427 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:29:13.428 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:29:13.428 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 153.0872ms
+2025-06-21 16:29:13.428 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:29:13.428 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 154.1353 ms
+2025-06-21 16:29:13.428 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 154ms - User: Anonymous
+2025-06-21 16:29:13.429 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 155.4947ms
+2025-06-21 16:30:01.004 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:30:01.005 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:30:01.007 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 2.9036ms
+2025-06-21 16:30:01.008 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:30:01.008 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:30:01.008 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:30:01.008 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:30:01.011 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:30:01.160 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:30:01.161 +05:30 [INF] User found: True
+2025-06-21 16:30:01.161 +05:30 [INF] Password valid: True
+2025-06-21 16:30:01.164 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:30:01.165 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:30:01.165 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 156.4316ms
+2025-06-21 16:30:01.165 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:30:01.165 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 157.0297 ms
+2025-06-21 16:30:01.165 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 157ms - User: Anonymous
+2025-06-21 16:30:01.166 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 157.834ms
+2025-06-21 16:33:09.594 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:33:09.595 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:33:09.596 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.7322ms
+2025-06-21 16:33:09.598 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:33:09.599 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:33:09.599 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:33:09.600 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:33:09.603 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:33:09.604 +05:30 [FTL] User not found
+2025-06-21 16:33:09.604 +05:30 [ERR] No such user
+2025-06-21 16:33:09.604 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-21 16:33:09.605 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 4.2377ms
+2025-06-21 16:33:09.605 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:33:09.605 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 5.7734 ms
+2025-06-21 16:33:09.605 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 6ms - User: Anonymous
+2025-06-21 16:33:09.606 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 8.2505ms
+2025-06-21 16:33:26.567 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:33:26.568 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:33:26.569 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.2594ms
+2025-06-21 16:33:26.571 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:33:26.572 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:33:26.572 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:33:26.573 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:33:26.588 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:33:26.588 +05:30 [FTL] User not found
+2025-06-21 16:33:26.588 +05:30 [ERR] No such user
+2025-06-21 16:33:26.588 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-21 16:33:26.589 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 15.7177ms
+2025-06-21 16:33:26.589 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:33:26.589 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 17.3997 ms
+2025-06-21 16:33:26.589 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 17ms - User: Anonymous
+2025-06-21 16:33:26.589 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 18.6643ms
+2025-06-21 16:33:40.709 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:33:40.709 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:33:40.710 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.1449ms
+2025-06-21 16:33:40.713 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 57
+2025-06-21 16:33:40.714 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:33:40.715 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:33:40.715 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:33:40.719 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:33:40.719 +05:30 [FTL] User not found
+2025-06-21 16:33:40.719 +05:30 [ERR] No such user
+2025-06-21 16:33:40.720 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-21 16:33:40.720 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 4.5067ms
+2025-06-21 16:33:40.720 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:33:40.720 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 5.7897 ms
+2025-06-21 16:33:40.720 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 5ms - User: Anonymous
+2025-06-21 16:33:40.721 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 7.7065ms
+2025-06-21 16:33:51.150 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:33:51.152 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:33:51.152 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.5815ms
+2025-06-21 16:33:51.155 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:33:51.156 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:33:51.156 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:33:51.156 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:33:51.158 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:33:51.349 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:33:51.349 +05:30 [INF] User found: True
+2025-06-21 16:33:51.349 +05:30 [INF] Password valid: True
+2025-06-21 16:33:51.353 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:33:51.353 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:33:51.354 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 197.5176ms
+2025-06-21 16:33:51.354 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:33:51.354 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 198.2973 ms
+2025-06-21 16:33:51.354 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 198ms - User: Anonymous
+2025-06-21 16:33:51.354 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 199.1908ms
+2025-06-21 16:36:36.110 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:36:36.111 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:36:36.111 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.1708ms
+2025-06-21 16:36:36.113 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:36:36.114 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:36:36.114 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:36:36.115 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:36:36.118 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:36:36.268 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:36:36.269 +05:30 [INF] User found: True
+2025-06-21 16:36:36.269 +05:30 [INF] Password valid: True
+2025-06-21 16:36:36.271 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:36:36.271 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:36:36.271 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 155.901ms
+2025-06-21 16:36:36.271 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:36:36.271 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 157.2128 ms
+2025-06-21 16:36:36.272 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 157ms - User: Anonymous
+2025-06-21 16:36:36.272 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 158.6419ms
+2025-06-21 16:50:32.705 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:50:32.707 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:50:32.707 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 2.5461ms
+2025-06-21 16:50:32.709 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:50:32.709 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:50:32.710 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:50:32.710 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:50:32.724 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:50:32.869 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:50:32.869 +05:30 [INF] User found: True
+2025-06-21 16:50:32.869 +05:30 [INF] Password valid: True
+2025-06-21 16:50:32.870 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:50:32.871 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:50:32.871 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 160.8366ms
+2025-06-21 16:50:32.871 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:50:32.871 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 161.6462 ms
+2025-06-21 16:50:32.871 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 161ms - User: Anonymous
+2025-06-21 16:50:32.872 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 162.6844ms
+2025-06-21 16:52:13.487 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-21 16:52:13.488 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:52:13.488 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.081ms
+2025-06-21 16:52:13.491 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-21 16:52:13.491 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:52:13.492 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:52:13.492 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-21 16:52:13.496 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:52:13.650 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-21 16:52:13.650 +05:30 [INF] User found: True
+2025-06-21 16:52:13.650 +05:30 [INF] Password valid: True
+2025-06-21 16:52:13.652 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-21 16:52:13.652 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-21 16:52:13.652 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 160.1622ms
+2025-06-21 16:52:13.653 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-21 16:52:13.653 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 161.1429 ms
+2025-06-21 16:52:13.653 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 161ms - User: Anonymous
+2025-06-21 16:52:13.653 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 162.3764ms
+2025-06-21 16:52:54.086 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 16:52:54.086 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:52:54.087 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:52:54.087 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 16:52:54.090 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:52:54.091 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 16:52:54.160 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 72.7195ms
+2025-06-21 16:52:54.160 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:52:54.161 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 74.0555 ms
+2025-06-21 16:52:54.161 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 74ms - User: Anonymous
+2025-06-21 16:52:54.161 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 75.2452ms
+2025-06-21 16:57:40.955 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 16:57:40.955 +05:30 [INF] CORS policy execution successful.
+2025-06-21 16:57:40.956 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:57:40.956 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 16:57:40.971 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 16:57:40.972 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 16:57:40.972 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 16.2867ms
+2025-06-21 16:57:40.973 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 16:57:40.973 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 17.2761 ms
+2025-06-21 16:57:40.973 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 17ms - User: Anonymous
+2025-06-21 16:57:40.973 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 18.2152ms
+2025-06-21 17:03:05.645 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 17:03:05.646 +05:30 [INF] CORS policy execution successful.
+2025-06-21 17:03:05.646 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:03:05.646 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 17:03:05.717 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 17:03:05.719 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 17:03:05.719 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 72.9855ms
+2025-06-21 17:03:05.720 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:03:05.720 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 74.4799 ms
+2025-06-21 17:03:05.721 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 74ms - User: Anonymous
+2025-06-21 17:03:05.722 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 76.8557ms
+2025-06-21 17:04:47.140 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 17:04:47.141 +05:30 [INF] CORS policy execution successful.
+2025-06-21 17:04:47.141 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:04:47.141 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 17:04:47.143 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 17:04:47.144 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 17:04:47.144 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.7138ms
+2025-06-21 17:04:47.144 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:04:47.144 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3.5420 ms
+2025-06-21 17:04:47.144 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3ms - User: Anonymous
+2025-06-21 17:04:47.145 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 4.4618ms
+2025-06-21 17:16:56.171 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 17:16:56.172 +05:30 [INF] CORS policy execution successful.
+2025-06-21 17:16:56.172 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:16:56.172 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 17:16:56.202 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 17:16:56.203 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 17:16:56.203 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 31.0358ms
+2025-06-21 17:16:56.203 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:16:56.204 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 31.7258 ms
+2025-06-21 17:16:56.204 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 31ms - User: Anonymous
+2025-06-21 17:16:56.204 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 32.9689ms
+2025-06-21 17:59:11.418 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 17:59:11.418 +05:30 [INF] CORS policy execution successful.
+2025-06-21 17:59:11.419 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:59:11.419 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 17:59:11.438 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 17:59:11.438 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 17:59:11.439 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 19.7839ms
+2025-06-21 17:59:11.439 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:59:11.439 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 20.4094 ms
+2025-06-21 17:59:11.439 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 20ms - User: Anonymous
+2025-06-21 17:59:11.440 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 21.8498ms
+2025-06-21 17:59:38.727 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 17:59:38.728 +05:30 [INF] CORS policy execution successful.
+2025-06-21 17:59:38.728 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:59:38.729 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 17:59:38.731 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 17:59:38.731 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 17:59:38.732 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.5994ms
+2025-06-21 17:59:38.732 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 17:59:38.732 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3.5490 ms
+2025-06-21 17:59:38.732 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3ms - User: Anonymous
+2025-06-21 17:59:38.733 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 5.3038ms
+2025-06-21 18:02:57.630 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:02:57.631 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:02:57.631 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:02:57.632 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:02:57.633 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:02:57.634 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:02:57.634 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.0669ms
+2025-06-21 18:02:57.634 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:02:57.634 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 2.6694 ms
+2025-06-21 18:02:57.634 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 2ms - User: Anonymous
+2025-06-21 18:02:57.634 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 3.7692ms
+2025-06-21 18:03:48.331 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:03:48.332 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:03:48.332 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:03:48.333 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:03:48.337 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:03:48.339 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:03:48.339 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 6.5128ms
+2025-06-21 18:03:48.340 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:03:48.340 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 7.7091 ms
+2025-06-21 18:03:48.340 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 7ms - User: Anonymous
+2025-06-21 18:03:48.341 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 10.0288ms
+2025-06-21 18:07:50.790 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:07:50.790 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:07:50.790 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:07:50.791 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:07:50.823 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:07:50.823 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:07:50.824 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 32.1961ms
+2025-06-21 18:07:50.824 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:07:50.824 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 33.3702 ms
+2025-06-21 18:07:50.824 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 33ms - User: Anonymous
+2025-06-21 18:07:50.824 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 34.6402ms
+2025-06-21 18:09:12.688 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:09:12.688 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:09:12.689 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:09:12.689 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:09:12.692 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:09:12.693 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:09:12.693 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 3.8304ms
+2025-06-21 18:09:12.693 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:09:12.693 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 4.7122 ms
+2025-06-21 18:09:12.694 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 4ms - User: Anonymous
+2025-06-21 18:09:12.694 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 6.3371ms
+2025-06-21 18:10:05.038 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:10:05.039 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:10:05.039 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:10:05.039 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:10:05.040 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:10:05.041 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:10:05.041 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 1.8662ms
+2025-06-21 18:10:05.041 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:10:05.041 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 2.5472 ms
+2025-06-21 18:10:05.041 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 2ms - User: Anonymous
+2025-06-21 18:10:05.042 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 3.5926ms
+2025-06-21 18:10:10.058 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:10:10.058 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:10:10.059 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:10:10.059 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:10:10.062 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:10:10.063 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:10:10.064 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 4.7046ms
+2025-06-21 18:10:10.064 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:10:10.065 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6.0403 ms
+2025-06-21 18:10:10.065 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6ms - User: Anonymous
+2025-06-21 18:10:10.066 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 7.9102ms
+2025-06-21 18:11:22.670 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:11:22.671 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:11:22.671 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:11:22.672 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:11:22.674 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:11:22.674 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:11:22.674 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.3797ms
+2025-06-21 18:11:22.675 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:11:22.675 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3.4313 ms
+2025-06-21 18:11:22.675 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 4ms - User: Anonymous
+2025-06-21 18:11:22.676 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 5.5645ms
+2025-06-21 18:13:20.621 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:13:20.622 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:13:20.622 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:13:20.622 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:13:20.642 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:13:20.642 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:13:20.643 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 20.2356ms
+2025-06-21 18:13:20.643 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:13:20.643 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 21.3445 ms
+2025-06-21 18:13:20.643 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 21ms - User: Anonymous
+2025-06-21 18:13:20.644 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 22.3072ms
+2025-06-21 18:14:17.397 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:14:17.398 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:14:17.398 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:14:17.398 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:14:17.401 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:14:17.401 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:14:17.401 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.6611ms
+2025-06-21 18:14:17.401 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:14:17.401 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3.6500 ms
+2025-06-21 18:14:17.402 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3ms - User: Anonymous
+2025-06-21 18:14:17.402 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 4.6197ms
+2025-06-21 18:16:02.213 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:16:02.214 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:16:02.214 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:16:02.215 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:16:02.216 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:16:02.217 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:16:02.217 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.641ms
+2025-06-21 18:16:02.218 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:16:02.218 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3.4906 ms
+2025-06-21 18:16:02.218 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3ms - User: Anonymous
+2025-06-21 18:16:02.218 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 4.7874ms
+2025-06-21 18:16:20.755 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:16:20.755 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:16:20.755 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:16:20.756 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:16:20.758 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:16:20.759 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:16:20.759 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 3.2171ms
+2025-06-21 18:16:20.760 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:16:20.761 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5.9573 ms
+2025-06-21 18:16:20.762 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6ms - User: Anonymous
+2025-06-21 18:16:20.762 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 7.5387ms
+2025-06-21 18:17:02.319 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:17:02.319 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:17:02.320 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:17:02.320 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:17:02.322 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:17:02.322 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:17:02.323 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 3.0357ms
+2025-06-21 18:17:02.323 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:17:02.323 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3.8311 ms
+2025-06-21 18:17:02.324 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 4ms - User: Anonymous
+2025-06-21 18:17:02.324 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 5.1833ms
+2025-06-21 18:18:45.954 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:18:45.955 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:18:45.955 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:18:45.955 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:18:45.976 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:18:45.977 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:18:45.977 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 22.1105ms
+2025-06-21 18:18:45.978 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:18:45.978 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 22.9125 ms
+2025-06-21 18:18:45.978 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 23ms - User: Anonymous
+2025-06-21 18:18:45.979 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 24.4605ms
+2025-06-21 18:19:20.810 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:19:20.811 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:19:20.811 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:19:20.811 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:19:20.814 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:19:20.814 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:19:20.814 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.5531ms
+2025-06-21 18:19:20.814 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:19:20.814 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3.3765 ms
+2025-06-21 18:19:20.815 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3ms - User: Anonymous
+2025-06-21 18:19:20.815 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 4.5785ms
+2025-06-21 18:26:41.953 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:26:41.953 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:26:41.954 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:26:41.954 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:26:41.971 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:26:41.971 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:26:41.972 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 17.6147ms
+2025-06-21 18:26:41.972 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:26:41.972 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 18.5693 ms
+2025-06-21 18:26:41.972 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 18ms - User: Anonymous
+2025-06-21 18:26:41.973 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 19.9797ms
+2025-06-21 18:27:44.743 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:27:44.744 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:27:44.744 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:27:44.745 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:27:44.748 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:27:44.748 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:27:44.748 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 3.3756ms
+2025-06-21 18:27:44.748 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:27:44.749 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 4.6039 ms
+2025-06-21 18:27:44.749 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5ms - User: Anonymous
+2025-06-21 18:27:44.749 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 6.0756ms
+2025-06-21 18:28:29.974 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:28:29.975 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:28:29.975 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:28:29.975 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:28:29.978 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:28:29.978 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:28:29.978 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 3.1496ms
+2025-06-21 18:28:29.979 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:28:29.979 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 4.1396 ms
+2025-06-21 18:28:29.980 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 4ms - User: Anonymous
+2025-06-21 18:28:29.981 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 5.9675ms
+2025-06-21 18:29:04.200 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:29:04.200 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:29:04.200 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:29:04.201 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:29:04.202 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:29:04.203 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:29:04.203 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.2284ms
+2025-06-21 18:29:04.203 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:29:04.204 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3.1758 ms
+2025-06-21 18:29:04.204 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 3ms - User: Anonymous
+2025-06-21 18:29:04.204 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 4.4289ms
+2025-06-21 18:32:31.066 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:32:31.066 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:32:31.067 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:32:31.067 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:32:31.090 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:32:31.091 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:32:31.091 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 23.5468ms
+2025-06-21 18:32:31.091 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:32:31.091 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 24.8475 ms
+2025-06-21 18:32:31.092 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 25ms - User: Anonymous
+2025-06-21 18:32:31.092 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 26.487ms
+2025-06-21 18:39:20.376 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 18:39:20.377 +05:30 [INF] CORS policy execution successful.
+2025-06-21 18:39:20.377 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:39:20.378 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 18:39:20.387 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 18:39:20.399 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 18:39:20.405 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 27.1017ms
+2025-06-21 18:39:20.414 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 18:39:20.419 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 41.2343 ms
+2025-06-21 18:39:20.421 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 43ms - User: Anonymous
+2025-06-21 18:39:20.427 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 50.4512ms
+2025-06-21 21:38:18.992 +05:30 [INF] Application is shutting down...
+2025-06-21 21:38:25.314 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-21 21:38:25.436 +05:30 [INF] Now listening on: http://localhost:5147
+2025-06-21 21:38:25.438 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-21 21:38:25.438 +05:30 [INF] Hosting environment: Development
+2025-06-21 21:38:25.438 +05:30 [INF] Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-20/Backend
+2025-06-21 21:38:36.170 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 21:38:36.219 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-21 21:38:36.220 +05:30 [INF] CORS policy execution successful.
+2025-06-21 21:38:36.250 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 21:38:36.445 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 21:38:37.772 +05:30 [INF] Executed DbCommand (55ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 21:38:37.870 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 21:38:37.921 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 1472.3899ms
+2025-06-21 21:38:37.925 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 21:38:37.928 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 1703.9187 ms
+2025-06-21 21:38:37.930 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 1707ms - User: Anonymous
+2025-06-21 21:38:37.941 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 1773.7068ms
+2025-06-21 21:44:52.775 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 21:44:52.780 +05:30 [INF] CORS policy execution successful.
+2025-06-21 21:44:52.783 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 21:44:52.785 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 21:44:52.836 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 21:44:52.838 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 21:44:52.838 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 53.2865ms
+2025-06-21 21:44:52.839 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 21:44:52.839 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 58.1991 ms
+2025-06-21 21:44:52.839 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 58ms - User: Anonymous
+2025-06-21 21:44:52.840 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 65.2369ms
+2025-06-21 22:02:35.437 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:02:35.440 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:02:35.443 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:02:35.445 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:02:35.553 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:02:35.554 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:02:35.555 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 109.0593ms
+2025-06-21 22:02:35.555 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:02:35.555 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 114.8880 ms
+2025-06-21 22:02:35.555 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 115ms - User: Anonymous
+2025-06-21 22:02:35.556 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 118.5443ms
+2025-06-21 22:28:44.464 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:28:44.465 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:28:44.466 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:28:44.466 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:28:44.479 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:28:44.480 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:28:44.480 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 14.3581ms
+2025-06-21 22:28:44.481 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:28:44.481 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 15.3752 ms
+2025-06-21 22:28:44.481 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 15ms - User: Anonymous
+2025-06-21 22:28:44.482 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 17.4352ms
+2025-06-21 22:49:36.696 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:49:36.697 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:49:36.697 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:36.697 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:49:36.766 +05:30 [INF] Executed DbCommand (37ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:49:36.768 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:49:36.768 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 70.5794ms
+2025-06-21 22:49:36.769 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:36.769 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 71.6233 ms
+2025-06-21 22:49:36.769 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 71ms - User: Anonymous
+2025-06-21 22:49:36.770 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 73.6968ms
+2025-06-21 22:49:38.434 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:49:38.436 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:49:38.436 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:38.436 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:49:38.439 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:49:38.440 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:49:38.441 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 3.7482ms
+2025-06-21 22:49:38.441 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:38.441 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5.3328 ms
+2025-06-21 22:49:38.442 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5ms - User: Anonymous
+2025-06-21 22:49:38.442 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 7.7803ms
+2025-06-21 22:49:39.028 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:49:39.029 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:49:39.031 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:39.032 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:49:39.036 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:49:39.037 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:49:39.037 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 4.6393ms
+2025-06-21 22:49:39.037 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:39.038 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6.4528 ms
+2025-06-21 22:49:39.038 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6ms - User: Anonymous
+2025-06-21 22:49:39.038 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 10.3398ms
+2025-06-21 22:49:39.812 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:49:39.813 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:49:39.813 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:39.814 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:49:39.819 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:49:39.820 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:49:39.820 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 6.1197ms
+2025-06-21 22:49:39.820 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:39.821 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 7.4502 ms
+2025-06-21 22:49:39.822 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 8ms - User: Anonymous
+2025-06-21 22:49:39.822 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 10.1271ms
+2025-06-21 22:49:53.207 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:49:53.208 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:49:53.208 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:53.209 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:49:53.211 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:49:53.212 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:49:53.213 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 3.7316ms
+2025-06-21 22:49:53.213 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:53.213 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 4.7803 ms
+2025-06-21 22:49:53.213 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5ms - User: Anonymous
+2025-06-21 22:49:53.214 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 6.4577ms
+2025-06-21 22:49:54.088 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:49:54.089 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:49:54.089 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:54.089 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:49:54.092 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:49:54.093 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:49:54.094 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 4.1083ms
+2025-06-21 22:49:54.094 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:49:54.094 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5.0598 ms
+2025-06-21 22:49:54.094 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5ms - User: Anonymous
+2025-06-21 22:49:54.095 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 6.6347ms
+2025-06-21 22:50:21.165 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:50:21.166 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:50:21.166 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:50:21.167 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:50:21.171 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:50:21.172 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:50:21.173 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 5.5161ms
+2025-06-21 22:50:21.173 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:50:21.174 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 8.1878 ms
+2025-06-21 22:50:21.175 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 8ms - User: Anonymous
+2025-06-21 22:50:21.175 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 10.3492ms
+2025-06-21 22:50:51.598 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:50:51.599 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:50:51.600 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:50:51.601 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:50:51.605 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:50:51.606 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:50:51.606 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 5.4061ms
+2025-06-21 22:50:51.607 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:50:51.607 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6.9891 ms
+2025-06-21 22:50:51.607 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 7ms - User: Anonymous
+2025-06-21 22:50:51.608 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 9.4518ms
+2025-06-21 22:50:53.372 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:50:53.373 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:50:53.373 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:50:53.373 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:50:53.376 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:50:53.377 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:50:53.377 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 3.9106ms
+2025-06-21 22:50:53.378 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:50:53.378 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5.1559 ms
+2025-06-21 22:50:53.378 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 5ms - User: Anonymous
+2025-06-21 22:50:53.379 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 6.758ms
+2025-06-21 22:50:54.252 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:50:54.253 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:50:54.254 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:50:54.254 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:50:54.258 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:50:54.259 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:50:54.260 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 5.1775ms
+2025-06-21 22:50:54.260 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:50:54.260 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6.3657 ms
+2025-06-21 22:50:54.260 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6ms - User: Anonymous
+2025-06-21 22:50:54.261 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 8.17ms
+2025-06-21 22:51:46.157 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:51:46.160 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:51:46.160 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:51:46.160 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:51:46.174 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:51:46.174 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:51:46.188 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 27.3582ms
+2025-06-21 22:51:46.188 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:51:46.189 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 28.7512 ms
+2025-06-21 22:51:46.189 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 29ms - User: Anonymous
+2025-06-21 22:51:46.189 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 32.122ms
+2025-06-21 22:51:47.539 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:51:47.540 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:51:47.540 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:51:47.540 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:51:47.550 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:51:47.552 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:51:47.555 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 14.0343ms
+2025-06-21 22:51:47.555 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:51:47.556 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 16.1181 ms
+2025-06-21 22:51:47.556 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 16ms - User: Anonymous
+2025-06-21 22:51:47.557 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 17.8792ms
+2025-06-21 22:51:50.058 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:51:50.059 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:51:50.059 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:51:50.060 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:51:50.071 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:51:50.072 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:51:50.074 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 13.3927ms
+2025-06-21 22:51:50.074 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:51:50.074 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 15.0308 ms
+2025-06-21 22:51:50.074 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 15ms - User: Anonymous
+2025-06-21 22:51:50.075 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 16.8772ms
+2025-06-21 22:51:59.618 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:51:59.618 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:51:59.618 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:51:59.619 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:51:59.623 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:51:59.624 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:51:59.624 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 4.4741ms
+2025-06-21 22:51:59.624 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:51:59.624 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6.1926 ms
+2025-06-21 22:51:59.625 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 6ms - User: Anonymous
+2025-06-21 22:51:59.625 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 7.7981ms
+2025-06-21 22:53:54.237 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 22:53:54.237 +05:30 [INF] CORS policy execution successful.
+2025-06-21 22:53:54.237 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:53:54.237 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 22:53:54.239 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 22:53:54.239 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 22:53:54.240 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.0732ms
+2025-06-21 22:53:54.240 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 22:53:54.240 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 2.6227 ms
+2025-06-21 22:53:54.240 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 2ms - User: Anonymous
+2025-06-21 22:53:54.240 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 3.4226ms
+2025-06-21 23:11:28.952 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 23:11:28.952 +05:30 [INF] CORS policy execution successful.
+2025-06-21 23:11:28.952 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:11:28.953 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 23:11:28.965 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 23:11:28.965 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 23:11:28.966 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 13.0924ms
+2025-06-21 23:11:28.966 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:11:28.966 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 13.7360 ms
+2025-06-21 23:11:28.966 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 13ms - User: Anonymous
+2025-06-21 23:11:28.966 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 14.5473ms
+2025-06-21 23:12:08.574 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 23:12:08.579 +05:30 [INF] CORS policy execution successful.
+2025-06-21 23:12:08.580 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:12:08.581 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 23:12:08.609 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 23:12:08.610 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 23:12:08.610 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 28.8254ms
+2025-06-21 23:12:08.611 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:12:08.611 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 31.1315 ms
+2025-06-21 23:12:08.611 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 31ms - User: Anonymous
+2025-06-21 23:12:08.613 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 38.3237ms
+2025-06-21 23:12:38.939 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 23:12:38.939 +05:30 [INF] CORS policy execution successful.
+2025-06-21 23:12:38.940 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:12:38.940 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 23:12:38.941 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 23:12:38.942 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 23:12:38.942 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 2.202ms
+2025-06-21 23:12:38.942 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:12:38.942 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 2.8285 ms
+2025-06-21 23:12:38.942 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 2ms - User: Anonymous
+2025-06-21 23:12:38.943 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 3.5395ms
+2025-06-21 23:18:16.044 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 23:18:16.044 +05:30 [INF] CORS policy execution successful.
+2025-06-21 23:18:16.044 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:18:16.044 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 23:18:16.058 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 23:18:16.059 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 23:18:16.059 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 14.4147ms
+2025-06-21 23:18:16.059 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:18:16.059 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 15.0595 ms
+2025-06-21 23:18:16.059 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 15ms - User: Anonymous
+2025-06-21 23:18:16.060 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 15.7676ms
+2025-06-21 23:34:23.526 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - null null
+2025-06-21 23:34:23.526 +05:30 [INF] CORS policy execution successful.
+2025-06-21 23:34:23.527 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:34:23.527 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-21 23:34:23.544 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-21 23:34:23.545 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-21 23:34:23.545 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 18.0328ms
+2025-06-21 23:34:23.546 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-06-21 23:34:23.546 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 19.0305 ms
+2025-06-21 23:34:23.546 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya123@gmail.com responded 200 in 19ms - User: Anonymous
+2025-06-21 23:34:23.546 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya123@gmail.com - 200 null application/json; charset=utf-8 20.2086ms

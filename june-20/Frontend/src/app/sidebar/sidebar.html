@@ -1,0 +1,65 @@
+  <div class="sidebar" [class.open]="isSidebarOpen">
+    <div class="logo_details">
+      <i class="bx bxl-audible icon"></i>
+      <div class="logo_name">The BlogPanel</div>
+      <i class="bx bx-menu" id="btn" (click)="toggleSidebar()"></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a routerLink="/dashboard">
+          <i class="bx bx-grid-alt"></i>
+          <span class="link_name" >Dashboard</span>
+        </a>
+        <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bx bx-envelope"></i>
+          <span class="link_name">MyPosts</span>
+        </a>
+        <span class="tooltip">MyPosts</span>
+      </li>
+      <li>
+        <a routerLink="/Create-post">
+    <i class='bx bx-pen'></i>
+          <span class="link_name">Blog</span>
+        </a>
+        <span class="tooltip">Blog</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bx bx-bell"></i>
+          <span class="link_name">Notification</span>
+        </a>
+        <span class="tooltip">Notification</span>
+      </li>
+      <li>
+        <a routerLink="/settings">
+          <i class="bx bx-cog"></i>
+          <span class="link_name">Settings</span>
+        </a>
+        <span class="tooltip">Settings</span>
+      </li>
+<li class="profile" (click)="toggleDropdown()" [class.open]="dropdownOpen">
+  <div class="profile_details">
+    <img [src]="profileImageSrc" alt="profile image">
+    <div class="profile_content">
+      <div class="name">{{ user?.name }}</div>
+      <div class="designation">{{ user?.role }}</div>
+    </div>
+    <i class="bx bx-chevron-down dropdown-icon"></i>
+  </div>
+
+  <!-- Move this below to avoid closing on immediate click -->
+  <div class="dropdown-wrapper" *ngIf="dropdownOpen">
+    <ul class="dropdown-menu">
+      <li (click)="viewProfile(); $event.stopPropagation()">View Profile</li>
+      <li (click)="viewHistory(); $event.stopPropagation()">History</li>
+    </ul>
+  </div>
+
+  <i class="bx bx-log-out" id="log_out"></i>
+</li>
+</ul>
+</div>
+ 

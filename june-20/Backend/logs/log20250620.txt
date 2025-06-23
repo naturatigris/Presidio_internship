@@ -1,0 +1,383 @@
+2025-06-20 15:11:03.288 +05:30 [ERR] An error occurred using the connection to database 'blogpanel' on server 'tcp://localhost:5432'.
+2025-06-20 15:11:04.084 +05:30 [INF] Executed DbCommand (460ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE blogpanel;
+2025-06-20 15:11:04.202 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-06-20 15:11:04.216 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-06-20 15:11:04.219 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-06-20 15:11:04.222 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-06-20 15:11:04.236 +05:30 [INF] Applying migration '20250620094048_InitialCreate'.
+2025-06-20 15:11:04.280 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "CommentAuditLogs" (
+    "Id" uuid NOT NULL,
+    "CommentId" uuid NOT NULL,
+    "Action" text NOT NULL,
+    "PerformedBy" text,
+    "PerformedAt" timestamp with time zone NOT NULL,
+    "Changes" text,
+    CONSTRAINT "PK_CommentAuditLogs" PRIMARY KEY ("Id")
+);
+2025-06-20 15:11:04.283 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "ImageAuditLogs" (
+    "Id" uuid NOT NULL,
+    "ImageId" uuid NOT NULL,
+    "Action" text NOT NULL,
+    "PerformedBy" text,
+    "PerformedAt" timestamp with time zone NOT NULL,
+    "Changes" text,
+    CONSTRAINT "PK_ImageAuditLogs" PRIMARY KEY ("Id")
+);
+2025-06-20 15:11:04.287 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "PostAuditLogs" (
+    "Id" uuid NOT NULL,
+    "PostId" uuid NOT NULL,
+    "Action" text NOT NULL,
+    "PerformedBy" text,
+    "PerformedAt" timestamp with time zone NOT NULL,
+    "Changes" text,
+    CONSTRAINT "PK_PostAuditLogs" PRIMARY KEY ("Id")
+);
+2025-06-20 15:11:04.290 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "RefreshTokens" (
+    "Id" uuid NOT NULL,
+    "Token" text NOT NULL,
+    "UserEmail" text NOT NULL,
+    "Expires" timestamp with time zone NOT NULL,
+    "IsRevoked" boolean NOT NULL,
+    CONSTRAINT "PK_RefreshTokens" PRIMARY KEY ("Id")
+);
+2025-06-20 15:11:04.294 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "UserAuditLogs" (
+    "Id" uuid NOT NULL,
+    "Action" text NOT NULL,
+    "TargetEmail" text NOT NULL,
+    "PerformedBy" text,
+    "PerformedAt" timestamp with time zone NOT NULL,
+    "Changes" text,
+    CONSTRAINT "PK_UserAuditLogs" PRIMARY KEY ("Id")
+);
+2025-06-20 15:11:04.300 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Email" text NOT NULL,
+    "Name" text NOT NULL,
+    "PasswordHash" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "Role" text NOT NULL DEFAULT 'User',
+    "IsSuspended" boolean NOT NULL DEFAULT FALSE,
+    "SuspensionReason" text,
+    "SuspendedUntil" timestamp with time zone,
+    "IsDeleted" boolean NOT NULL,
+    "Status" text NOT NULL,
+    "ProfileImage" bytea,
+    "Bio" character varying(500),
+    "Location" text,
+    "Website" text,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Email")
+);
+2025-06-20 15:11:04.355 +05:30 [INF] Executed DbCommand (53ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Posts" (
+    "Id" uuid NOT NULL,
+    "UserEmail" text NOT NULL,
+    "Title" text NOT NULL,
+    "Slug" text NOT NULL,
+    "Content" text NOT NULL,
+    "Status" text NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    CONSTRAINT "PK_Posts" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Posts_Users_UserEmail" FOREIGN KEY ("UserEmail") REFERENCES "Users" ("Email") ON DELETE CASCADE
+);
+2025-06-20 15:11:04.372 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Comments" (
+    "Id" uuid NOT NULL,
+    "PostId" uuid NOT NULL,
+    "UserEmail" text NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL,
+    "Content" text NOT NULL,
+    "Status" text NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    CONSTRAINT "PK_Comments" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Comments_Posts_PostId" FOREIGN KEY ("PostId") REFERENCES "Posts" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Comments_Users_UserEmail" FOREIGN KEY ("UserEmail") REFERENCES "Users" ("Email") ON DELETE CASCADE
+);
+2025-06-20 15:11:04.375 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Images" (
+    "Id" uuid NOT NULL,
+    "PostId" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "Content" bytea NOT NULL,
+    "IsDeleted" boolean NOT NULL,
+    "UploadedAt" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_Images" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Images_Posts_PostId" FOREIGN KEY ("PostId") REFERENCES "Posts" ("Id") ON DELETE CASCADE
+);
+2025-06-20 15:11:04.378 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Comments_PostId" ON "Comments" ("PostId");
+2025-06-20 15:11:04.380 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Comments_UserEmail" ON "Comments" ("UserEmail");
+2025-06-20 15:11:04.382 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Images_PostId" ON "Images" ("PostId");
+2025-06-20 15:11:04.384 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Posts_UserEmail" ON "Posts" ("UserEmail");
+2025-06-20 15:11:04.385 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_RefreshTokens_Token" ON "RefreshTokens" ("Token");
+2025-06-20 15:11:04.386 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250620094048_InitialCreate', '9.0.5');
+2025-06-20 21:28:22.013 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-20 21:28:22.205 +05:30 [INF] Now listening on: http://localhost:5147
+2025-06-20 21:28:22.206 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-20 21:28:22.207 +05:30 [INF] Hosting environment: Development
+2025-06-20 21:28:22.207 +05:30 [INF] Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-20/Backend
+2025-06-20 21:33:40.078 +05:30 [INF] Application is shutting down...
+2025-06-20 21:33:51.035 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-20 21:33:51.210 +05:30 [INF] Now listening on: http://localhost:5147
+2025-06-20 21:33:51.212 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-20 21:33:51.213 +05:30 [INF] Hosting environment: Development
+2025-06-20 21:33:51.213 +05:30 [INF] Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-20/Backend
+2025-06-20 21:35:19.865 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users - null null
+2025-06-20 21:35:19.924 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-20 21:35:19.925 +05:30 [INF] CORS policy execution successful.
+2025-06-20 21:35:19.931 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users - 204 null null 70.0997ms
+2025-06-20 21:35:19.948 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/users - application/json 106
+2025-06-20 21:35:19.955 +05:30 [INF] CORS policy execution successful.
+2025-06-20 21:35:20.016 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.CreateUser (bloggingplatform)'
+2025-06-20 21:35:20.245 +05:30 [INF] Route matched with {action = "CreateUser", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateUser(BlogPlatform.Models.DTOs.UserDto) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-06-20 21:35:21.872 +05:30 [INF] Executed DbCommand (69ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 21:35:22.381 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?', @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?', @p5='?', @p6='?', @p7='?' (DbType = Binary), @p8='?', @p9='?', @p10='?' (DbType = DateTime), @p11='?', @p12='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Email", "Bio", "CreatedAt", "IsDeleted", "Location", "Name", "PasswordHash", "ProfileImage", "Role", "Status", "SuspendedUntil", "SuspensionReason", "Website")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)
+RETURNING "IsSuspended";
+2025-06-20 21:35:22.439 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAuditLogs" ("Id", "Action", "Changes", "PerformedAt", "PerformedBy", "TargetEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-06-20 21:35:22.447 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'BlogPlatform.Models.User'.
+2025-06-20 21:35:22.503 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.CreateUser (bloggingplatform) in 2254.1223ms
+2025-06-20 21:35:22.503 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.CreateUser (bloggingplatform)'
+2025-06-20 21:35:22.507 +05:30 [INF] HTTP POST /api/v1/users responded 201 in 2547.0469 ms
+2025-06-20 21:35:22.509 +05:30 [INF] HTTP POST /api/v1/users responded 201 in 2551ms - User: Anonymous
+2025-06-20 21:35:22.518 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/users - 201 null application/json; charset=utf-8 2571.0078ms
+2025-06-20 21:59:45.450 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-20 21:59:45.454 +05:30 [INF] CORS policy execution successful.
+2025-06-20 21:59:45.454 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 4.6783ms
+2025-06-20 21:59:45.456 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 56
+2025-06-20 21:59:45.457 +05:30 [INF] CORS policy execution successful.
+2025-06-20 21:59:45.459 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 21:59:45.467 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 21:59:45.509 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 21:59:45.818 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 21:59:45.818 +05:30 [INF] User found: True
+2025-06-20 21:59:45.819 +05:30 [INF] Password valid: False
+2025-06-20 21:59:45.819 +05:30 [ERR] Invalid credentials
+2025-06-20 21:59:45.820 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-20 21:59:45.832 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 364.2394ms
+2025-06-20 21:59:45.832 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 21:59:45.832 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 374.6188 ms
+2025-06-20 21:59:45.833 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 374ms - User: Anonymous
+2025-06-20 21:59:45.833 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 377.0606ms
+2025-06-20 21:59:56.955 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-20 21:59:56.956 +05:30 [INF] CORS policy execution successful.
+2025-06-20 21:59:56.957 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.8596ms
+2025-06-20 21:59:56.958 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-20 21:59:56.959 +05:30 [INF] CORS policy execution successful.
+2025-06-20 21:59:56.963 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 21:59:56.964 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 21:59:57.056 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 21:59:57.192 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 21:59:57.192 +05:30 [INF] User found: True
+2025-06-20 21:59:57.192 +05:30 [INF] Password valid: True
+2025-06-20 21:59:57.237 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-20 21:59:57.238 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-20 21:59:57.239 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 274.8047ms
+2025-06-20 21:59:57.240 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 21:59:57.240 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 280.6024 ms
+2025-06-20 21:59:57.240 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 280ms - User: Anonymous
+2025-06-20 21:59:57.240 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 282.1443ms
+2025-06-20 22:02:06.485 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-20 22:02:06.485 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:02:06.485 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 0.6349ms
+2025-06-20 22:02:06.487 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-20 22:02:06.488 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:02:06.488 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:02:06.489 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 22:02:06.497 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 22:02:06.639 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 22:02:06.639 +05:30 [INF] User found: True
+2025-06-20 22:02:06.639 +05:30 [INF] Password valid: False
+2025-06-20 22:02:06.639 +05:30 [ERR] Invalid credentials
+2025-06-20 22:02:06.640 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-20 22:02:06.640 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 151.3382ms
+2025-06-20 22:02:06.640 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:02:06.641 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 152.3987 ms
+2025-06-20 22:02:06.641 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 152ms - User: Anonymous
+2025-06-20 22:02:06.641 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 153.6664ms
+2025-06-20 22:02:16.560 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-20 22:02:16.561 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:02:16.561 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 0.608ms
+2025-06-20 22:02:16.562 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-20 22:02:16.563 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:02:16.563 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:02:16.563 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 22:02:16.566 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 22:02:16.710 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 22:02:16.710 +05:30 [INF] User found: True
+2025-06-20 22:02:16.710 +05:30 [INF] Password valid: False
+2025-06-20 22:02:16.710 +05:30 [ERR] Invalid credentials
+2025-06-20 22:02:16.710 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-20 22:02:16.711 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 147.1314ms
+2025-06-20 22:02:16.711 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:02:16.711 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 147.9087 ms
+2025-06-20 22:02:16.711 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 148ms - User: Anonymous
+2025-06-20 22:02:16.711 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 148.8763ms
+2025-06-20 22:02:17.184 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-20 22:02:17.185 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:02:17.185 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:02:17.185 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 22:02:17.189 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 22:02:17.334 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 22:02:17.334 +05:30 [INF] User found: True
+2025-06-20 22:02:17.334 +05:30 [INF] Password valid: False
+2025-06-20 22:02:17.334 +05:30 [ERR] Invalid credentials
+2025-06-20 22:02:17.335 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-06-20 22:02:17.335 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 149.2957ms
+2025-06-20 22:02:17.335 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:02:17.335 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 150.2913 ms
+2025-06-20 22:02:17.335 +05:30 [INF] HTTP POST /api/v1/login responded 401 in 150ms - User: Anonymous
+2025-06-20 22:02:17.336 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 401 null application/json; charset=utf-8 151.4667ms
+2025-06-20 22:02:34.577 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-20 22:02:34.578 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:02:34.578 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 0.7638ms
+2025-06-20 22:02:34.580 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-20 22:02:34.581 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:02:34.581 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:02:34.582 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 22:02:34.588 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 22:02:34.731 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 22:02:34.731 +05:30 [INF] User found: True
+2025-06-20 22:02:34.732 +05:30 [INF] Password valid: True
+2025-06-20 22:02:34.734 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-20 22:02:34.734 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-20 22:02:34.734 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 151.8613ms
+2025-06-20 22:02:34.734 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:02:34.734 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 153.6387 ms
+2025-06-20 22:02:34.735 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 153ms - User: Anonymous
+2025-06-20 22:02:34.735 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 155.1759ms
+2025-06-20 22:04:29.335 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-20 22:04:29.335 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:04:29.336 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 0.7113ms
+2025-06-20 22:04:29.337 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-20 22:04:29.337 +05:30 [INF] CORS policy execution successful.
+2025-06-20 22:04:29.337 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:04:29.337 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 22:04:29.340 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 22:04:29.483 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 22:04:29.484 +05:30 [INF] User found: True
+2025-06-20 22:04:29.484 +05:30 [INF] Password valid: True
+2025-06-20 22:04:29.486 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-20 22:04:29.486 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-20 22:04:29.486 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 148.5258ms
+2025-06-20 22:04:29.486 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 22:04:29.486 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 149.2106 ms
+2025-06-20 22:04:29.486 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 149ms - User: Anonymous
+2025-06-20 22:04:29.487 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 149.9121ms
+2025-06-20 22:08:54.284 +05:30 [INF] Application is shutting down...
+2025-06-20 23:34:31.248 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-20 23:34:31.400 +05:30 [INF] Now listening on: http://localhost:5147
+2025-06-20 23:34:31.402 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-20 23:34:31.402 +05:30 [INF] Hosting environment: Development
+2025-06-20 23:34:31.402 +05:30 [INF] Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-20/Backend
+2025-06-20 23:35:10.896 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-20 23:35:10.937 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-20 23:35:10.938 +05:30 [INF] CORS policy execution successful.
+2025-06-20 23:35:10.945 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 50.0729ms
+2025-06-20 23:35:10.959 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-20 23:35:10.965 +05:30 [INF] CORS policy execution successful.
+2025-06-20 23:35:10.998 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 23:35:11.201 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 23:35:12.427 +05:30 [INF] Executed DbCommand (44ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 23:35:12.852 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 23:35:12.853 +05:30 [INF] User found: True
+2025-06-20 23:35:12.853 +05:30 [INF] Password valid: True
+2025-06-20 23:35:12.986 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-20 23:35:13.002 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-20 23:35:13.014 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 1809.9051ms
+2025-06-20 23:35:13.015 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 23:35:13.018 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 2049.2038 ms
+2025-06-20 23:35:13.020 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 2052ms - User: Anonymous
+2025-06-20 23:35:13.030 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 2071.3692ms
+2025-06-20 23:37:14.036 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-06-20 23:37:14.040 +05:30 [INF] CORS policy execution successful.
+2025-06-20 23:37:14.041 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 4.6279ms
+2025-06-20 23:37:14.043 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 58
+2025-06-20 23:37:14.044 +05:30 [INF] CORS policy execution successful.
+2025-06-20 23:37:14.046 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 23:37:14.048 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-06-20 23:37:14.078 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-06-20 23:37:14.374 +05:30 [INF] Login attempt: sandhya123@gmail.com
+2025-06-20 23:37:14.374 +05:30 [INF] User found: True
+2025-06-20 23:37:14.374 +05:30 [INF] Password valid: True
+2025-06-20 23:37:14.377 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-20 23:37:14.377 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-06-20 23:37:14.378 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 328.9156ms
+2025-06-20 23:37:14.378 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-06-20 23:37:14.378 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 333.5103 ms
+2025-06-20 23:37:14.379 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 333ms - User: Anonymous
+2025-06-20 23:37:14.379 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 336.3731ms
+2025-06-20 23:52:23.888 +05:30 [INF] Application is shutting down...

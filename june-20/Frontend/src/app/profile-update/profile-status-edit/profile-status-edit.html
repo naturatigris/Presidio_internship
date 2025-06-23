@@ -1,0 +1,31 @@
+<div class="modal-backdrop" *ngIf="showStatusModal">
+  <div class="modal">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2>Edit Account Status</h2>
+      <i class="bx bx-x close-icon" (click)="onCancelStatus()"></i>
+    </div>
+
+    <!-- Modal Content -->
+    <div class="modal-content">
+      <label>
+        <input type="checkbox" [(ngModel)]="localSuspended" />
+        Suspended
+      </label>
+
+      <div *ngIf="localSuspended" class="suspend-fields">
+        <label>Suspension Reason</label>
+        <input type="text" [(ngModel)]="localReason" />
+
+        <label>Suspended Until</label>
+        <input type="date" [(ngModel)]="localUntil" />
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="onCancelStatus()">Cancel</button>
+      <button class="save-btn" (click)="onSaveStatus()">Save</button>
+    </div>
+  </div>
+</div>

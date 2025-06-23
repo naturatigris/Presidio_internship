@@ -1,0 +1,21 @@
+<div class="modal-backdrop" *ngIf="showBioModal">
+  <div class="modal">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2>Edit Bio</h2>
+      <i class="bx bx-x close-icon" (click)="closeBioModal()"></i>
+    </div>
+
+    <!-- Modal Content -->
+    <div class="modal-content">
+      <label for="bio">Bio</label>
+      <textarea id="bio" [(ngModel)]="editableBio" rows="4" placeholder="Enter your bio..."></textarea>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeBioModal()">Cancel</button>
+      <button class="save-btn" (click)="saveBio()">Save</button>
+    </div>
+  </div>
+</div>

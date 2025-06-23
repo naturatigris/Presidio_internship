@@ -1,0 +1,24 @@
+2025-06-09 14:07:52.985 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-09 14:07:53.131 +05:30 [FTL] Application startup exception
+System.InvalidOperationException: Unable to resolve service for type 'AspNetCoreRateLimit.IProcessingStrategy' while attempting to activate 'AspNetCoreRateLimit.ClientRateLimitMiddleware'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2025-06-09 14:07:53.167 +05:30 [ERR] Hosting failed to start
+System.InvalidOperationException: Unable to resolve service for type 'AspNetCoreRateLimit.IProcessingStrategy' while attempting to activate 'AspNetCoreRateLimit.ClientRateLimitMiddleware'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-06-09 14:08:17.441 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-09 14:08:17.601 +05:30 [INF] Now listening on: http://localhost:5147
+2025-06-09 14:08:17.603 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-09 14:08:17.603 +05:30 [INF] Hosting environment: Development
+2025-06-09 14:08:17.603 +05:30 [INF] Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-6/bloggingplatform

@@ -1,0 +1,61 @@
+<div class="post-form-container">
+  <h2>Create New Post</h2>
+
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <label>Title</label>
+    <input type="text" formControlName="title" />
+
+    <label>Slug</label>
+    <input type="text" formControlName="slug" />
+
+    <label>Content</label>
+    <textarea formControlName="content" rows="6"></textarea>
+
+    <label>Status</label>
+    <select formControlName="status">
+      <option value="Published">Published</option>
+      <option value="Draft">Draft</option>
+    </select>
+
+<label>Categories</label>
+
+<input
+  #categoryInput
+  type="text"
+  [attr.list]="'categoryOptions'"
+  (keydown.enter)="addCategory(categoryInput.value); categoryInput.value=''; $event.preventDefault()"
+  placeholder="Type or select a category and press Enter"
+/>
+
+<datalist id="categoryOptions">
+  <option *ngFor="let name of fetchedcategoryNames" [value]="name"></option>
+</datalist>
+
+<ul>
+  <li *ngFor="let cat of categoryNames.controls; let i = index">
+    {{ cat.value }}
+    <button type="button" (click)="removeCategory(i)">x</button>
+  </li>
+</ul>
+<!-- Cover Photo Upload -->
+<label class="cover-upload" (click)="coverInput.click()">
+  <input #coverInput type="file" (change)="onCoverChange($event)" hidden />
+  <ng-container *ngIf="coverPreview; else addCover">
+    <img [src]="coverPreview" alt="Cover" class="cover-preview" />
+  </ng-container>
+  <ng-template #addCover>
+    Add Cover photo
+  </ng-template>
+</label>
+
+<!-- Image Upload -->
+<label>Upload Images</label>
+<input type="file" (change)="onFileChange($event)" multiple="true" />
+
+<!-- Image Previews -->
+<div class="image-preview-container">
+  <img *ngFor="let url of imagePreviews" [src]="url" alt="Post image" class="image-preview" />
+</div>
+    <button type="submit" [disabled]="postForm.invalid">Create Post</button>
+  </form>
+</div>
