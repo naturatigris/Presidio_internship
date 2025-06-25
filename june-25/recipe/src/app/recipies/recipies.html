@@ -1,0 +1,12 @@
+@if (recipies().length > 0) {
+  <div class="recipe-list">
+    @for (item of recipies(); track item.id) {
+      <app-recipe [recipe]="item"></app-recipe>
+    }
+  </div>
+}
+@else {
+  <div class="no-recipes">
+    No recipes available
+  </div>
+}

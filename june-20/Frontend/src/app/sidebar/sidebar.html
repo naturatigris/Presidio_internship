@@ -13,7 +13,7 @@
         <span class="tooltip">Dashboard</span>
       </li>
       <li>
-        <a href="#">
+        <a routerLink="/myposts">
           <i class="bx bx-envelope"></i>
           <span class="link_name">MyPosts</span>
         </a>
@@ -42,7 +42,7 @@
       </li>
 <li class="profile" (click)="toggleDropdown()" [class.open]="dropdownOpen">
   <div class="profile_details">
-    <img [src]="profileImageSrc" alt="profile image">
+    <img [src]="profileImageSrc" alt="profile image"   ngOptimizedImage>
     <div class="profile_content">
       <div class="name">{{ user?.name }}</div>
       <div class="designation">{{ user?.role }}</div>
@@ -58,7 +58,7 @@
     </ul>
   </div>
 
-  <i class="bx bx-log-out" id="log_out"></i>
+  <i class="bx bx-log-out" id="log_out" (click)="logout()"></i>
 </li>
 </ul>
 </div>

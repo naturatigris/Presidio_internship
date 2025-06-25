@@ -88,12 +88,16 @@ namespace BlogPlatform.Controllers
         {
             try
             {
-                var comments = await _commentService.GetFilteredComments(query.PostId,query.UserEmail, query.Status, query.SortOrder, query.PageNumber, query.PageSize);
-                if (comments.Count()== 0)
+                var (comments, totalCount) = await _commentService.GetFilteredComments(query.PostId, query.UserEmail, query.Status, query.SortOrder, query.PageNumber??1, query.PageSize??10);
+                if (comments.Count() == 0)
                 {
                     return NotFound("no comments in the gven category");
                 }
-                return Ok(comments);
+                return Ok(new
+                {
+                    items = comments,
+                    totalCount = totalCount
+                });
             }
             catch (Exception ex)
             {

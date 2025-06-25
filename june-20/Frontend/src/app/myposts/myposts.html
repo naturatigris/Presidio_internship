@@ -1,0 +1,116 @@
+<div class="dashboard-container">
+  <h2>My Blog Posts</h2>
+<div class="options">
+  <a [class.active]="activeTab === 'published'" (click)="activeTab = 'published'">Published</a>
+  <a [class.active]="activeTab === 'drafts'" (click)="activeTab = 'drafts'">Drafts</a>
+</div>
+
+<section class="published" *ngIf="activeTab === 'published'">
+  <div class="post-grid">
+    <div class="post-card" *ngFor="let post of publishedposts">
+      
+      <!-- Cover Image -->
+<div class="image-wrapper">
+  <img
+    class="cover-image"
+    [src]="'data:image/jpeg;base64,' + post.images?.[0]?.content"
+    *ngIf="post.images?.length"
+    alt="Cover Image"
+  />
+
+  <!-- Trash Icon Overlay -->
+  <i
+    class="bx bx-trash trash-icon"
+    title="Delete Post"
+    (click)="DeletePost(post!.id)"
+  ></i>
+</div>
+
+      <!-- Title & Slug -->
+      <div class="post-body">
+
+        <div style="display: flex; justify-content: space-between;">
+        <h3 class="post-title">{{ post.title }}</h3>
+            <div class="edit-post">
+            <i class="bx bx-pencil"(click)="editPost(post!.id)"></i>
+        </div>
+
+        </div>
+        <p class="post-slug">{{ post.slug }}</p>
+
+        <!-- Content Preview -->
+        <p class="post-preview">
+          {{ post.content | slice:0:120 }}...
+        </p>
+
+        <!-- Categories -->
+        <div class="category-tags">
+          <span class="tag" *ngFor="let cat of post.categories">{{ cat.name }}</span>
+        </div>
+
+        <!-- Author & Status -->
+        <div class="post-footer">
+          <span class="author">By: {{ post.user?.name || post.userEmail }}</span>
+          <span class="status">{{ post.status }}</span>
+            <button *ngIf="post?.id" (click)="viewPost(post!.id)" class="readmore">Read More</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+<section class="Drafts" *ngIf="activeTab === 'drafts'">
+  <div class="post-grid">
+    <div class="post-card" *ngFor="let post of drafts">
+      
+      <!-- Cover Image -->
+<div class="image-wrapper">
+  <img
+    class="cover-image"
+    [src]="'data:image/jpeg;base64,' + post.images?.[0]?.content"
+    *ngIf="post.images?.length"
+    alt="Cover Image"
+  />
+
+  <!-- Trash Icon Overlay -->
+  <i
+    class="bx bx-trash trash-icon"
+    title="Delete Post"
+    (click)="DeletePost(post!.id)"
+  ></i>
+</div>
+
+      <!-- Title & Slug -->
+      <div class="post-body">
+        <div style="display: flex; justify-content: space-between;">
+        <h3 class="post-title">{{ post.title }}</h3>
+            <div class="edit-post">
+            <i class="bx bx-pencil" (click)="editPost(post!.id)"></i>
+        </div>
+        </div>
+        <p class="post-slug">{{ post.slug }}</p>
+
+        <!-- Content Preview -->
+        <p class="post-preview">
+          {{ post.content | slice:0:120 }}...
+        </p>
+
+        <!-- Categories -->
+        <div class="category-tags">
+          <span class="tag" *ngFor="let cat of post.categories">{{ cat.name }}</span>
+        </div>
+
+        <!-- Author & Status -->
+        <div class="post-footer">
+          <span class="author">By: {{ post.user?.name || post.userEmail }}</span>
+          <span class="status">{{ post.status }}</span>
+        <button *ngIf="post?.id" (click)="viewPost(post!.id)" class="readmore">Read More</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+  </div>

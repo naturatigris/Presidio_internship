@@ -4,10 +4,11 @@ import { UserService } from '../service/user.service';
 import { UserProfile } from '../models/userprofilemodel';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule,CommonModule,NgOptimizedImage],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css'
 })
@@ -33,11 +34,11 @@ toggleDropdown() {
 }
 
 viewProfile() {
-  this.router.navigate(['/profile']); // adjust route as needed
+  this.router.navigate(['/profile']); 
 }
 
 viewHistory() {
-  this.router.navigate(['/history']); // adjust route as needed
+  this.router.navigate(['/history']); 
 }
 
     ngOnInit() {
@@ -56,6 +57,12 @@ viewHistory() {
     bytes.forEach(b => binary += String.fromCharCode(b));
     return window.btoa(binary);
   }
+logout() {
+  localStorage.removeItem('token');
+  sessionStorage.removeItem('email');
+  localStorage.clear();  
+  this.router.navigate(['/login']);  
+}
 
 
 

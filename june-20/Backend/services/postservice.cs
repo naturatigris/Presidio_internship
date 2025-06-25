@@ -5,6 +5,7 @@ using BlogPlatform.Models.AuditLogs;
 using Microsoft.AspNetCore.SignalR;
 using BlogPlatform.Hubs;
 using System.Text.Json;
+using BlogPlatform.Models.Dtos;
 
 namespace BlogPlatform.Services
 {
@@ -141,10 +142,9 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
             var final = images.Where(c => c.PostId == id).ToList();
             return final;
         }
-        public async Task<IEnumerable<Post>> GetFilteredPosts(string? userEmail, string? status, string? searchTerm, string? sortOrder, int? pageNumber, int? pageSize,    List<string>? categories)
+        public async Task<PaginatedPostResult> GetFilteredPosts(string? userEmail, string? status, string? searchTerm, string? sortOrder, int? pageNumber, int? pageSize,    List<string>? categories)
 
         {
-            await _userValidationService.ValidateUserEmail(userEmail);
 
             var posts = await _postRepository.GetAll();
 
@@ -153,7 +153,11 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(userEmail))
+            {
+                await _userValidationService.ValidateUserEmail(userEmail);
+
                 query = query.Where(p => p.UserEmail == userEmail);
+            }
 
             if (!string.IsNullOrEmpty(status))
                 query = query.Where(p => p.Status.Equals(status, StringComparison.OrdinalIgnoreCase));
@@ -171,6 +175,7 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
                     query = query.Where(p => p.Categories
                         .Any(pc => normalizedCategories.Contains(pc.Name.ToLower())));
                 }
+             var totalCount =  query.Count();
 
 
 
@@ -181,7 +186,11 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
             if (pageNumber.HasValue && pageSize.HasValue)
                 query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
 
-            return query.ToList();
+    return new PaginatedPostResult
+    {
+        Items = query.ToList(),
+        TotalItems = totalCount
+    };
         }
     }
 }

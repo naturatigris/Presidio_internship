@@ -96,7 +96,7 @@ namespace BlogPlatform.Services
 
             return comment;
         }
-        public async Task<IEnumerable<Comment>> GetFilteredComments(Guid? postId,string? userEmail, string? status, string? sortOrder, int? pageNumber, int? pageSize)
+        public async Task<(IEnumerable<Comment>, int TotalCount)> GetFilteredComments(Guid? postId,string? userEmail, string? status, string? sortOrder, int? pageNumber, int? pageSize)
                 {
 
                     var comments = await _commentRepo.GetAll();
@@ -116,6 +116,7 @@ namespace BlogPlatform.Services
 
                     if (!string.IsNullOrEmpty(status))
                         query = query.Where(c => c.Status.Equals(status, StringComparison.OrdinalIgnoreCase));
+                    int totalCount = query.Count(); // total before pagination
 
                     query = sortOrder?.ToLower() == "desc"
                         ? query.OrderByDescending(c => c.CreatedAt)
@@ -124,7 +125,7 @@ namespace BlogPlatform.Services
                     if (pageNumber.HasValue && pageSize.HasValue)
                         query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
 
-                    return query.ToList();
+                    return (query, totalCount);
                 }
 
     }

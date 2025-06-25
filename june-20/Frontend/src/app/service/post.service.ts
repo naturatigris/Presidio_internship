@@ -6,7 +6,9 @@ import { getUserEmail } from '../misc/jwtdecode';
 import { BehaviorSubject } from 'rxjs';
 import { CreatePost } from '../models/postcreatmodel';
 import { PostQueryParams } from '../models/postquerymodel';
-
+import { Post } from '../models/postmodel';
+import { PaginatedResponse } from '../models/paginatepostresutl';
+import { PostUpdate } from '../models/postupdatedto';
 @Injectable({
   providedIn: 'root'
 })
@@ -40,7 +42,7 @@ WritePost(post: CreatePost): Observable<any> {
 
   return this.http.post(this.apiUrl, formData);
 }
-  getFilteredPosts(params: PostQueryParams): Observable<any[]> {
+getFilteredPosts(params: PostQueryParams): Observable<PaginatedResponse<Post>> {
     let httpParams = new HttpParams();
 
     Object.entries(params).forEach(([key, value]) => {
@@ -51,11 +53,28 @@ WritePost(post: CreatePost): Observable<any> {
       }
     });
 
-    return this.http.get<any[]>(`${this.apiUrl}/filter`, { params: httpParams });
+    return this.http.get<PaginatedResponse<Post>>(`${this.apiUrl}/filter`, { params: httpParams });
   
 }
-DeletePosrt(id:string):Observable<any>{
-    return this.http.delete(`${this.apiUrl}/delete/${id}`);
+GetPostById(id:string):Observable<any>{
+  return this.http.get(`${this.apiUrl}/${id}`)
+
+}
+updatePost(id: string, post: PostUpdate): Observable<any> {
+  const formData = new FormData();
+
+  if (post.title) formData.append('title', post.title);
+  if (post.slug) formData.append('slug', post.slug);
+  if (post.content) formData.append('content', post.content);
+  if (post.status) formData.append('status', post.status);
+
+  post.images.forEach(file => formData.append('images', file));
+
+  return this.http.put(`${this.apiUrl}/${id}`, formData);
+}
+
+DeletePost(id:string):Observable<any>{
+    return this.http.delete(`${this.apiUrl}/${id}`);
 
 }
 }

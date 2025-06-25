@@ -9,6 +9,9 @@ import { Profile } from './profile/profile';
 import { Settings } from './settings/settings';
 import { CreatePost } from './create-post/create-post';
 import { PostDetailComponent } from './post-detail-component/post-detail-component';
+import { Myposts } from './myposts/myposts';
+import { UpdatePostComponent } from './post-update/post-update';
+import { History } from './history/history';
 export const routes: Routes = [
     { path: 'home', component: Home },
       {path:'login',component:Login},
@@ -24,7 +27,12 @@ export const routes: Routes = [
       {path:'profile',component:Profile},
       {path:'settings',component:Settings},
       {path:'Create-post',component:CreatePost},
-      {path:'dashboard/post/:id',component:PostDetailComponent}
+      {path:'dashboard/post/:id',component:PostDetailComponent},
+      {path:'myposts',component:Myposts},
+      { path: 'myposts/edit/:id', component: UpdatePostComponent },
+      {path:'history',component:History}
+
+
 
     ]
   },

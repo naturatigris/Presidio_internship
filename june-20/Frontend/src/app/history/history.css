@@ -1,0 +1,114 @@
+  .history-container {
+  padding: 20px;
+}
+
+  .options{
+    margin-bottom: 30px;
+  }
+.options a {
+  padding: 20px;
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+    display: inline-block; /* Add this */
+
+}
+
+.options a.active {
+  color:#0077cc;
+  font-weight: bold;
+  border-bottom: 2px solid #0077cc;
+}
+.post-entry {
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+.post-snippet {
+  font-size: 0.95rem;
+  color: #444;
+}
+.slug {
+  font-size: 0.8rem;
+  color: #888;
+}
+.post-status {
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.post-status.published {
+  background-color: #e0f7e9;
+  color: #2e7d32;
+}
+.post-status.draft {
+  background-color: #fff8e1;
+  color: #f9a825;
+}
+.post-categories {
+  margin-top: 0.5rem;
+}
+.category-chip {
+  background-color: #eef;
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  display: inline-block;
+}
+.post-date {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.3rem;
+}
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
+  
+}
+
+.comment-entry {
+  padding: 0.5rem;
+  border-radius: 5px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.comment-content {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+
+.comment-meta {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.comment-meta .highlight {
+  font-weight: bold;
+  color: #333;
+}
+
+.comment-date {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 0.5rem;
+}
+
+.available {
+  color: green;
+}
+
+.pending {
+  color: orange;
+}
+
+.rejected {
+  color: red;
+}

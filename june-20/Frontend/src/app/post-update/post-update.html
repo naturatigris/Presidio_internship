@@ -1,0 +1,58 @@
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+  <label>Title:
+    <input formControlName="title" type="text" />
+  </label>
+
+  <label>Slug:
+    <input formControlName="slug" type="text" />
+  </label>
+
+  <label>Content:
+    <textarea formControlName="content" rows="5"></textarea>
+  </label>
+
+  <label>Status:
+    <select formControlName="status">
+      <option value="Published">Published</option>
+      <option value="Draft">Draft</option>
+    </select>
+  </label>
+
+<!-- Cover Image Preview -->
+<!-- Existing Cover Image -->
+<div *ngIf="existingImages.length > 0" class="cover-image-box">
+<img [src]="getImageUrl(existingImages[0])" />
+  <button type="button" class="remove-btn" (click)="removeExistingImage(0)">✖</button>
+  <p class="label">Cover Image</p>
+</div>
+
+<!-- Remaining Existing Images -->
+<div class="other-images" *ngIf="existingImages.length > 1">
+  <div
+    class="image-box"
+    *ngFor="let image of existingImages.slice(1); let i = index"
+  >
+<img [src]="getImageUrl(image)" />
+    <button type="button" class="remove-btn" (click)="removeExistingImage(i + 1)">✖</button>
+  </div>
+</div>
+
+<!-- New Image Previews -->
+<div *ngIf="selectedFiles.length > 0">
+  <h4>Newly Added Images</h4>
+  <div class="other-images">
+    <div class="image-box" *ngFor="let file of selectedFiles; let i = index">
+      <img [src]="getImageUrl(file)" />
+      <button type="button" class="remove-btn" (click)="removeImage(i)">✖</button>
+    </div>
+  </div>
+</div>
+
+<!-- File Upload Input -->
+<label class="upload-label">
+  Upload More Images:
+  <input type="file" multiple (change)="onFileSelected($event)" />
+</label>
+
+  <button type="submit">Update Post</button>
+</form>

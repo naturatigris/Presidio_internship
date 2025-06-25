@@ -1,4 +1,5 @@
 using BlogPlatform.Models;
+using BlogPlatform.Models.Dtos;
 
 namespace BlogPlatform.Interfaces
 {
@@ -10,7 +11,7 @@ namespace BlogPlatform.Interfaces
         public Task<IEnumerable<Comment>> GetCommentSByPost(Guid id);
         public Task<Post> DeletePost(Guid id, string PerformedByEmail);
         public Task<List<Image>> GetImagesByPostId(Guid id);
-        public Task<IEnumerable<Post>> GetFilteredPosts(string? userEmail, string? status, string? searchTerm, string? sortOrder, int? pageNumber, int? pageSize,List<string>? categories);
+        public Task<PaginatedPostResult> GetFilteredPosts(string? userEmail, string? status, string? searchTerm, string? sortOrder, int? pageNumber, int? pageSize,List<string>? categories);
 
     }
 }

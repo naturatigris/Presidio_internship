@@ -1,1 +1,109 @@
-<p>post-detail-component works!</p>
+<div class="post-container" *ngIf="post">
+    <div class="back-button" (click)="goBack()">
+  <span class="arrow">←</span> 
+</div>
+
+  <!-- Title -->
+  <h1 class="post-title">{{ post.title }}</h1>
+
+  <!-- Cover Image -->
+  <div class="cover-image" *ngIf="post.images?.length">
+    <img class="cover-img" *ngIf="post && post.images && post.images[0].content" [src]="'data:image/jpeg;base64,' + post.images[0].content" alt="Cover Image" />
+  </div>
+
+  <!-- Full Content -->
+  <div class="post-content">
+    <p>{{ post.content }}</p>
+  </div>
+
+  <!-- Image Gallery -->
+<div class="gallery" *ngIf="post && post.images && post.images.length > 1">
+    <h3>Gallery</h3>
+    <div class="gallery-grid">
+      <img
+        *ngFor="let img of post?.images?.slice(1)"
+        [src]="'data:image/jpeg;base64,' + img.content"
+        class="gallery-thumb"
+        alt="Post Image"
+        class="gallery-img"
+
+      />
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="categories" *ngIf="post.categories?.length">
+    <span *ngFor="let cat of post.categories" class="category-tag">{{ cat.name }}</span>
+  </div>
+
+  <!-- Author Section -->
+  <div class="author-box" *ngIf="post.user">
+    <img [src]="'data:image/jpeg;base64,' + post.user.profileImage" class="author-avatar" alt="Author Photo" />
+    <div>
+    <div class="author-info">
+      <h3>{{ post.user.name }}</h3>
+      <p><strong>Email:</strong> {{ post.user.email }}</p>
+      <p><strong>Bio:</strong> {{ post.user.bio }}</p>
+    </div>
+    </div>
+  </div>
+  <!-- Comment Section -->
+<div class="comment-section">
+  <!-- Add Comment Input -->
+  <div class="add-comment">
+    <input
+      type="text"
+      [(ngModel)]="postcontent"
+      placeholder="Add a comment..."
+      class="comment-input"
+    />
+    <button (click)="addComment(post!.id)">Post</button>
+  </div>
+
+  <!-- Comments List -->
+<div class="comments-list" >
+  <!-- User's Own Comments First -->
+  <ng-container *ngFor="let comment of userComments" class="usercomments">
+    <div class="comment">
+      <div>
+      <p class="comment-author">{{ comment.userEmail }}</p>
+      <div *ngIf="editingCommentId === comment.id; else viewContent">
+        <input [(ngModel)]="editContent" class="edit-input" />
+        <button (click)="saveComment(comment.id)">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </div>
+      <ng-template #viewContent>
+        <p class="comment-content">{{ comment.content }}</p>
+      </ng-template>
+      </div>
+      <!-- Three Dots Menu -->
+      <div class="comment-options">
+        <div class="dots" (click)="toggleMenu(comment.id)">
+          <i class='bx bx-dots-vertical-rounded'></i>
+        </div>
+
+        <div class="dropdown-menu" *ngIf="activeMenuId === comment.id">
+          <button (click)="editComment(comment)">
+            <i class="bx bx-edit-alt"></i> Edit
+          </button>
+          <button (click)="deleteComment(comment.id)">
+            <i class="bx bx-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Other Comments -->
+  <ng-container *ngFor="let comment of otherComments">
+    <div class="comment">
+      <div>
+      <p class="comment-author">{{ comment.userEmail }}</p>
+      <p class="comment-content">{{ comment.content }}</p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+</div>
+
+</div>

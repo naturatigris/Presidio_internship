@@ -194,14 +194,23 @@ public class PostController : ControllerBase
     {
         try
         {
-            var posts = await _postService.GetFilteredPosts(
+            var result = await _postService.GetFilteredPosts(
                 query.UserEmail, query.Status, query.SearchTerm,
                 query.SortOrder, query.PageNumber, query.PageSize,query.Categories);
 
-            if (!posts.Any())
-                return NotFound("No posts found.");
+        if (!result.Items.Any())
+            return NotFound("No posts found.");
 
-            return Ok(posts);
+        var totalPages = (int)Math.Ceiling(result.TotalItems / (double)query.PageSize);
+
+        return Ok(new
+        {
+            items = result.Items,
+            totalItems = result.TotalItems,
+            totalPages = totalPages,
+            currentPage = query.PageNumber,
+            pageSize = query.PageSize
+        });
         }
         catch (Exception ex)
         {

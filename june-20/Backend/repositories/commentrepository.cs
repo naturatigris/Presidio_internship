@@ -20,7 +20,7 @@ namespace BlogPlatform.Repositories
 
         public override async Task<IEnumerable<Comment>> GetAll()
         {
-            var comments = await _Context.Comments.Where(i => !i.IsDeleted).ToListAsync();
+            var comments = await _Context.Comments.Where(i => !i.IsDeleted).Include(p => p.Post).Include(p=>p.User).ToListAsync();
             return comments;
         }
     }

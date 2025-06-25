@@ -1,0 +1,121 @@
+/* Base form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Label and inputs */
+label {
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+input[type="text"],
+textarea,
+select {
+  margin-top: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff;
+}
+
+/* Submit button */
+button[type="submit"] {
+  align-self: flex-start;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Upload input */
+.upload-label input[type="file"] {
+  margin-top: 0.5rem;
+}
+
+/* Image previews */
+.cover-image-box,
+.image-box {
+  position: relative;
+  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cover-image-box img {
+  width: 280px;
+  height: auto;
+  border: 3px solid #007bff;
+  border-radius: 8px;
+}
+
+.image-box img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Remove buttons */
+.remove-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.2s ease;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+/* Section for other images */
+.other-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Image label */
+.label {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #007bff;
+  font-weight: 600;
+}

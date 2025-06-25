@@ -1,6 +1,28 @@
 <div class="dashboard-container">
   <h2>Blog Posts</h2>
 
+  <!-- Filter Form -->
+  <div class="filter-bar">
+    <input
+      type="text"
+      [(ngModel)]="filteredParams.searchTerm"
+      placeholder="Search by title or slug..."
+      class="search-input"
+    />
+
+<select [(ngModel)]="selectedCategory" (ngModelChange)="onCategoryChange($event)" class="category-select">
+      <option value="">All Categories</option>
+      <option *ngFor="let cat of fetchedCategories" [value]="cat">{{ cat }}</option>
+    </select>
+
+    <select [(ngModel)]="filteredParams.sortOrder" class="sort-select">
+      <option value="asc">Oldest First</option>
+      <option value="desc">Newest First</option>
+    </select>
+
+    <button (click)="applyFilters()" class="filter-button">Apply</button>
+  </div>
+
   <div class="post-grid">
     <div class="post-card" *ngFor="let post of posts">
       
@@ -31,8 +53,16 @@
         <div class="post-footer">
           <span class="author">By: {{ post.user?.name || post.userEmail }}</span>
           <span class="status">{{ post.status }}</span>
+<button *ngIf="post?.id" (click)="viewPost(post!.id)" class="readmore">Read More</button>
+
         </div>
       </div>
     </div>
   </div>
+  <div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
+
 </div>

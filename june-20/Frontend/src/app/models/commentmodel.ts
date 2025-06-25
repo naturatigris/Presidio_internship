@@ -1,7 +1,13 @@
+import { Post } from "./postmodel";
+import { UserProfile } from "./userprofilemodel";
+
 export interface Comment {
   id: string;
-  content: string;
   postId: string;
   userEmail: string;
-  createdAt?: Date;
+  content: string;
+  status: string;
+  createdAt: string;
+  post:Post;
+  user:UserProfile;
 }
