@@ -1,15 +1,15 @@
 <div class="history-container">
   <h2>History</h2>
 <div class="options">
-  <a [class.active]="activeTab === 'Posts'" (click)="activeTab = 'Posts'">Posts</a>
-  <a [class.active]="activeTab === 'Comments'" (click)="activeTab = 'Comments'">Comments</a>
+  <a [class.active]="activeTab === 'Posts'" (click)="activeTab = 'Posts'" style="cursor:pointer;">Posts</a>
+  <a [class.active]="activeTab === 'Comments'" (click)="activeTab = 'Comments'" style="cursor:pointer;">Comments</a>
 </div>
 <section class="Posts" *ngIf="activeTab === 'Posts'">
       <div class="post-list">
 <section class="Posts" *ngIf="activeTab === 'Posts'">
   <div class="post-list">
     <div *ngFor="let post of posts" class="post-entry">
-      <h3>{{ post.title }}</h3>
+      <h3 class="comment-count" *ngIf="post.id" (click)="viewpost(post.id)" style="cursor:pointer;">{{ post.title }}</h3>
 
       <p class="slug">tags:{{ post.slug }}</p>
 
@@ -23,7 +23,7 @@
         <span *ngFor="let cat of post?.categories" class="category-chip">{{ cat.name }}</span>
       </div>
 
-      <p *ngIf="post.comments?.length">💬 {{ post.comments?.length }} comment(s)</p>
+      <p class="comment-count" *ngIf="post?.id && post.comments?.length" (click)="viewpost(post.id!)" style="cursor:pointer;">💬 {{ post.comments?.length }} comment(s)</p>
 
       <p class="post-date">Published by {{ post.user?.name || post.userEmail }}</p>
     </div>
@@ -39,7 +39,7 @@
       <p class="comment-content">📝 {{ comment.content }}</p>
 
       <p class="comment-meta">
-        On Post: <span class="highlight">{{ comment.post.title }}</span> |
+        On Post: <span class="highlight" style="cursor:pointer;" class="comment-count" *ngIf="comment.post.id" (click)="viewpost(comment.post.id)">{{ comment.post.title }}</span> |
         Status: <span [ngClass]="comment.status.toLowerCase()">{{ comment.status }}</span>
       </p>
 

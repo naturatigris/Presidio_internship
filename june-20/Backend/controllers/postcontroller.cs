@@ -41,7 +41,6 @@ public class PostController : ControllerBase
 
             if (role != "Admin" && userEmail != dto.UserEmail)
                 return Forbid();
-            await _hubContext.Clients.All.SendAsync("ReceivePost", dto);
 
             var post = _mapper.Map<Post>(dto);
             var normalizedNames = dto.CategoryNames
@@ -68,6 +67,8 @@ public class PostController : ControllerBase
 
             var created = await _postService.AddPost(post, dto.UserEmail);
             post.Images = await _imageService.SaveImagesAsync(dto.Images, created.Id, userEmail);
+            await _hubContext.Clients.All.SendAsync("ReceivePost", post);
+
 
 
             return CreatedAtAction(nameof(GetPostById), new { version = "1.0", id = created.Id }, created);
@@ -112,7 +113,9 @@ public class PostController : ControllerBase
                     return Forbid();
 
             var updatedPost = _mapper.Map<Post>(dto);
+
             updatedPost.Id = id;
+            await _hubContext.Clients.All.SendAsync("EditedPost", updatedPost);
 
             var result = await _postService.UpdatePost(id, userEmail, updatedPost, dto.Images);
             if (result == null)

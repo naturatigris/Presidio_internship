@@ -7,6 +7,7 @@ import { PostQueryParams } from '../models/postquerymodel';
 import { getUserEmail } from '../misc/jwtdecode';
 import { CommentQueryParams } from '../models/commentqueryparams';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-history',
   imports: [CommonModule],
@@ -39,7 +40,7 @@ export class History implements OnInit{
   };
 
     
-    constructor(private postservice:PostService,private commentservice:CommentService){}
+    constructor(private postservice:PostService,private commentservice:CommentService,private router:Router){}
 
 ngOnInit(): void {
       const email=getUserEmail();
@@ -63,9 +64,10 @@ ngOnInit(): void {
       this.comments=res.items;
     },
       error: err => console.error('Error fetching posts', err)
-  });
+  }); 
+}
+viewpost(id:string){
+  this.router.navigate(['dashboard/post',id])
 
-  
-  
 }
 }

@@ -112,3 +112,7 @@
 .rejected {
   color: red;
 }
+.comment-count:hover{
+  color:dodgerblue;
+
+}

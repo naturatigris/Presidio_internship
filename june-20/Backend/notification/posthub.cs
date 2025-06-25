@@ -1,20 +1,33 @@
 using Microsoft.AspNetCore.SignalR;
 using BlogPlatform.Models.DTOs;
+using BlogPlatform.Models;
 
 namespace BlogPlatform.Hubs
 {
-public class PostHub : Hub
-{
-    public async Task BroadcastPost(Postto post)
+    public class PostHub : Hub
     {
-        try
+        public async Task BroadcastPost(Post post)
         {
-            await Clients.All.SendAsync("ReceivePost", post);
+            try
+            {
+                await Clients.All.SendAsync("ReceivePost", post);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error broadcasting post: " + ex.Message);
+            }
         }
-        catch (Exception ex)
+
+        public async Task BroadcastComment(Comment comment)
         {
-            Console.WriteLine("SignalR Hub Error: " + ex.Message);
+            try
+            {
+                await Clients.All.SendAsync("ReceiveComment", comment);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error broadcasting comment: " + ex.Message);
+            }
         }
     }
-}
 }

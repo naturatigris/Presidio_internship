@@ -247,7 +247,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapHub<PostHub>("/hubs/posts"); // Add this line
+app.MapHub<PostHub>("/notification"); // Add this line
 
 
 

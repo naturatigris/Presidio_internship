@@ -12,6 +12,7 @@ import { PostDetailComponent } from './post-detail-component/post-detail-compone
 import { Myposts } from './myposts/myposts';
 import { UpdatePostComponent } from './post-update/post-update';
 import { History } from './history/history';
+import { Notifications } from './notifications/notifications';
 export const routes: Routes = [
     { path: 'home', component: Home },
       {path:'login',component:Login},
@@ -30,7 +31,8 @@ export const routes: Routes = [
       {path:'dashboard/post/:id',component:PostDetailComponent},
       {path:'myposts',component:Myposts},
       { path: 'myposts/edit/:id', component: UpdatePostComponent },
-      {path:'history',component:History}
+      {path:'history',component:History},
+      {path:'notification',component:Notifications}
 
 
 

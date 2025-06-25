@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using System.Security.Claims;
+using BlogPlatform.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 
 namespace BlogPlatform.Controllers
@@ -16,12 +18,16 @@ namespace BlogPlatform.Controllers
     {
         private readonly ICommentService _commentService;
         private readonly IMapper _mapper;
+        private readonly IHubContext<PostHub> _hubContext;
 
-        public CommentController(ICommentService commentService, IMapper mapper)
+        public CommentController(ICommentService commentService, IMapper mapper, IHubContext<PostHub> hubContext)
         {
             _commentService = commentService;
             _mapper = mapper;
+            _hubContext = hubContext;
         }
+
+        
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddComment([FromBody] CommentDto dto)
@@ -34,7 +40,10 @@ namespace BlogPlatform.Controllers
                     return Forbid();
 
 
+
                 var comment = _mapper.Map<Comment>(dto);
+                await _hubContext.Clients.All.SendAsync("ReceiveComment", comment);
+
                 var created = await _commentService.AddComment(comment, userEmail);
                 return CreatedAtAction(nameof(AddComment), new { id = created.Id }, created);
             }
