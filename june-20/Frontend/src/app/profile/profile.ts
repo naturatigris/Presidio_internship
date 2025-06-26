@@ -37,8 +37,9 @@ export class Profile implements OnInit{
 
 ngOnInit(): void {
   this.role=getUserRole();
+  console.log(this.role);
   if (this.role=='Admin'){
-    this.resource=='Allowed';
+    this.resource='allowed';
   }
 
       this.userservice.user$.subscribe(user => {

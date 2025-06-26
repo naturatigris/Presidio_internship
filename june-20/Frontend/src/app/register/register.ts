@@ -28,8 +28,9 @@ export class Register {
       email: [null, [Validators.required, Validators.min(1)]],
       role: ['', Validators.required],
       password: ['', [Validators.required,this.Passwordstrengthvalidator(),Validators.minLength(8)]],
-      confirmpassword:['',Validators.required]
-        },{validators:[this.passwordchecker,this.AdminsecretValidator]});
+      confirmpassword:['',Validators.required],
+      adminSecret:['']
+       },{validators:[this.passwordchecker,this.AdminsecretValidator]});
   }
   AdminsecretValidator:ValidatorFn=(form:AbstractControl):ValidationErrors|null=>{
     const role = form.get('role')?.value;

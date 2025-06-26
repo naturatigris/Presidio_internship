@@ -22,7 +22,7 @@
       <div class="text">
         <p><strong>{{ comment.userEmail }}</strong> commented:</p>
         <p class="comment-snippet">"{{ comment.content | slice:0:100 }}..."</p>
-        <span class="link-hint" (click)="viewpost(comment.post.id!)">View Post →</span>
+        <span class="link-hint" (click)="viewpost(comment.postId!)">View Post →</span>
       </div>
     </div>
   </div>

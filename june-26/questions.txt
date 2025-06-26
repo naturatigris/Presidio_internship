@@ -1,0 +1,40 @@
+1. You have a file with permissions -rw-r--r--, and you run chmod +x file.sh. What happens?
+ans:initial permissions a)owner-read,write b)group-read c)others-read
+now -rwxr-xr-xall the users can execute the file.
+
+2. What is the difference between chmod 744 file.txt and chmod u=rwx,go=r file.txt?
+ans:744=-rwxr--r--,octal notation
+u=rwx,go=r=744 symbolic notation.
+3. What is the sticky bit, and when should you use it?
+ans:stick bit allows to set permissions such that the oners can only delete or rename files in that directory.
+eg:chmode +t directory_name
+4. You are told to give the owner full access, group only execute, and others no permissions. What symbolic command achieves this?
+ans: -rwx=owner
+--x=group
+---=others
+-rwx--x---
+5. What is umask, and why is it important?
+ans:umask basically sets defaul  permissions for newly created files and directories
+defaul permissions
+1)directories-read ,write and execute(777)
+2)files-read and write(666)
+
+6. If the umask is 022, what are the default permissions for a new file and a new directory?
+a)files
+666 - 022 = 644 → rw-r--r--
+owner=readand write
+group, others=read
+b)directory
+777 - 022 = 755 → rwxr-xr-x
+owner=read,write and execute
+group,other=read and execute
+
+
+7. Why is umask often set to 002 in development environments but 027 or 077 in production?
+002-so that develeopers who collaborate can work together with all permissions and the rest can not access the authorized ones
+027-limits the write and execution access to groups protect files
+077-only owner can have all permissions
+
+8)useradd vs adduser
+useradd- creates users with basic default functions but must manually configure password and direcotry, its safe to use.
+add user-set basic defaults, prompts automatically for the password and homedirecotyr setting, and thevalues must be provided for the prompts, otherwise the user is locked

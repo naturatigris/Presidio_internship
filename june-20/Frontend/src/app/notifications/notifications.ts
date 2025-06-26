@@ -21,8 +21,6 @@ viewpost(postId: string) {
   this.router.navigate(['dashboard/post', postId]);
 }
   ngOnInit(): void {
-      this.loadRecentData();
-  // Live updates
   this.notificationService.posts$.subscribe(posts => {
     this.posts = posts;
   });
@@ -31,21 +29,21 @@ viewpost(postId: string) {
     this.comments = comments;
   });
   }
-  private loadRecentData() {
-    if(this.postService){
-  this.postService.getFilteredPosts({
-    pageNumber: 1,
-    pageSize: 5,
-    sortOrder: 'desc'
-  }).subscribe(res => {
-    this.commentService.getFilteredComments({
-      pageNumber: 1,
-      pageSize: 5,
-      sortOrder: 'desc'
-    }).subscribe(cres => {
-      this.notificationService.loadInitial(res.items, cres.items);
-    });
-  });}
-}
+//   private loadRecentData() {
+//     if(this.postService){
+//   this.postService.getFilteredPosts({
+//     pageNumber: 1,
+//     pageSize: 5,
+//     sortOrder: 'desc'
+//   }).subscribe(res => {
+//     this.commentService.getFilteredComments({
+//       pageNumber: 1,
+//       pageSize: 5,
+//       sortOrder: 'desc'
+//     }).subscribe(cres => {
+//       this.notificationService.loadInitial(res.items, cres.items);
+//     });
+//   });}
+// }
 
 }

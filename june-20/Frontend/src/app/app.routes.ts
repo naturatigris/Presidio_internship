@@ -13,6 +13,7 @@ import { Myposts } from './myposts/myposts';
 import { UpdatePostComponent } from './post-update/post-update';
 import { History } from './history/history';
 import { Notifications } from './notifications/notifications';
+import { Admindashboard } from './admindashboard/admindashboard';
 export const routes: Routes = [
     { path: 'home', component: Home },
       {path:'login',component:Login},
@@ -24,7 +25,8 @@ export const routes: Routes = [
 
     children: [
       {path:'',redirectTo:'dashboard',pathMatch:'full'},
-      { path: 'dashboard', component: Dashboard },
+      {path: 'dashboard', component: Dashboard },
+      {path:'dashboars/admin',component:Admindashboard},
       {path:'profile',component:Profile},
       {path:'settings',component:Settings},
       {path:'Create-post',component:CreatePost},
