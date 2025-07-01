@@ -6,7 +6,7 @@
     </div>
     <ul class="nav-list">
       <li>
-        <a routerLink="/dashboard">
+        <a routerLink={{routelink}}>
           <i class="bx bx-grid-alt"></i>
           <span class="link_name" >Dashboard</span>
         </a>
@@ -28,7 +28,10 @@
       </li>
       <li>
         <a routerLink="/notification">
-          <i class="bx bx-bell"></i>
+          <i class="bx bx-bell">
+              <span *ngIf="hasUnread" class="notification-dot"></span>
+
+          </i>
           <span class="link_name">Notification</span>
         </a>
         <span class="tooltip">Notification</span>

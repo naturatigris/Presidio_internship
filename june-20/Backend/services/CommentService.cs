@@ -57,6 +57,8 @@ namespace BlogPlatform.Services
             var oldContent = existing.Content;
 
             existing.Content = comment.Content;
+            existing.iseditied = true;
+            existing.CreatedAt = DateTime.UtcNow;
             var updated = await _commentRepo.Update(id, existing);
 
             await _auditRepo.AddAsync(new CommentAuditLog

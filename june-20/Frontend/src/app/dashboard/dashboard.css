@@ -130,3 +130,19 @@
   font-size: 14px;
   font-weight: 500;
 }
+.like-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.bx-like {
+  font-size: 20px;
+  color: gray;
+  transition: color 0.2s;
+}
+
+.bx-like.liked {
+  color: #007bff;
+}

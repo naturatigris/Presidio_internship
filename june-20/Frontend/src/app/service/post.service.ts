@@ -68,6 +68,13 @@ updatePost(id: string, post: PostUpdate): Observable<any> {
   if (post.content) formData.append('content', post.content);
   if (post.status) formData.append('status', post.status);
 
+  if (post.views !== undefined) formData.append('views', post.views.toString());
+
+  // ✅ Append deleteImages flag
+  formData.append('deleteImages', post.deleteImages ? 'true' : 'false');
+
+
+
   post.images.forEach(file => formData.append('images', file));
 
   return this.http.put(`${this.apiUrl}/${id}`, formData);
@@ -76,5 +83,8 @@ updatePost(id: string, post: PostUpdate): Observable<any> {
 DeletePost(id:string):Observable<any>{
     return this.http.delete(`${this.apiUrl}/${id}`);
 
+}
+getAllPosts():Observable<any>{
+    return this.http.get(`${this.apiUrl}`);
 }
 }

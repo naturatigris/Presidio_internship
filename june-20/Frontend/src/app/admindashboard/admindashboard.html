@@ -1,1 +1,112 @@
-<p>admindashboard works!</p>
+<!-- admindashboard.html -->
+<div class="dashboard-container">
+  <!-- Confirmation Notification -->
+<div *ngIf="confirmDelete" class="confirm-toast">
+  <p>Are you sure you want to delete <strong>{{ userToDelete?.name }}</strong>'s account?</p>
+  <div>
+  <button class="confirm-btn" (click)="confirmDeleteUser()">Yes, Delete</button>
+  <button class="cancel-btn" (click)="cancelDelete()">Cancel</button>
+  </div>
+</div>
+
+  <h2>Admin Dashboard</h2>
+
+  <!-- Top Summary Cards -->
+<div class="summary-cards">
+  <div class="card blue">
+    <i class='bx bx-user-circle card-icon'></i>
+    <div>
+    <div class="card-text">Total Users</div>
+    <div class="card-number">{{ totalUsers }}</div>
+
+    </div>
+  </div>
+  <div class="card green">
+    <i class='bx bx-news card-icon'></i>
+    <div>
+    <div class="card-text">Total Posts</div>
+    <div class="card-number">{{ totalPosts }}</div>
+
+    </div>
+  </div>
+  <div class="card red">
+    <i class='bx bx-comment-detail card-icon'></i>
+    <div>
+    <div class="card-text">Total Comments</div>
+    <div class="card-number">{{ totalComments }}</div>
+    </div>
+  </div>
+</div>
+<div style="display: flex;">
+  <!-- Placeholder for Analytics -->
+  <div class="analytics-section" style="width: 50%;">
+    <app-admindashboardanalytics ></app-admindashboardanalytics>
+  </div>
+  <app-adminpostview style="width: 50%;"></app-adminpostview>
+</div>
+
+
+  <!-- Filtering Section -->
+  <div class="filter-section">
+    <label>Role:
+      <select [(ngModel)]="filters.role">
+        <option value="">All</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+      </select>
+    </label>
+
+    <label>Status:
+      <select [(ngModel)]="filters.status">
+        <option value="">All</option>
+        <option value="Active">Active</option>
+        <option value="Suspended">Suspended</option>
+      </select>
+    </label>
+
+    <button (click)="applyFilters()">Apply</button>
+  </div>
+
+  <!-- User List Table -->
+  <div class="user-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.status }}</td>
+          <td>{{ user.createdAt | date: 'short' }}</td>
+          <td>
+        <button class="action-button" title="View User">
+        <i class='bx bx-show' [routerLink]="['/profile', user.email]"></i>
+        </button>
+        <button class="action-button" title="Edit User">
+          <i class='bx bx-edit' [routerLink]="['/profile', user.email]"></i>
+        </button>
+        <button class="action-button" title="Delete User" >
+          <i class='bx bx-trash' (click)="deleteAccount(user.email)"></i>
+        </button>
+      </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="pageNumber === 1">Prev</button>
+    <span>Page {{ pageNumber }}</span>
+    <button (click)="nextPage()" [disabled]="(pageNumber * pageSize) >= totalItems">Next</button>
+  </div>
+</div>

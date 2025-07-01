@@ -25,11 +25,16 @@ namespace BlogPlatform.Models
 
         public string Status { get; set; } = "Published"; // (Draft, Published, Deleted)
         public bool IsDeleted { get; set; } = false;
+        public int Views { get; set; } = 0;
 
         public User User { get; set; }
+
+        public DateTime createdAt { get; set; } = DateTime.UtcNow;
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         public ICollection<Category> Categories { get; set; } = new List<Category>();
 
         public ICollection<Image> Images { get; set; } = new List<Image>();
+        public ICollection<PostLike> PostLikes { get; set; } = new List<PostLike>();
+
     }
 }

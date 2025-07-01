@@ -78,6 +78,19 @@ public class PostController : ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetAllpost()
+        {try
+            {
+                var result = await _postService.GetAll();
+                return Ok(result);
+            }        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+
+    }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetPostById(Guid id)
@@ -117,7 +130,7 @@ public class PostController : ControllerBase
             updatedPost.Id = id;
             await _hubContext.Clients.All.SendAsync("EditedPost", updatedPost);
 
-            var result = await _postService.UpdatePost(id, userEmail, updatedPost, dto.Images);
+            var result = await _postService.UpdatePost(id, userEmail, updatedPost, dto.Images,dto.deleteImages);
             if (result == null)
                 return NotFound($"Post with ID {id} not found");
 
@@ -199,7 +212,7 @@ public class PostController : ControllerBase
         {
             var result = await _postService.GetFilteredPosts(
                 query.UserEmail, query.Status, query.SearchTerm,
-                query.SortOrder, query.PageNumber, query.PageSize,query.Categories);
+                query.SortOrder, query.PageNumber, query.PageSize,query.Categories,query.viewOrder);
 
         if (!result.Items.Any())
             return NotFound("No posts found.");

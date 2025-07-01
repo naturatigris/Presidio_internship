@@ -2,6 +2,7 @@ import { UserProfile } from "./userprofilemodel";
 import { Category } from "./categorymodel";
 import { Comment } from "./commentmodel";
 import { Image } from "./imagemodel";
+import { PostLike } from "./postlikemodel";
 export interface Post {
   id?: string;  // optional since it’s generated server-side
 
@@ -11,9 +12,11 @@ export interface Post {
   content: string;
   status?: string;         // default to "Published" if not provided
   isDeleted?: boolean;
-
+  createdAt?:Date;
+  views?:number;
   user?: UserProfile;             // optional, included only if populated
   comments?: Comment[];
   categories?: Category[];
   images?: Image[];
+  postLikes?:PostLike[];
 }

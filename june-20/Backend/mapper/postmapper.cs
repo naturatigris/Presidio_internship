@@ -16,11 +16,13 @@ public class PostProfile : Profile
            .ForMember(dest => dest.Images, opt => opt.Ignore());
 
 
-CreateMap<PostUpdateDto, Post>()
-    .ForMember(dest => dest.Title, opt => opt.Condition(src => src.Title != null))
-    .ForMember(dest => dest.Slug, opt => opt.Condition(src => src.Slug != null))
-    .ForMember(dest => dest.Content, opt => opt.Condition(src => src.Content != null))
-    .ForMember(dest => dest.Status, opt => opt.Condition(src => src.Status != null))
+        CreateMap<PostUpdateDto, Post>()
+            .ForMember(dest => dest.Title, opt => opt.Condition(src => src.Title != null))
+            .ForMember(dest => dest.Slug, opt => opt.Condition(src => src.Slug != null))
+            .ForMember(dest => dest.Content, opt => opt.Condition(src => src.Content != null))
+            .ForMember(dest => dest.Status, opt => opt.Condition(src => src.Status != null))
+            .ForMember(dest => dest.Views, opt => opt.Condition(src => src.Views != null))
+
     .ForMember(dest => dest.Images, opt => opt.Ignore());
 
 

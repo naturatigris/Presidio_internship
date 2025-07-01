@@ -1,0 +1,23 @@
+.analytics-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  margin-top: 2rem;
+}
+
+.analytics-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #004f83;
+}
+
+canvas {
+  width: 100% !important;
+  height: 320px !important;
+}
+.week-range {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 10px;
+}

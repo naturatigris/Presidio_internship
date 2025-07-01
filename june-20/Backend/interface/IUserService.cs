@@ -15,7 +15,7 @@ namespace BlogPlatform.Interfaces
 
         public Task<User> DeleteUser(string key, string PerformedByEmail);
         public Task<IEnumerable<Post>> GetPostByUser(string key);
-       public  Task<IEnumerable<User>> GetAllFiltereduser(string? role, string? status, string? sortOrder, int? pageNumber, int? pageSize);
+        public  Task<PaginatedUserResult> GetAllFiltereduser(string? role, string? status, string? sortOrder, int? pageNumber, int? pageSize);
 
 
 

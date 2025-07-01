@@ -7,6 +7,7 @@ import { getUserEmail } from '../misc/jwtdecode';
 import { BehaviorSubject } from 'rxjs';
 import { UpdateUserDto } from '../models/userupdatemodel';
 import { HttpHeaders } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -76,4 +77,34 @@ DeleteUser(email:string):Observable<any>{
     return this.http.delete(`${this.apiUrl}/delete/${email}`);
 
 }
+GetUserByEmail(email:string): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${this.apiUrl}/get/${email}`);
+  }
+
+getAllUsers(): Observable<UserProfile[]> {
+    return this.http.get<UserProfile[]>(`${this.apiUrl}/getall`);
+  }
+  getFilteredUsers(
+  role?: string,
+  status?: string,
+  sortOrder: 'asc' | 'desc' = 'asc',
+  pageNumber: number = 1,
+  pageSize: number = 10
+): Observable<{ items: UserProfile[], totalItems: number, pageNumber: number, pageSize: number }> {
+  let params = new HttpParams()
+    .set('sortOrder', sortOrder)
+    .set('pageNumber', pageNumber)
+    .set('pageSize', pageSize);
+
+  if (role) params = params.set('role', role);
+  if (status) params = params.set('status', status);
+
+  return this.http.get<{ 
+    items: UserProfile[], 
+    totalItems: number, 
+    pageNumber: number, 
+    pageSize: number 
+  }>(`${this.apiUrl}/getall/filtered`, { params });
+}
+
 }

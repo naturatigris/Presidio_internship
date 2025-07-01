@@ -21,9 +21,11 @@
     "@angular/ssr": "^20.0.1",
     "@microsoft/signalr": "^8.0.7",
     "boxicons": "^2.1.4",
+    "chart.js": "^4.5.0",
     "dompurify": "^3.2.6",
     "express": "^5.1.0",
     "jwt-decode": "^4.0.0",
+    "ng2-charts": "^8.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

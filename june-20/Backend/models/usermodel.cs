@@ -26,7 +26,7 @@ namespace BlogPlatform.Models
 
         public bool IsDeleted { get; set; } = false;
 
-        public string Status { get; set; } = "Active"; 
+        public string Status { get; set; } = "Active";
         public byte[]? ProfileImage { get; set; }
         public string? Bio { get; set; }
         public string? Location { get; set; }
@@ -35,5 +35,9 @@ namespace BlogPlatform.Models
 
         public ICollection<Post> Posts { get; set; } = new List<Post>();
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<PostLike> PostLikes { get; set; } = new List<PostLike>();
+        public ICollection<CommentLike> CommentLikes { get; set; } = new List<CommentLike>();
+
+
     }
 }

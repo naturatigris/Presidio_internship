@@ -76,8 +76,22 @@
         <p class="comment-content">{{ comment.content }}</p>
       </ng-template>
       </div>
+      <!-- Like Button with Count -->
+<div class="comment-like-section">
+  <i 
+    class='bx' 
+    [ngClass]="{
+      'bxs-like': likedCommentIds.has(comment.id),
+      'bx-like': !likedCommentIds.has(comment.id)
+    }"
+    (click)="toggleCommentLike(comment.id)"
+    style="cursor: pointer;"
+  ></i>
+  <span>{{ commentLikes[comment.id] || 0 }}</span>
+</div>
+
       <!-- Three Dots Menu -->
-      <div class="comment-options">
+      <div class="comment-options" style="justify-self: end;">
         <div class="dots" (click)="toggleMenu(comment.id)">
           <i class='bx bx-dots-vertical-rounded'></i>
         </div>
@@ -90,7 +104,13 @@
             <i class="bx bx-trash"></i> Delete
           </button>
         </div>
+         <div class="commet-time" >
+<span>{{ comment.iseditied ? 'edited' : '' }}</span>
+<span>{{ formatTime(comment.createdAt) }}</span>
       </div>
+
+      </div>
+      
     </div>
   </ng-container>
 
@@ -99,9 +119,50 @@
     <div class="comment">
       <div>
       <p class="comment-author">{{ comment.userEmail }}</p>
-      <p class="comment-content">{{ comment.content }}</p>
+      <div *ngIf="editingCommentId === comment.id; else viewContent">
+        <input [(ngModel)]="editContent" class="edit-input" />
+        <button (click)="saveComment(comment.id)">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </div>
+      <ng-template #viewContent>
+        <p class="comment-content">{{ comment.content }}</p>
+      </ng-template>
+      </div>
+      <!-- Like Button with Count -->
+<div class="comment-like-section">
+  <i 
+    class='bx' 
+    [ngClass]="{
+      'bxs-like': likedCommentIds.has(comment.id),
+      'bx-like': !likedCommentIds.has(comment.id)
+    }"
+    (click)="toggleCommentLike(comment.id)"
+    style="cursor: pointer;"
+  ></i>
+  <span>{{ commentLikes[comment.id] || 0 }}</span>
+</div>
+
+      <!-- Three Dots Menu -->
+      <div class="comment-options" style="justify-self: end;" *ngIf="isAdmin">
+        <div class="dots" (click)="toggleMenu(comment.id)">
+          <i class='bx bx-dots-vertical-rounded'></i>
+        </div>
+
+        <div class="dropdown-menu" *ngIf="activeMenuId === comment.id">
+          <button (click)="editComment(comment)">
+            <i class="bx bx-edit-alt"></i> Edit
+          </button>
+          <button (click)="deleteComment(comment.id)">
+            <i class="bx bx-trash"></i> Delete
+          </button>
+        </div>
+         <div class="commet-time" >
+<span>{{ comment.iseditied ? 'edited' : '' }}</span>
+<span>{{ formatTime(comment.createdAt) }}</span>
       </div>
     </div>
+        </div>
+
   </ng-container>
 </div>
 </div>

@@ -1,0 +1,44 @@
+<div class="blog-container">
+  <div class="blog-header">
+    <h2 class="blog-title">Recent Blogs</h2>
+    <button class="add-button" routerLink="/Create-post">+ Add New</button>
+  </div>
+
+  <ul class="blog-list">
+    <li *ngFor="let post of posts" class="blog-item">
+      <img
+        [src]="'data:image/jpeg;base64,' + post.images?.[0]?.content"
+        class="post-image"
+        alt="Post Cover"
+        *ngIf="post.images?.length"
+      />
+
+      <div class="post-details">
+        <p class="post-title" [title]="post.title">{{ post.title }}</p>
+
+        <div class="post-meta">
+          <div class="meta-item">
+            <i class="bx bx-comment"></i>
+            <span>{{ post.comments?.length || 0 }} Comments</span>
+          </div>
+
+          <div class="meta-item">
+            <i class='bx  bx-show'  ></i>             
+            <span>{{ post?.views|| 0 }} Views</span>
+          </div>
+
+          <div class="meta-item clickable" (click)="editPost(post.id)">
+            <i class="bx bx-edit"></i>
+            <span>Edit</span>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div style="  display: flex;justify-content: flex-end;margin-top: 16px;" >
+  <div class="view-more-btn" routerLink="/dashboard/admin/posts" >
+  View More
+  <i class='bx bx-arrow-back bx-rotate-180'></i>
+</div>
+</div>
+</div>

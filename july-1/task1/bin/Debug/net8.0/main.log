@@ -1,0 +1,37 @@
+2025-06-04 12:28:49,739 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5025
+2025-06-04 12:28:49,773 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 12:28:49,773 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 12:28:49,773 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-4/task1
+2025-06-04 12:29:40,117 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (59ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role", d."Id", d."Email", d."Name", d."Status", d."YearsOfExperience"
+FROM "Users" AS u
+LEFT JOIN "Doctors" AS d ON u."Username" = d."Email"
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 12:29:40,142 [.NET TP Worker] FATAL FirstAPI.Services.AuthenticationService - User not found
+2025-06-04 12:29:40,143 [.NET TP Worker] ERROR FirstAPI.Controllers.AuthenticationController - No such user
+2025-06-04 12:34:08,539 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5025
+2025-06-04 12:34:08,579 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 12:34:08,579 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 12:34:08,579 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-4/task1
+2025-06-04 12:34:18,304 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (52ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role", d."Id", d."Email", d."Name", d."Status", d."YearsOfExperience"
+FROM "Users" AS u
+LEFT JOIN "Doctors" AS d ON u."Username" = d."Email"
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 12:34:18,327 [.NET TP Worker] FATAL FirstAPI.Services.AuthenticationService - User not found
+2025-06-04 12:34:18,334 [.NET TP Worker] ERROR FirstAPI.Controllers.AuthenticationController - No such user
+2025-06-04 12:36:58,884 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5025
+2025-06-04 12:36:58,929 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 12:36:58,930 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 12:36:58,930 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-4/task1
+2025-06-04 12:37:19,151 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (55ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role", d."Id", d."Email", d."Name", d."Status", d."YearsOfExperience"
+FROM "Users" AS u
+LEFT JOIN "Doctors" AS d ON u."Username" = d."Email"
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 12:37:19,172 [.NET TP Worker] FATAL FirstAPI.Services.AuthenticationService - User not found
+2025-06-04 12:37:19,173 [.NET TP Worker] ERROR FirstAPI.Controllers.AuthenticationController - No such user
+2025-06-04 12:37:34,175 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...

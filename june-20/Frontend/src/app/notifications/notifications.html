@@ -1,29 +1,26 @@
 <div class="notification-panel">
   <h3>🔔 Notifications</h3>
 
-  <div class="notification-section" *ngIf="posts.length">
-    <h4>New Posts</h4>
-    <div *ngFor="let post of posts" class="notification-item post">
-      <span class="icon">📝</span>
-      <div class="text">
-        <p><strong>{{ post.title }}</strong> by {{ post.userEmail }}</p>
-      </div>
-        <span class="link-hint" (click)="viewpost(post.id!)">View Post →</span>
-
+<div class="notification-section" *ngIf="posts.length">
+  <h4>New Posts</h4>
+  <div *ngFor="let notif of unreadPosts" class="notification-item post" [class.unread]="!notif.read">
+    <span class="icon">📝</span>
+    <div class="text">
+      <p><strong>{{ notif.item.title }}</strong> by {{ notif.item.userEmail }}</p>
     </div>
-
+    <span class="link-hint" (click)="markPostAsRead(notif.item.id!)">View Post →</span>
   </div>
+</div>
 
-  <div class="notification-section" *ngIf="comments.length">
-    <h4>New Comments</h4>
-    <div *ngFor="let comment of comments" 
-         class="notification-item comment">
-      <span class="icon">💬</span>
-      <div class="text">
-        <p><strong>{{ comment.userEmail }}</strong> commented:</p>
-        <p class="comment-snippet">"{{ comment.content | slice:0:100 }}..."</p>
-        <span class="link-hint" (click)="viewpost(comment.postId!)">View Post →</span>
-      </div>
+<div class="notification-section" *ngIf="comments.length">
+  <h4>New Comments</h4>
+  <div *ngFor="let notif of unreadComments" class="notification-item comment" [class.unread]="!notif.read">
+    <span class="icon">💬</span>
+    <div class="text">
+      <p><strong>{{ notif.item.userEmail }}</strong> commented:</p>
+      <p class="comment-snippet">"{{ notif.item.content | slice:0:100 }}..."</p>
     </div>
+    <span class="link-hint" (click)="markCommentAsRead(notif.item.postId!)">View Post →</span>
   </div>
+</div>
 </div>

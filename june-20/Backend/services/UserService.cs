@@ -4,6 +4,8 @@ using BlogPlatform.Repositories;
 using BlogPlatform.Contexts;
 using BlogPlatform.Models;
 using BlogPlatform.Models.AuditLogs;
+using System.Linq;
+
 
 
 namespace BlogPlatform.Services
@@ -115,7 +117,7 @@ if (existingUser.Name != user.Name)
             return final;
 
         }
-        public async Task<IEnumerable<User>> GetAllFiltereduser(string? role, string? status, string? sortOrder, int? pageNumber, int? pageSize)
+public async Task<PaginatedUserResult> GetAllFiltereduser(string? role, string? status, string? sortOrder, int? pageNumber, int? pageSize)
         {
             var query = await _userrepository.GetAll();
 
@@ -131,12 +133,23 @@ if (existingUser.Name != user.Name)
                 query = query.OrderByDescending(u => u.CreatedAt);
             else
                 query = query.OrderBy(u => u.CreatedAt);
+                var totalItems = query.Count();
 
-            // Pagination
-            if (pageNumber.HasValue && pageSize.HasValue && pageNumber > 0 && pageSize > 0)
-                query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
+                int page = pageNumber ?? 1;
+                int size = pageSize ?? 10;
 
-            return query.ToList();
+                var paginatedItems = query
+                    .Skip((page - 1) * size)
+                    .Take(size)
+                    .ToList();
+
+    return new PaginatedUserResult
+    {
+        Items = paginatedItems,
+        PageNumber = page,
+        PageSize = size,
+        TotalItems = totalItems
+    };
         }
             
 

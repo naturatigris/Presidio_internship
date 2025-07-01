@@ -5,6 +5,7 @@ import { UserProfile } from '../models/userprofilemodel';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common'
+import { NotificationService } from '../service/notification.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,10 +17,11 @@ export class Sidebar implements OnInit{
   isSidebarOpen = false;
     user: UserProfile | null = null;
       profileImageSrc: SafeUrl = 'https://images.unsplash.com/photo-1620053580376-3de604e91953?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmVhdXRpZnVsJTIwbmF0dXJlfGVufDB8fDB8fHww';
-
+    routelink:string='/dashboard';
+    hasUnread = false;
 
     @Output() toggle = new EventEmitter<boolean>();
-  constructor(private userService: UserService,private sanitizer: DomSanitizer,private router:Router) {}
+  constructor(private userService: UserService,private sanitizer: DomSanitizer,private router:Router,private notificationService: NotificationService) {}
 
 
   toggleSidebar() {
@@ -46,16 +48,18 @@ viewHistory() {
       this.user = user;
             if (user?.profileImage) {
         this.profileImageSrc = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,${user.profileImage}`);
+
+      }
+      if(user?.role=='Admin'){
+        this.routelink='/dashboard/admin';
       }
 
     });
+      this.notificationService.hasUnread$.subscribe(flag => {
+    this.hasUnread = flag;
+  });
 
-  }
-    private arrayBufferToBase64(buffer: Uint8Array): string {
-    let binary = '';
-    const bytes = new Uint8Array(buffer);
-    bytes.forEach(b => binary += String.fromCharCode(b));
-    return window.btoa(binary);
+
   }
 logout() {
   localStorage.removeItem('token');

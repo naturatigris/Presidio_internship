@@ -123,17 +123,62 @@
       color: #007BFF;
     }
 
-    @media (max-width: 600px) {
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
 
-      .navbar .actions {
-        margin-top: 0.5rem;
-      }
+  .navbar .actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
 
-      .hero h1 {
-        font-size: 1.5rem;
-      }
-    }
+  .navbar .actions button {
+    width: 100%;
+    margin: 0.3rem 0;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .hero img {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .why {
+    padding: 2rem 1rem;
+  }
+
+  .why h2 {
+    font-size: 1.4rem;
+  }
+
+  .why p {
+    font-size: 1rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+  }
+}

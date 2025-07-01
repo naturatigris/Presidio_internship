@@ -1,4 +1,6 @@
 <div class="profile-container">
+  <h3>Welcome Back</h3>
+  <p>Hey {{ user?.name }}, ready to update your journey today?</p>
 
   <!-- Profile Header -->
   <div class="profile-header">
@@ -24,6 +26,16 @@
   (close)="showDetailsModal = false"
   (save)="updateUserDetails($event)">
 </app-profile-header-edit>
+<!-- Profile Completion Section -->
+<div class="profile-section">
+  <h3>Profile Completion</h3>
+  <div class="progress-bar-wrapper">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" [style.width.%]="animatedPercentage"></div>
+    </div>
+    <p>{{ getProfileCompletionPercentage() }}% complete</p>
+  </div>
+</div>
 
 
 
@@ -51,6 +63,18 @@
   (close)="showLocationModal = false"
   (save)="updateLocation($event)">
   </app-location-edit>
+  <!-- Activity Section -->
+<!-- Activity Chart -->
+<div class="profile-section">
+  <h3>Activity Overview</h3>
+<canvas baseChart
+  [data]="activityChartData"
+  [type]="chartType"
+  [options]="chartOptions"
+  [labels]="activityLabels">
+</canvas>
+</div>
+
 
 
   <!-- Account Status Section -->

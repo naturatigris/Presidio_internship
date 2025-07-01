@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject,combineLatest,map } from 'rxjs';
 import * as signalR from '@microsoft/signalr';
 import { Post } from '../models/postmodel';
 import { Comment } from '../models/commentmodel';
+
+export interface UINotification<T> {
+  item: T;
+  read: boolean;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +15,11 @@ import { Comment } from '../models/commentmodel';
 export class NotificationService {
   private hubConnection!: signalR.HubConnection;
 
-  private postsSubject = new BehaviorSubject<Post[]>([]);
-  posts$ = this.postsSubject.asObservable();
+private postsSubject = new BehaviorSubject<UINotification<Post>[]>([]);
+posts$ = this.postsSubject.asObservable();
 
-  private commentsSubject = new BehaviorSubject<Comment[]>([]);
-  comments$ = this.commentsSubject.asObservable();
+private commentsSubject = new BehaviorSubject<UINotification<Comment>[]>([]);
+comments$ = this.commentsSubject.asObservable();
 
   constructor() {
     this.startConnection();
@@ -32,21 +37,37 @@ export class NotificationService {
       .catch((err) => console.error('SignalR connection error:', err));
 
     // Handle live posts
-    this.hubConnection.on('ReceivePost', (post: Post) => {
-      const current = this.postsSubject.value;
-      this.postsSubject.next([post, ...current.slice(0, 4)]); // keep max 5
-    });
+this.hubConnection.on('ReceivePost', (post: Post) => {
+  const current = this.postsSubject.value;
+  this.postsSubject.next([{ item: post, read: false }, ...current.slice(0, 4)]);
+});
 
-    // Handle live comments
-    this.hubConnection.on('ReceiveComment', (comment: Comment) => {
-      const current = this.commentsSubject.value;
-      this.commentsSubject.next([comment, ...current.slice(0, 4)]);
-    });
+this.hubConnection.on('ReceiveComment', (comment: Comment) => {
+  const current = this.commentsSubject.value;
+  this.commentsSubject.next([{ item: comment, read: false }, ...current.slice(0, 4)]);
+});
   }
+  markPostAsRead(postId: string) {
+  const updated = this.postsSubject.value.map(n =>
+    n.item.id === postId ? { ...n, read: true } : n
+  );
+  this.postsSubject.next([...updated]); // <--- trigger change detection
+}
 
-  // Called from your component to load recent initial data
-  public loadInitial(posts: Post[], comments: Comment[]): void {
-    this.postsSubject.next(posts);
-    this.commentsSubject.next(comments);
-  }
+markCommentAsRead(commentId: string) {
+  const updated = this.commentsSubject.value.map(n =>
+    n.item.id === commentId ? { ...n, read: true } : n
+  );
+  this.commentsSubject.next([...updated]);
+}
+
+readonly hasUnread$ = combineLatest([
+  this.posts$,
+  this.comments$
+]).pipe(
+  map(([posts, comments]) =>
+    posts.some(p => !p.read) || comments.some(c => !c.read)
+  )
+);
+
 }

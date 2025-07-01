@@ -168,6 +168,9 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<RefreshTokenService>();
 builder.Services.AddScoped<SanitizeInputFilter>();
+builder.Services.AddScoped<CommentLikeService>();
+builder.Services.AddScoped<PostLikeService>();
+
 
 
 

@@ -173,6 +173,9 @@ namespace bloggingplatform.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("iseditied")
+                        .HasColumnType("boolean");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
@@ -180,6 +183,31 @@ namespace bloggingplatform.Migrations
                     b.HasIndex("UserEmail");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("BlogPlatform.Models.CommentLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("LikedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("UserEmail");
+
+                    b.ToTable("CommentLikes");
                 });
 
             modelBuilder.Entity("BlogPlatform.Models.Image", b =>
@@ -241,11 +269,42 @@ namespace bloggingplatform.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Views")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserEmail");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("BlogPlatform.Models.PostLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("LikedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserEmail");
+
+                    b.ToTable("PostLikes");
                 });
 
             modelBuilder.Entity("BlogPlatform.Models.RefreshToken", b =>
@@ -368,6 +427,25 @@ namespace bloggingplatform.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BlogPlatform.Models.CommentLike", b =>
+                {
+                    b.HasOne("BlogPlatform.Models.Comment", "Comment")
+                        .WithMany("Likes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlogPlatform.Models.User", "User")
+                        .WithMany("CommentLikes")
+                        .HasForeignKey("UserEmail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BlogPlatform.Models.Image", b =>
                 {
                     b.HasOne("BlogPlatform.Models.Post", "Post")
@@ -390,6 +468,25 @@ namespace bloggingplatform.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BlogPlatform.Models.PostLike", b =>
+                {
+                    b.HasOne("BlogPlatform.Models.Post", "Post")
+                        .WithMany("PostLikes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlogPlatform.Models.User", "User")
+                        .WithMany("PostLikes")
+                        .HasForeignKey("UserEmail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("CategoryPost", b =>
                 {
                     b.HasOne("BlogPlatform.Models.Category", null)
@@ -405,16 +502,27 @@ namespace bloggingplatform.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("BlogPlatform.Models.Comment", b =>
+                {
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("BlogPlatform.Models.Post", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
+
+                    b.Navigation("PostLikes");
                 });
 
             modelBuilder.Entity("BlogPlatform.Models.User", b =>
                 {
+                    b.Navigation("CommentLikes");
+
                     b.Navigation("Comments");
+
+                    b.Navigation("PostLikes");
 
                     b.Navigation("Posts");
                 });

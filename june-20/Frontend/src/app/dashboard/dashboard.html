@@ -53,7 +53,17 @@
         <div class="post-footer">
           <span class="author">By: {{ post.user?.name || post.userEmail }}</span>
           <span class="status">{{ post.status }}</span>
-<button *ngIf="post?.id" (click)="viewPost(post!.id)" class="readmore">Read More</button>
+          <span class="status">{{post.createdAt|date:'dd MMM yyyy'}}</span>
+          <button *ngIf="post?.id" (click)="viewPost(post!.id)" class="readmore">Read More</button>
+          <div class="like-box">
+            <i 
+              class='bx bx-like' 
+              [class.liked]="likedPostIds.has(post.id!)" 
+              (click)="togglePostLike(post.id!)">
+            </i>
+            <span>{{ postLikes[post.id!] || 0 }}</span>
+          </div>
+
 
         </div>
       </div>

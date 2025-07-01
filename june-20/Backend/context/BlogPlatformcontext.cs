@@ -22,6 +22,10 @@ namespace BlogPlatform.Contexts
         public DbSet<ImageAuditLog> ImageAuditLogs { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<PostLike> PostLikes { get; set; }
+        public DbSet<CommentLike> CommentLikes { get; set; }
+
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

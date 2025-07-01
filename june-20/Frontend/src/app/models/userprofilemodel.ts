@@ -1,3 +1,7 @@
+import { CommentLike } from "./commentlikemodal";
+import { Comment } from "./commentmodel";
+import { PostLike } from "./postlikemodel";
+import { Post } from "./postmodel";
 
 export class UserProfile {
   constructor(
@@ -15,7 +19,10 @@ export class UserProfile {
     public bio: string | null = null,
     public location: string | null = null,
     public website: string | null = null,
-    public posts: any[] = [],
-    public comments: any[] = []
+    public posts: Post[] = [],
+    public comments: Comment[] = [],
+    public commentLikes:CommentLike[]=[],
+    public postLikes:PostLike[]=[]
+    
   ) {}
 }

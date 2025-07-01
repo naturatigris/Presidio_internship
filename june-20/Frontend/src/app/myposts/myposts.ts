@@ -5,6 +5,8 @@ import { PostQueryParams } from '../models/postquerymodel';
 import { getUserEmail } from '../misc/jwtdecode';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PostLikeService } from '../service/postlike.service';
+
 
 @Component({
   selector: 'app-myposts',
@@ -23,6 +25,9 @@ ptotalItems: number = 0;
 dtotalPages: number = 1;
 dcurrentPage: number = 1;
 dtotalItems: number = 0;
+postLikes: { [postId: string]: number } = {};
+likedPostIds: Set<string> = new Set();
+
 
 
 
@@ -47,7 +52,7 @@ dtotalItems: number = 0;
         categories:[]
   }
 
-  constructor(private postservice:PostService,private router:Router){}
+  constructor(private postservice:PostService,private router:Router,private postLikeService: PostLikeService){}
   viewPost(id?: string) {
   console.log(id);
   if (!id) return; 
@@ -74,6 +79,23 @@ DeletePost(id?: string): void {
     }
   });
 }
+togglePostLike(postId: string) {
+  const email = localStorage.getItem('email');
+  if (!email) return;
+
+  if (this.likedPostIds.has(postId)) {
+    this.postLikeService.unlikePost(postId, email).subscribe(() => {
+      this.likedPostIds.delete(postId);
+      this.postLikes[postId] = (this.postLikes[postId] || 1) - 1;
+    });
+  } else {
+    this.postLikeService.likePost(postId, email).subscribe(() => {
+      this.likedPostIds.add(postId);
+      this.postLikes[postId] = (this.postLikes[postId] || 0) + 1;
+    });
+  }
+}
+
 
 
 
@@ -90,6 +112,21 @@ DeletePost(id?: string): void {
       this.ptotalPages = response.totalPages;
       this.ptotalItems = response.totalItems;
       this.pcurrentPage = response.currentPage;
+            const email = getUserEmail();
+
+      this.postLikeService.getLikesByUser(email!).subscribe({
+        next: (likes) => {
+          const likedIds = likes.map(like => like.postId);
+          this.likedPostIds = new Set(likedIds);
+        }
+      });
+
+      this.publishedposts.forEach(post => {
+        this.postLikeService.getLikeCount(post.id!).subscribe(count => {
+          this.postLikes[post.id!] = count;
+        });
+      });
+
     },
       error: err => console.error('Error fetching posts', err)
 

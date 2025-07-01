@@ -56,8 +56,12 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
 
             return created;
         }
+        public async Task<IEnumerable<Post>> GetAll()
+        {
+            return await _postRepository.GetAll();
+        }
 
-        public async Task<Post> UpdatePost(Guid id, string PerformedByEmail, Post updatedPost, List<IFormFile> newImages)
+        public async Task<Post> UpdatePost(Guid id, string PerformedByEmail, Post updatedPost, List<IFormFile> newImages,Boolean deleteImages)
         {
             await _userValidationService.ValidateUserEmail(PerformedByEmail);
 
@@ -75,12 +79,18 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
                 old.Slug = updatedPost.Slug;
             if (!string.IsNullOrWhiteSpace(updatedPost.Status))
                 old.Status = updatedPost.Status;
+            old.Views = updatedPost.Views;
 
+            
 
-            await _context.SaveChangesAsync(); // assumes this calls _context.SaveChangesAsync()
+            await _context.SaveChangesAsync(); 
 
-            // Update images only if provided
-            if (newImages != null && newImages.Count > 0)
+            if (deleteImages)
+            {
+                await _imageService.DeleteImagesByPostIdAsync(id, PerformedByEmail);
+                old.Images = new List<Image>(); // Clear in-memory list too
+            }
+            else if (newImages != null && newImages.Count > 0)
             {
                 old.Images = await _imageService.UpdateImagesAsync(newImages, id, PerformedByEmail);
             }
@@ -142,7 +152,7 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
             var final = images.Where(c => c.PostId == id).ToList();
             return final;
         }
-        public async Task<PaginatedPostResult> GetFilteredPosts(string? userEmail, string? status, string? searchTerm, string? sortOrder, int? pageNumber, int? pageSize,    List<string>? categories)
+        public async Task<PaginatedPostResult> GetFilteredPosts(string? userEmail, string? status, string? searchTerm, string? sortOrder, int? pageNumber, int? pageSize,    List<string>? categories,string? viewOrder)
 
         {
 
@@ -175,13 +185,23 @@ IImageService imageService, BlogPlatformContext context,IUserValidationService u
                     query = query.Where(p => p.Categories
                         .Any(pc => normalizedCategories.Contains(pc.Name.ToLower())));
                 }
+    if (!string.IsNullOrEmpty(viewOrder))
+    {
+        query = viewOrder.ToLower() == "most"
+            ? query.OrderByDescending(p => p.Views).ThenByDescending(p => p.createdAt)
+            : query.OrderBy(p => p.Views).ThenBy(p => p.createdAt);
+    }
+    else
+    {
+        query = sortOrder?.ToLower() == "desc"
+            ? query.OrderByDescending(p => p.createdAt)
+            : query.OrderBy(p => p.createdAt);
+    }
+
+
              var totalCount =  query.Count();
 
 
-
-            query = sortOrder?.ToLower() == "desc"
-                ? query.OrderByDescending(p => p.Id)
-                : query.OrderBy(p => p.Id);
 
             if (pageNumber.HasValue && pageSize.HasValue)
                 query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);

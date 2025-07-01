@@ -5,6 +5,7 @@ using BlogPlatform.Models.DTOs;
 using BlogPlatform.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using System.Linq;
 
 
 namespace BlogPlatform.Controllers.v1
@@ -207,15 +208,16 @@ namespace BlogPlatform.Controllers.v1
             }
         }
 [HttpGet("getall/filtered")]
-public async Task<ActionResult<IEnumerable<User>>> GetFilteredUsers([FromQuery] string? role,[FromQuery] string? status,[FromQuery] string? sortOrder = "asc",
+public async Task<IActionResult> GetFilteredUsers([FromQuery] string? role,[FromQuery] string? status,[FromQuery] string? sortOrder = "asc",
     [FromQuery] int? pageNumber=1,[FromQuery] int? pageSize=10)
 {
     try
     {
         var users = await _userService.GetAllFiltereduser(role, status, sortOrder, pageNumber, pageSize);
 
-        if (!users.Any())
+        if (!users.Items.Any())
             return NotFound("No users found for the given criteria.");
+
 
         return Ok(users);
     }

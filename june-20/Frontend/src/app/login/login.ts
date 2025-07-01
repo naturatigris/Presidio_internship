@@ -5,6 +5,7 @@ import { UserLogin } from '../models/userlogin';
 import { AuthService } from '../service/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { getUserRole } from '../misc/jwtdecode';
 
 @Component({
   selector: 'app-login',
@@ -38,8 +39,11 @@ export class Login {
                 alert('Login successful');
 
               this.token=localStorage.getItem('token')
-              if (this.token)
-                this.router.navigate(['/dashboard']);
+              if (this.token){
+                if (getUserRole()=='Admin'){
+                  this.router.navigate(['/dashboard/admin'])
+                }else{
+                this.router.navigate(['/dashboard']);}}
 
           },
           error: err => {

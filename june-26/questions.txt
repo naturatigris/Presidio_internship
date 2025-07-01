@@ -37,4 +37,4 @@ group,other=read and execute
 
 8)useradd vs adduser
 useradd- creates users with basic default functions but must manually configure password and direcotry, its safe to use.
-add user-set basic defaults, prompts automatically for the password and homedirecotyr setting, and thevalues must be provided for the prompts, otherwise the user is locked
+add user-set basic defaults, prompts automatically for the password and home directory setting, and thevalues must be provided for the prompts, otherwise the user is locked

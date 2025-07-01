@@ -77,10 +77,13 @@ this.existingImages=(post.images || []).map((img: { id?: string; content: string
 
 
   onSubmit(): void {
-    const updatePayload: PostUpdate = {
-      ...this.updateForm.value,
-      images: [...this.existingImages ,...this.selectedFiles]
-    };
+  const combinedImages = [...this.existingImages, ...this.selectedFiles];
+
+  const updatePayload: PostUpdate = {
+    ...this.updateForm.value,
+    images: combinedImages,
+    deleteImages: combinedImages.length === 0 
+  };
 
     this.postService.updatePost(this.postId, updatePayload).subscribe({
       next: () => this.router.navigate(['/dashboard']),

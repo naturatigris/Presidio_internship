@@ -21,8 +21,11 @@ namespace BlogPlatform.Models
 
         public string Status { get; set; } = "Available"; // (Available, Deleted)
         public bool IsDeleted { get; set; } = false;
+        public bool iseditied { get; set; } = false;
 
         public Post Post { get; set; }
         public User User { get; set; }
+        public ICollection<CommentLike> Likes { get; set; } = new List<CommentLike>();
+
     }
 }
