@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter,OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter,OnChanges,SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { getUserRole } from '../../misc/jwtdecode';
 
 @Component({
   selector: 'app-profile-header-edit',
@@ -8,7 +9,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
   templateUrl: './profile-header-edit.html',
   styleUrl: './profile-header-edit.css'
 })
-export class ProfileHeaderEdit implements OnInit{
+export class ProfileHeaderEdit implements OnChanges {
   @Input() showDetailsModal: boolean = false;
   @Input() name: string = '';
   @Input() role: string = '';
@@ -17,30 +18,39 @@ export class ProfileHeaderEdit implements OnInit{
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<{ name: string; role: string }>();
 
-  profileForm: FormGroup;
+  profileForm!: FormGroup;
+userrole: string = '';
 
-  constructor(private fb: FormBuilder) {
-    this.profileForm = this.fb.group({
-      name: ['', Validators.required],
-      role: ['', Validators.required]
-    });
+  constructor(private fb: FormBuilder) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+  if (changes['name'] || changes['role'] || changes['showDetailsModal']) {
+      this.initForm();
+    }
   }
 
-  ngOnInit() {
-    this.profileForm.patchValue({
-      name: this.name,
-      role: this.role
+  initForm() {
+    this.userrole = getUserRole() ?? '';
+
+    this.profileForm = this.fb.group({
+      name: new FormControl(
+        { value: this.name, disabled: this.userrole !== 'User' },
+        Validators.required
+      ),
+      role: new FormControl(
+        { value: this.role, disabled: this.userrole !== 'Admin' },
+        Validators.required
+      )
     });
   }
 
   onSubmit() {
     if (this.profileForm.valid) {
-      this.save.emit(this.profileForm.value);
+      this.save.emit(this.profileForm.getRawValue()); // includes disabled fields
     }
   }
 
   onCancel() {
     this.close.emit();
   }
-
 }

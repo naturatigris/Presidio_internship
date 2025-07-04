@@ -54,6 +54,7 @@ loadComments(postId: string) {
 
 
   this.commentService.getFilteredComments(queryParams).subscribe(res => {
+    console.log(res.items[0]);
 
 
     this.userComments = res.items.filter(c => c.userEmail === currentUserEmail);

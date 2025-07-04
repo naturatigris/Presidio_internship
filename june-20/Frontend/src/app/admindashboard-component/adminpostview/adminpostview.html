@@ -14,7 +14,7 @@
       />
 
       <div class="post-details">
-        <p class="post-title" [title]="post.title">{{ post.title }}</p>
+        <p class="post-title" [title]="post.title" (click)="viewPost(post.id!)" style="cursor: pointer;">{{ post.title }}</p>
 
         <div class="post-meta">
           <div class="meta-item">
@@ -27,10 +27,6 @@
             <span>{{ post?.views|| 0 }} Views</span>
           </div>
 
-          <div class="meta-item clickable" (click)="editPost(post.id)">
-            <i class="bx bx-edit"></i>
-            <span>Edit</span>
-          </div>
         </div>
       </div>
     </li>

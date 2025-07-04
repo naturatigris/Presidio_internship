@@ -6,6 +6,9 @@ import { Post } from '../../models/postmodel';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../service/category.service';
+import { PostLikeService } from '../../service/postlike.service';
+import { getUserEmail } from '../../misc/jwtdecode';
+
 
 @Component({
   selector: 'app-adminpostcomponent',
@@ -18,9 +21,11 @@ export class Adminpostcomponent {
   totalPages: number = 1;
 currentPage: number = 1;
 totalItems: number = 0;
+postLikes: { [postId: string]: number } = {};
+likedPostIds: Set<string> = new Set();
 
   fetchedCategories:string[]=[];
-      constructor(private postService: PostService,private router: Router,private categoryservice:CategoryService) {}
+      constructor(private postService: PostService,private router: Router,private categoryservice:CategoryService,private postLikeService: PostLikeService) {}
     filteredParams:PostQueryParams={  
       searchTerm:'',
       sortOrder: 'asc',
@@ -35,6 +40,22 @@ selectedCategory: string = '';
 
 onCategoryChange(value: string) {
   this.filteredParams.categories = value ? [value] : [];
+}
+togglePostLike(postId: string) {
+  const email = localStorage.getItem('email');
+  if (!email) return;
+
+  if (this.likedPostIds.has(postId)) {
+    this.postLikeService.unlikePost(postId, email).subscribe(() => {
+      this.likedPostIds.delete(postId);
+      this.postLikes[postId] = (this.postLikes[postId] || 1) - 1;
+    });
+  } else {
+    this.postLikeService.likePost(postId, email).subscribe(() => {
+      this.likedPostIds.add(postId);
+      this.postLikes[postId] = (this.postLikes[postId] || 0) + 1;
+    });
+  }
 }
 
 
@@ -54,11 +75,6 @@ viewPost(id?: string) {
   console.log(id);
   if (!id) return; 
   this.router.navigate(['dashboard/post', id]);
-}
-  editPost(id?: string) {
-  console.log(id);
-  if (!id) return; 
-  this.router.navigate(['myposts/edit', id]);
 }
 DeletePost(id?: string): void {  
   if (!id) return;
@@ -91,7 +107,7 @@ applyFilters():void{
 
     });
   }
-  fetchPosts(): void {
+fetchPosts(): void {
   this.filteredParams.pageNumber = this.currentPage;
 
   this.postService.getFilteredPosts(this.filteredParams).subscribe({
@@ -100,6 +116,21 @@ applyFilters():void{
       this.totalPages = response.totalPages;
       this.totalItems = response.totalItems;
       this.currentPage = response.currentPage;
+
+      const email = getUserEmail();
+
+      this.postLikeService.getLikesByUser(email!).subscribe({
+        next: (likes) => {
+          const likedIds = likes.map(like => like.postId);
+          this.likedPostIds = new Set(likedIds);
+        }
+      });
+
+      this.posts.forEach(post => {
+        this.postLikeService.getLikeCount(post.id!).subscribe(count => {
+          this.postLikes[post.id!] = count;
+        });
+      });
     },
     error: err => console.error('Error fetching posts', err)
   });

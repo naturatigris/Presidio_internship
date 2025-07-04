@@ -15,6 +15,7 @@ import { History } from './history/history';
 import { Notifications } from './notifications/notifications';
 import { Admindashboard } from './admindashboard/admindashboard';
 import { Adminpostcomponent } from './admindashboard-component/adminpostcomponent/adminpostcomponent';
+import { RenderMode } from '@angular/ssr';
 export const routes: Routes = [
     { path: 'home', component: Home },
       {path:'login',component:Login},
@@ -25,18 +26,24 @@ export const routes: Routes = [
       canActivate: [AuthGuard],
 
     children: [
-      {path:'',redirectTo:'dashboard',pathMatch:'full'},
+      {path:'',redirectTo:'dashboard',pathMatch:'full',data: { renderMode: 'dynamic' }},
       {path: 'dashboard', component: Dashboard },
       {path:'dashboard/admin',component:Admindashboard,canActivate: [AdminGuard] },
-      {path:'dashboard/admin/posts',component:Adminpostcomponent,canActivate: [AuthGuard] },
+      {path:'dashboard/admin/posts',component:Adminpostcomponent,canActivate: [AdminGuard] },
+            { path: 'dashboard/admin/**', redirectTo: 'dashboard/admin' },
+
 
       {path:'profile',component:Profile},
-      { path: 'profile/:email', component: Profile, canActivate: [AuthGuard] },
+      { path: 'profile/:email', component: Profile, canActivate: [AdminGuard],  data: { renderMode: 'dynamic' },
+       
+ },
       {path:'settings',component:Settings},
       {path:'Create-post',component:CreatePost},
-      {path:'dashboard/post/:id',component:PostDetailComponent},
+      {path:'dashboard/post/:id',component:PostDetailComponent,  data: { renderMode: 'dynamic' } 
+},
       {path:'myposts',component:Myposts},
-      { path: 'myposts/edit/:id', component: UpdatePostComponent },
+      { path: 'myposts/edit/:id', component: UpdatePostComponent ,  data: { renderMode: 'dynamic' } 
+},
       {path:'history',component:History},
       {path:'notification',component:Notifications}
 
@@ -45,6 +52,7 @@ export const routes: Routes = [
     ]
   },
 
-  { path: '**', redirectTo: '/home' }
+  { path: '**', redirectTo: '/home' ,    data: { renderMode: 'dynamic' }
+}
 
 ];

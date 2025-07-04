@@ -47,15 +47,9 @@
         <div class="category-tags">
           <span class="tag" *ngFor="let cat of post.categories">{{ cat.name }}</span>
         </div>
-
-        <!-- Author & Status -->
-        <div class="post-footer">
-          <span class="author">By: {{ post.user?.name || post.userEmail }}</span>
-          <span class="status">{{ post.status }}</span>
-                    <span class="status">{{post.createdAt|date:'dd MMM yyyy'}}</span>
-
-            <button *ngIf="post?.id" (click)="viewPost(post!.id)" class="readmore">Read More</button>
-                              <div class="like-box">
+                        <div style="display: flex; justify-content: space-between;">
+          <button *ngIf="post?.id" (click)="viewPost(post!.id)" class="readmore">Read More</button>
+          <div class="like-box">
             <i 
               class='bx bx-like' 
               [class.liked]="likedPostIds.has(post.id!)" 
@@ -63,6 +57,16 @@
             </i>
             <span>{{ postLikes[post.id!] || 0 }}</span>
           </div>
+                </div>
+
+
+
+        <!-- Author & Status -->
+        <div class="post-footer">
+          <span class="author">By: {{ post.user?.name || post.userEmail }}</span>
+          <span class="status">{{ post.status }}</span>
+                    <span class="status">{{post.createdAt|date:'dd MMM yyyy'}}</span>
+
 
 
 
@@ -111,6 +115,7 @@
         <div class="category-tags">
           <span class="tag" *ngFor="let cat of post.categories">{{ cat.name }}</span>
         </div>
+        
 
         <!-- Author & Status -->
         <div class="post-footer">

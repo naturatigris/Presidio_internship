@@ -112,3 +112,118 @@
 .view-more-btn:hover {
   color: #1e40af; /* Darker blue on hover */
 }
+/* Tablet View */
+@media (max-width: 1024px) {
+  .blog-container {
+    max-width: 90%;
+    padding: 16px;
+  }
+
+  .blog-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .blog-title {
+    font-size: 18px;
+  }
+
+  .add-button {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+
+  .post-meta {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .meta-item {
+    font-size: 11px;
+  }
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .blog-container {
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  .blog-title {
+    font-size: 16px;
+  }
+
+  .add-button {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .blog-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .post-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+
+  .post-title {
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .meta-item i {
+    font-size: 14px;
+  }
+
+  .view-more-btn {
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  .view-more-btn i {
+    font-size: 16px;
+  }
+}
+
+/* Very Small Devices (≤480px) */
+@media (max-width: 480px) {
+  .blog-container {
+    padding: 10px;
+  }
+
+  .add-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .view-more-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .blog-title {
+    font-size: 15px;
+  }
+
+  .post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .meta-item {
+    font-size: 10px;
+  }
+}

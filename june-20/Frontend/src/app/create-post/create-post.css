@@ -172,3 +172,112 @@ button[type="submit"]:hover {
   border: 1px solid #ccc;
 }
 
+@media (max-width: 1024px) {
+  .post-form-container {
+    padding: 2rem;
+  }
+
+  input[formControlName="title"] {
+    font-size: 1.6rem;
+  }
+
+  textarea[formControlName="content"] {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .post-form-container {
+    padding: 1rem;
+  }
+
+  input[formControlName="title"] {
+    font-size: 1rem;
+  }
+
+  .cover-upload,
+  .cover-preview {
+    height: 200px;
+  }
+
+  .image-preview {
+    width: 100px;
+    height: 80px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    align-self: center;
+  }
+
+  ul li {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    padding: 1rem 0.5rem;
+  }
+
+  .post-form-container {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .post-form-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  form {
+    gap: 1rem;
+  }
+
+  input[formControlName="title"] {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+  }
+
+  input[formControlName="slug"],
+  input[type="text"][list],
+  select,
+  textarea[formControlName="content"] {
+    font-size: 0.95rem;
+    padding: 0.5rem;
+  }
+
+  textarea[formControlName="content"] {
+    min-height: 150px;
+    line-height: 1.5;
+  }
+
+  .cover-upload,
+  .cover-preview {
+    height: 160px;
+    font-size: 0.9rem;
+  }
+
+  .image-preview {
+    width: 80px;
+    height: 60px;
+  }
+
+  ul {
+    gap: 5px;
+    margin-top: 6px;
+  }
+
+  ul li {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 16px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+}

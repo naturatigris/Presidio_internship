@@ -163,3 +163,43 @@ font-size: 1.5rem;
 .bx-like.liked {
   color: #007bff;
 }
+@media (max-width: 480px) {
+  .dashboard-container {
+  padding: 5px;
+}
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+.post-card h3{
+  font-size: 18px;
+
+} 
+.post-footer{
+  font-size: 10px;
+}
+.post-slug{
+  font-size: 12px;
+}
+.edit-post{
+  font-size: 15px;
+}
+.post-preview{
+  font-size: 14px;
+}
+.bx-like{
+  font-size: 15px;
+}
+.bx-like.liked{
+  font-size: 15px;
+}
+.tag {
+
+  font-size: 12px;
+}
+.readmore{
+  font-size: 12px;
+}
+
+}

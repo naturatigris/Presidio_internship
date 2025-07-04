@@ -15,11 +15,14 @@
         Name is required.
       </div>
 
-      <label>Role</label>
-      <input type="text" disabled [value]="role" />
-      <div *ngIf="profileForm.get('role')?.invalid && profileForm.get('role')?.touched">
-        Role is required.
-      </div>
+<label>Role</label>
+<select formControlName="role">
+  <option value="User">User</option>
+  <option value="Admin">Admin</option>
+</select>
+<div *ngIf="profileForm.get('role')?.invalid && profileForm.get('role')?.touched">
+  Role is required.
+</div>
 
       <div class="modal-footer">
         <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>

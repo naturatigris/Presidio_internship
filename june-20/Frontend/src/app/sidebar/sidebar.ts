@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter,OnInit } from '@angular/core';
+import { Component, Output, EventEmitter,OnInit ,HostListener} from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { UserProfile } from '../models/userprofilemodel';
@@ -19,17 +19,31 @@ export class Sidebar implements OnInit{
       profileImageSrc: SafeUrl = 'https://images.unsplash.com/photo-1620053580376-3de604e91953?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmVhdXRpZnVsJTIwbmF0dXJlfGVufDB8fDB8fHww';
     routelink:string='/dashboard';
     hasUnread = false;
+      isMobile = false;
+
 
     @Output() toggle = new EventEmitter<boolean>();
   constructor(private userService: UserService,private sanitizer: DomSanitizer,private router:Router,private notificationService: NotificationService) {}
 
 
   toggleSidebar() {
+    
     this.isSidebarOpen = !this.isSidebarOpen;
         this.toggle.emit(this.isSidebarOpen);
-
+    
   }
   dropdownOpen: boolean = false;
+  @HostListener('window:resize', [])
+  onResize() {
+    this.checkScreenSize();
+  }
+    checkScreenSize() {
+    this.isMobile = window.innerWidth <= 768;
+    if (!this.isMobile) {
+      this.isSidebarOpen = true; // always open on desktop
+    }
+  }
+
 
 toggleDropdown() {
   this.dropdownOpen = !this.dropdownOpen;

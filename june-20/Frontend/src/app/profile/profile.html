@@ -41,7 +41,7 @@
 
   <!-- Bio Section -->
   <div class="profile-section">
-    <h3>Bio <i class="bx bx-edit section-edit" (click)="showBioModal = true"></i></h3>
+    <h3>Bio <i class="bx bx-edit section-edit"  *ngIf="role !== 'Admin'"  (click)="showBioModal = true"></i></h3>
     <p>{{ user?.bio}}</p>
   </div>
   <app-bio-edit
@@ -54,7 +54,7 @@
 
   <!-- Location Section -->
   <div class="profile-section">
-    <h3>Location <i class="bx bx-edit section-edit" (click)="showLocationModal = true"></i></h3>
+    <h3>Location <i class="bx bx-edit section-edit"  *ngIf="role !== 'Admin'" (click)="showLocationModal = true"></i></h3>
     <p>{{ user?.location}}</p>
   </div>
   <app-location-edit
@@ -96,7 +96,7 @@
 
   <!-- Security Section -->
   <div class="profile-section">
-    <h3>Password <i class="bx bx-edit section-edit" (click)="showPasswordModal = true"></i></h3>
+    <h3>Password <i class="bx bx-edit section-edit"  *ngIf="role !== 'Admin'" (click)="showPasswordModal = true"></i></h3>
     <p>********</p>
   </div>
   <app-password-edit

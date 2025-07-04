@@ -235,6 +235,10 @@
   border-radius: 4px;
   cursor: pointer;
 }
+  .chart_post{
+    display: flex;
+  }
+
 
 @keyframes fadeSlideIn {
   from {
@@ -244,5 +248,140 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* Tablet View */
+@media (max-width: 1024px) {
+  .summary-cards {
+    gap: 1rem;
+  }
+
+  .card {
+    flex: 1 1 45%;
+    margin-bottom: 1rem;
+  }
+
+  .analytics-section,
+  app-adminpostview {
+    width: 100% !important;
+  }
+
+  .dashboard-container {
+    padding: 1.5rem;
+  }
+
+  .filter-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-section select,
+  .filter-section button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .user-table tbody tr {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-table td {
+    padding: 0.4rem 0;
+  }
+
+  .user-table td:last-child {
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%;
+  }
+
+  .card-icon {
+    font-size: 4rem;
+  }
+
+  .card-text {
+    font-size: 1.2rem;
+  }
+
+  .card-number {
+    font-size: 1.8rem;
+  }
+
+  .analytics-section {
+    padding: 0.5rem;
+  }
+
+  .filter-section {
+    gap: 0.5rem;
+  }
+
+  .filter-section label {
+    width: 100%;
+  }
+
+  .filter-section select,
+  .filter-section button {
+    width: 100%;
+  }
+
+  .user-table td {
+    min-width: auto;
+    font-size: 0.9rem;
+  }
+
+  .pagination-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .confirm-toast {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .confirm-toast div {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .confirm-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}
+
+/* Very Small Devices (<=480px) */
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+
+  .card-text {
+    font-size: 1rem;
+  }
+
+  .card-number {
+    font-size: 1.5rem;
+  }
+
+  .user-table td {
+    font-size: 0.85rem;
+  }
+
+  .action-button {
+    font-size: 1.2rem;
+  }
+  .chart_post{
+    display: block;
   }
 }

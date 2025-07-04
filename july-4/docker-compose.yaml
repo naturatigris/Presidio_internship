@@ -1,0 +1,21 @@
+services:
+  api:
+    build:
+      context: ./RazorpayPaymentAPI
+    ports:
+      - "5194:5192"
+    networks:
+      - paynet
+
+  client:
+    build:
+      context: ./paymentapp
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    networks:
+      - paynet
+
+networks:
+  paynet:

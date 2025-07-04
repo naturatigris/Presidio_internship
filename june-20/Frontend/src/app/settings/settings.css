@@ -1,14 +1,12 @@
-
-
 .settings-container {
   max-width: 600px;
-  margin: 40px 200px;
+  margin: 40px auto;
   background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
-  padding: 100px 100px;
+  padding: 60px 40px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  
+  width: 90%;
 }
 
 .settings-title {
@@ -38,6 +36,7 @@ label {
   border: 1px solid #ddd;
   padding: 10px 12px;
   border-radius: 6px;
+  word-break: break-word;
 }
 
 .settings-checkbox-group {
@@ -80,8 +79,49 @@ input[type="checkbox"] {
   align-items: center;
   gap: 8px;
   transition: background-color 0.3s;
+  text-align: center;
 }
 
 .delete-button:hover {
   background-color: #c62828;
+}
+
+/* ✅ Responsive Breakpoints */
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 40px 20px;
+  }
+
+  .settings-title {
+    font-size: 20px;
+  }
+
+  .settings-display {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .delete-button {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-container {
+    padding: 30px 15px;
+  }
+
+  .settings-title {
+    font-size: 18px;
+  }
+
+  .settings-checkbox-label {
+    font-size: 14px;
+  }
+
+  .delete-button {
+    flex-direction: column;
+    gap: 4px;
+  }
 }

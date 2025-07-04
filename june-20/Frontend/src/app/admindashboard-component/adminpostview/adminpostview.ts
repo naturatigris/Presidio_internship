@@ -53,11 +53,6 @@ viewPost(id?: string) {
   if (!id) return; 
   this.router.navigate(['dashboard/post', id]);
 }
-  editPost(id?: string) {
-  console.log(id);
-  if (!id) return; 
-  this.router.navigate(['myposts/edit', id]);
-}
 DeletePost(id?: string): void {  
   if (!id) return;
 

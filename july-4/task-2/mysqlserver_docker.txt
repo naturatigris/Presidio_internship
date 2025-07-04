@@ -1,0 +1,65 @@
+/dev/fd/12:18: command not found: compdef
+sandhyaanand@C02Y730BJG5J-sandhyaanand ~ % docker pull mysql:latest
+
+latest: Pulling from library/mysql
+610c16d564ee: Pull complete 
+c55f07fe1b6e: Pull complete 
+515701765b17: Pull complete 
+3b536f25676c: Pull complete 
+9db7a8f5c310: Pull complete 
+3d2798b2072a: Pull complete 
+e6048afa6840: Pull complete 
+56483034e3f1: Pull complete 
+4d45e5094a07: Pull complete 
+f4b2a1d21561: Pull complete 
+Digest: sha256:f1049ce35b3986b84c08184de43a0b2109ae037a4a10a23ecf373a893daeadf7
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+sandhyaanand@C02Y730BJG5J-sandhyaanand ~ % docker run -d \
+  --name mysql-container \
+  -e MYSQL_ROOT_PASSWORD=rootpass \
+  -e MYSQL_DATABASE=testdb \
+  -v mydbdata:/var/lib/mysql \
+  -p 3306:3306 \
+  mysql:latest
+
+2ad409b8a296a381a09554d8ce4d9a1aeca70a574259e9be81a391d9ee365149
+sandhyaanand@C02Y730BJG5J-sandhyaanand ~ % mysql -h 127.0.0.1 -P 3306 -u root -p
+
+zsh: command not found: mysql
+sandhyaanand@C02Y730BJG5J-sandhyaanand ~ % docker exec -it mysql-container mysql -u root -p
+
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 9.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> USE testdb;
+Database changed
+mysql> CREATE TABLE users (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50));
+Query OK, 0 rows affected (0.017 sec)
+
+mysql> INSERT INTO users (name) VALUES ('Alice'), ('Bob');
+Query OK, 2 rows affected (0.010 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM users;
++----+-------+
+| id | name  |
++----+-------+
+|  1 | Alice |
+|  2 | Bob   |
++----+-------+
+2 rows in set (0.000 sec)
+
+mysql> exit
+docker stop mysql-container
+docker rm mysql-container

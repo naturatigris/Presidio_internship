@@ -155,3 +155,82 @@
   font-size: 14px;
   font-weight: 500;
 }
+.like-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.bx-like {
+  font-size: 20px;
+  color: gray;
+  transition: color 0.2s;
+}
+
+.bx-like.liked {
+  color: #007bff;
+}
+@media (max-width: 480px) {
+  .dashboard-container {
+  padding: 5px;
+}
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+.post-card h3{
+  font-size: 18px;
+
+} 
+.post-footer{
+  font-size: 10px;
+}
+.post-slug{
+  font-size: 12px;
+}
+.edit-post{
+  font-size: 15px;
+}
+.post-preview{
+  font-size: 14px;
+}
+.bx-like{
+  font-size: 15px;
+}
+.bx-like.liked{
+  font-size: 15px;
+}
+.tag {
+
+  font-size: 12px;
+}
+.readmore{
+  font-size: 12px;
+}
+.dashboard-container h2{
+  font-size: 20px;
+}
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .search-input,
+  .category-select,
+  .sort-select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.7rem;
+  }
+
+  .filter-button {
+    padding: 0.35rem 0.5rem;
+    font-weight: 300;
+  }
+
+
+}

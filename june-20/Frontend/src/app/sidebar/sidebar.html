@@ -1,3 +1,10 @@
+<button class="sidebar-toggle-btn" (click)="toggleSidebar()" *ngIf="!isSidebarOpen">
+  <i class="bx bx-menu"></i>
+</button>
+
+<!-- Overlay when sidebar is open (mobile only) -->
+<div class="sidebar-overlay" *ngIf="isSidebarOpen && isMobile" (click)="toggleSidebar()"></div>
+
   <div class="sidebar" [class.open]="isSidebarOpen">
     <div class="logo_details">
       <i class="bx bxl-audible icon"></i>
@@ -65,4 +72,3 @@
 </li>
 </ul>
 </div>
- 

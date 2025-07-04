@@ -322,3 +322,58 @@ justify-self: center;
   background-color: #f0f0f0;
 }
 
+@media screen and (max-width: 768px) {
+  .sidebar {
+    left: -100%;           
+    width: 250px;          /* full sidebar width */
+  }
+
+  .sidebar.open {
+    left: 0;               /* slide in from left */
+    transition: left 0.5s ease;
+  }
+
+  .sidebar .nav-list {
+    margin-top: 60px;      /* avoid overlapping toggle */
+  }
+
+  .sidebar-toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-size: 28px;
+    color: white;
+    background-color: #004f83;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 98;
+  }
+  .sidebar li.profile{
+  position: absolute;
+  height: 60px;
+  left: 0;
+  bottom:-8px;
+  padding:10px 14px;
+  overflow: visible;
+  padding-bottom: 80px; 
+  transition: all .5s ease;
+}
+.sidebar li.profile #log_out{
+}
+
+}
