@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    image: my-backend:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - appnet
+
+  frontend:
+    build: ./frontend
+    image: my-frontend:latest  
+
+    networks:
+      - appnet
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080:80"
+
+networks:
+  appnet:

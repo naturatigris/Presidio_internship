@@ -39,7 +39,7 @@
       <p class="comment-content">📝 {{ comment.content }}</p>
 
       <p class="comment-meta">
-        On Post: <span class="highlight" style="cursor:pointer;" class="comment-count" *ngIf="comment.post.id" (click)="viewpost(comment.post.id)">{{ comment.post.title }}</span> |
+        On Post: <span class="highlight comment-count" style="cursor:pointer;" *ngIf="comment.post.id" (click)="viewpost(comment.post.id)">{{ comment.post.title }}</span> |
         Status: <span [ngClass]="comment.status.toLowerCase()">{{ comment.status }}</span>
       </p>
 
