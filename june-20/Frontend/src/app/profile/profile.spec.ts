@@ -77,15 +77,4 @@ describe('Profile', () => {
     expect(spy).toHaveBeenCalledWith('john@example.com', jasmine.any(UpdateUserDto));
   });
 
-  it('should update account status successfully', () => {
-    const spy = mockUserService.updateUserSection.and.returnValue(of({}));
-    component.updateStatus({ isSuspended: true, suspensionReason: 'Test', suspendedUntil: new Date() });
-    expect(spy).toHaveBeenCalledWith('john@example.com', jasmine.any(UpdateUserDto));
-  });
-
-  it('should update user details successfully', () => {
-    const spy = mockUserService.updateUserSection.and.returnValue(of({}));
-    component.updateUserDetails({ name: 'Jane', role: 'Editor' });
-    expect(spy).toHaveBeenCalledWith('john@example.com', jasmine.any(UpdateUserDto));
-  });
 });

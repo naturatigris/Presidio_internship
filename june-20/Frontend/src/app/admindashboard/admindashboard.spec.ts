@@ -91,4 +91,8 @@ const mockPostService = {
     component.confirmDeleteUser();
     expect(mockUserService.DeleteUser).toHaveBeenCalledWith('john@example.com');
   });
+  afterEach(() => {
+  TestBed.resetTestingModule();
+});
+
 });

@@ -1,0 +1,969 @@
+2025-07-07 13:31:35.444 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-07 13:31:35.633 +05:30 [INF] Now listening on: http://localhost:5147
+2025-07-07 13:31:35.635 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-07 13:31:35.635 +05:30 [INF] Hosting environment: Development
+2025-07-07 13:31:35.635 +05:30 [INF] Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-20/Backend
+2025-07-07 13:31:53.372 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/filter?status=Published&searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 13:31:53.372 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/get/sandhya1234@gmail.com - null null
+2025-07-07 13:31:53.372 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/category/names - null null
+2025-07-07 13:31:53.371 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/notification/negotiate?negotiateVersion=1 - null null
+2025-07-07 13:31:53.460 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-07 13:31:53.463 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.463 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.463 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.463 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.484 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/notification/negotiate?negotiateVersion=1 - 204 null null 116.7569ms
+2025-07-07 13:31:53.484 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/category/names - 204 null null 116.1915ms
+2025-07-07 13:31:53.484 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/filter?status=Published&searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - 204 null null 116.7786ms
+2025-07-07 13:31:53.484 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/get/sandhya1234@gmail.com - 204 null null 116.7847ms
+2025-07-07 13:31:53.488 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/notification/negotiate?negotiateVersion=1 - null 0
+2025-07-07 13:31:53.504 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya1234@gmail.com - null null
+2025-07-07 13:31:53.504 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?status=Published&searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 13:31:53.504 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/category/names - null null
+2025-07-07 13:31:53.507 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.512 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.512 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.512 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.572 +05:30 [INF] Executing endpoint '/notification/negotiate'
+2025-07-07 13:31:53.581 +05:30 [INF] Executed endpoint '/notification/negotiate'
+2025-07-07 13:31:53.584 +05:30 [INF] HTTP POST /notification/negotiate responded 200 in 71.8352 ms
+2025-07-07 13:31:53.586 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/notification?id=UV7VNGrkcXq_FBrG-9HTGw - null null
+2025-07-07 13:31:53.586 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:53.589 +05:30 [INF] Executing endpoint '/notification'
+2025-07-07 13:31:53.588 +05:30 [INF] HTTP POST /notification/negotiate responded 200 in 77ms - User: Anonymous
+2025-07-07 13:31:53.590 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/notification/negotiate?negotiateVersion=1 - 200 316 application/json 101.4744ms
+2025-07-07 13:31:53.632 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:53 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 13:31:53.632 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:53 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 13:31:53.632 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:53 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 13:31:53.675 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:53 AM'.
+2025-07-07 13:31:53.675 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:53 AM'.
+2025-07-07 13:31:53.675 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-07-07 13:31:53.675 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform)'
+2025-07-07 13:31:53.675 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:53 AM'.
+2025-07-07 13:31:53.676 +05:30 [INF] Executing endpoint 'CategoryController.GetAllCategoryNames (bloggingplatform)'
+2025-07-07 13:31:53.893 +05:30 [INF] Route matched with {action = "GetAllCategoryNames", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategoryNames() on controller CategoryController (bloggingplatform).
+2025-07-07 13:31:53.894 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-07-07 13:31:53.896 +05:30 [INF] Route matched with {action = "GetFilteredPosts", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredPosts(BlogPlatform.Models.DTOs.PostQueryParamsDto) on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 13:31:55.014 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-07-07 13:31:55.016 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-07-07 13:31:55.299 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Name"
+FROM "Categories" AS c
+2025-07-07 13:31:55.316 +05:30 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", s."CategoriesId", s."PostsId", s."Id", s."Name", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "Posts" AS p
+INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s ON p."Id" = s."PostsId"
+LEFT JOIN "Images" AS i ON p."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON p."Id" = c0."PostId"
+WHERE NOT (p."IsDeleted")
+ORDER BY p."Id", u."Email", s."CategoriesId", s."PostsId", s."Id", i."Id"
+2025-07-07 13:31:55.317 +05:30 [INF] Executed DbCommand (42ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u0."Email", u0."Bio", u0."CreatedAt", u0."IsDeleted", u0."IsSuspended", u0."Location", u0."Name", u0."PasswordHash", u0."ProfileImage", u0."Role", u0."Status", u0."SuspendedUntil", u0."SuspensionReason", u0."Website", p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", c."Id", c."Content", c."CreatedAt", c."IsDeleted", c."PostId", c."Status", c."UserEmail", c.iseditied
+FROM (
+    SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+    FROM "Users" AS u
+    WHERE u."Email" = @__key_0
+    LIMIT 2
+) AS u0
+LEFT JOIN "Posts" AS p ON u0."Email" = p."UserEmail"
+LEFT JOIN "Comments" AS c ON u0."Email" = c."UserEmail"
+ORDER BY u0."Email", p."Id"
+2025-07-07 13:31:55.372 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 13:31:55.396 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-07-07 13:31:55.400 +05:30 [INF] Executed action CategoryController.GetAllCategoryNames (bloggingplatform) in 1503.0124ms
+2025-07-07 13:31:55.401 +05:30 [INF] Executed endpoint 'CategoryController.GetAllCategoryNames (bloggingplatform)'
+2025-07-07 13:31:55.402 +05:30 [INF] HTTP GET /api/v1/category/names responded 200 in 1889.2835 ms
+2025-07-07 13:31:55.403 +05:30 [INF] HTTP GET /api/v1/category/names responded 200 in 1889ms - User: Anonymous
+2025-07-07 13:31:55.411 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/category/names - 200 null application/json; charset=utf-8 1907.2416ms
+2025-07-07 13:31:55.433 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 1538.5756ms
+2025-07-07 13:31:55.434 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-07-07 13:31:55.434 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya1234@gmail.com responded 200 in 1921.0531 ms
+2025-07-07 13:31:55.434 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya1234@gmail.com responded 200 in 1921ms - User: Anonymous
+2025-07-07 13:31:55.435 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya1234@gmail.com - 200 null application/json; charset=utf-8 1931.1428ms
+2025-07-07 13:31:55.498 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`5[[System.Collections.Generic.List`1[[BlogPlatform.Models.Post, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 13:31:56.100 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform) in 2204.4157ms
+2025-07-07 13:31:56.101 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform)'
+2025-07-07 13:31:56.101 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 2587.9596 ms
+2025-07-07 13:31:56.101 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 2588ms - User: Anonymous
+2025-07-07 13:31:56.101 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?status=Published&searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 2597.4608ms
+2025-07-07 13:31:56.248 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/by-user?userEmail=sandhya1234@gmail.com - null null
+2025-07-07 13:31:56.251 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=25be6e0d-caa0-424e-979b-1d131f58fc15 - null null
+2025-07-07 13:31:56.251 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=138e91ba-95c1-4e79-9bea-bf1999ebf8b6 - null null
+2025-07-07 13:31:56.251 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:56.251 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=4a96b649-e971-4867-ade8-eee057f3d7b2 - null null
+2025-07-07 13:31:56.252 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/by-user?userEmail=sandhya1234@gmail.com - 204 null null 4.1547ms
+2025-07-07 13:31:56.253 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:56.253 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:56.253 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:56.253 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=138e91ba-95c1-4e79-9bea-bf1999ebf8b6 - 204 null null 1.5685ms
+2025-07-07 13:31:56.253 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/postlike/by-user?userEmail=sandhya1234@gmail.com - null null
+2025-07-07 13:31:56.253 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=4a96b649-e971-4867-ade8-eee057f3d7b2 - 204 null null 1.4791ms
+2025-07-07 13:31:56.253 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=25be6e0d-caa0-424e-979b-1d131f58fc15 - 204 null null 1.7311ms
+2025-07-07 13:31:56.254 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:56.255 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=4a96b649-e971-4867-ade8-eee057f3d7b2 - null null
+2025-07-07 13:31:56.255 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=138e91ba-95c1-4e79-9bea-bf1999ebf8b6 - null null
+2025-07-07 13:31:56.255 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 13:31:56.255 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=25be6e0d-caa0-424e-979b-1d131f58fc15 - null null
+2025-07-07 13:31:56.256 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:56.256 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:56.257 +05:30 [INF] CORS policy execution successful.
+2025-07-07 13:31:56.257 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:56 AM'.
+2025-07-07 13:31:56.257 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 13:31:56.257 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.PostLikeController.GetAllLikesByUser (bloggingplatform)'
+2025-07-07 13:31:56.257 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 13:31:56.257 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 13:31:56.258 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:56 AM'.
+2025-07-07 13:31:56.259 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:56 AM'.
+2025-07-07 13:31:56.259 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 8:01:56 AM'.
+2025-07-07 13:31:56.259 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 13:31:56.260 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 13:31:56.260 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 13:31:56.263 +05:30 [INF] Route matched with {action = "GetAllLikesByUser", controller = "PostLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllLikesByUser(System.String) on controller BlogPlatform.Controllers.PostLikeController (bloggingplatform).
+2025-07-07 13:31:56.264 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "PostLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.PostLikeController (bloggingplatform).
+2025-07-07 13:31:56.264 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "PostLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.PostLikeController (bloggingplatform).
+2025-07-07 13:31:56.264 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "PostLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.PostLikeController (bloggingplatform).
+2025-07-07 13:31:56.338 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__userEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."LikedAt", p."PostId", p."UserEmail", p0."Id", p0."Content", p0."IsDeleted", p0."Slug", p0."Status", p0."Title", p0."UserEmail", p0."Views", p0."createdAt"
+FROM "PostLikes" AS p
+INNER JOIN "Posts" AS p0 ON p."PostId" = p0."Id"
+WHERE p."UserEmail" = @__userEmail_0
+2025-07-07 13:31:56.350 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__postId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "PostLikes" AS p
+WHERE p."PostId" = @__postId_0
+2025-07-07 13:31:56.350 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BlogPlatform.Models.PostLike, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-07 13:31:56.350 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__postId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "PostLikes" AS p
+WHERE p."PostId" = @__postId_0
+2025-07-07 13:31:56.352 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 13:31:56.352 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 13:31:56.353 +05:30 [INF] Executed action BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform) in 88.6334ms
+2025-07-07 13:31:56.353 +05:30 [INF] Executed action BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform) in 87.2093ms
+2025-07-07 13:31:56.353 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 13:31:56.353 +05:30 [INF] Executed action BlogPlatform.Controllers.PostLikeController.GetAllLikesByUser (bloggingplatform) in 90.0893ms
+2025-07-07 13:31:56.353 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 13:31:56.353 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 96.1014 ms
+2025-07-07 13:31:56.353 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.PostLikeController.GetAllLikesByUser (bloggingplatform)'
+2025-07-07 13:31:56.354 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 96.6065 ms
+2025-07-07 13:31:56.354 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 96ms - User: Anonymous
+2025-07-07 13:31:56.354 +05:30 [INF] HTTP GET /api/v1/postlike/by-user responded 200 in 99.6318 ms
+2025-07-07 13:31:56.354 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 97ms - User: Anonymous
+2025-07-07 13:31:56.355 +05:30 [INF] HTTP GET /api/v1/postlike/by-user responded 200 in 100ms - User: Anonymous
+2025-07-07 13:31:56.355 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=25be6e0d-caa0-424e-979b-1d131f58fc15 - 200 null application/json; charset=utf-8 99.3287ms
+2025-07-07 13:31:56.355 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=138e91ba-95c1-4e79-9bea-bf1999ebf8b6 - 200 null application/json; charset=utf-8 99.7057ms
+2025-07-07 13:31:56.356 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/postlike/by-user?userEmail=sandhya1234@gmail.com - 200 null application/json; charset=utf-8 103.6241ms
+2025-07-07 13:31:56.359 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__postId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "PostLikes" AS p
+WHERE p."PostId" = @__postId_0
+2025-07-07 13:31:56.360 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 13:31:56.360 +05:30 [INF] Executed action BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform) in 95.8846ms
+2025-07-07 13:31:56.360 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 13:31:56.361 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 103.9040 ms
+2025-07-07 13:31:56.361 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 104ms - User: Anonymous
+2025-07-07 13:31:56.362 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=4a96b649-e971-4867-ade8-eee057f3d7b2 - 200 null application/json; charset=utf-8 106.2927ms
+2025-07-07 13:32:04.653 +05:30 [INF] Executed endpoint '/notification'
+2025-07-07 13:32:04.653 +05:30 [INF] HTTP GET /notification responded 101 in 11066.7383 ms
+2025-07-07 13:32:04.654 +05:30 [INF] HTTP GET /notification responded 101 in 11067ms - User: Anonymous
+2025-07-07 13:32:04.655 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/notification?id=UV7VNGrkcXq_FBrG-9HTGw - 101 null null 11068.4446ms
+2025-07-07 13:32:11.893 +05:30 [INF] Application is shutting down...
+2025-07-07 15:20:20.167 +05:30 [INF] User profile is available. Using '/Users/sandhyaanand/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-07 15:20:20.296 +05:30 [INF] Now listening on: http://localhost:5147
+2025-07-07 15:20:20.299 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-07 15:20:20.299 +05:30 [INF] Hosting environment: Development
+2025-07-07 15:20:20.299 +05:30 [INF] Content root path: /Users/sandhyaanand/Documents/GitHub/Presidio_internship/june-20/Backend
+2025-07-07 15:20:33.477 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/category/names - null null
+2025-07-07 15:20:33.478 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/get/sandhya1234@gmail.com - null null
+2025-07-07 15:20:33.478 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/notification/negotiate?negotiateVersion=1 - null null
+2025-07-07 15:20:33.478 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/filter?status=Published&searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:20:33.559 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-07 15:20:33.562 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.562 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.562 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.562 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.574 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/notification/negotiate?negotiateVersion=1 - 204 null null 100.205ms
+2025-07-07 15:20:33.574 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/category/names - 204 null null 100.2124ms
+2025-07-07 15:20:33.574 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/filter?status=Published&searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - 204 null null 100.2085ms
+2025-07-07 15:20:33.574 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/get/sandhya1234@gmail.com - 204 null null 100.201ms
+2025-07-07 15:20:33.577 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/notification/negotiate?negotiateVersion=1 - null 0
+2025-07-07 15:20:33.589 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?status=Published&searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:20:33.589 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/category/names - null null
+2025-07-07 15:20:33.589 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya1234@gmail.com - null null
+2025-07-07 15:20:33.593 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.598 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.598 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.598 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.635 +05:30 [INF] Executing endpoint '/notification/negotiate'
+2025-07-07 15:20:33.646 +05:30 [INF] Executed endpoint '/notification/negotiate'
+2025-07-07 15:20:33.648 +05:30 [INF] HTTP POST /notification/negotiate responded 200 in 50.9008 ms
+2025-07-07 15:20:33.650 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/notification?id=19-nghzFk7Iz22kcb4be2Q - null null
+2025-07-07 15:20:33.651 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:33.654 +05:30 [INF] Executing endpoint '/notification'
+2025-07-07 15:20:33.653 +05:30 [INF] HTTP POST /notification/negotiate responded 200 in 55ms - User: Anonymous
+2025-07-07 15:20:33.655 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/notification/negotiate?negotiateVersion=1 - 200 316 application/json 77.3124ms
+2025-07-07 15:20:33.691 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:33 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 15:20:33.691 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:33 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 15:20:33.691 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:33 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 15:20:33.711 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:33 AM'.
+2025-07-07 15:20:33.712 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:33 AM'.
+2025-07-07 15:20:33.711 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:33 AM'.
+2025-07-07 15:20:33.712 +05:30 [INF] Executing endpoint 'CategoryController.GetAllCategoryNames (bloggingplatform)'
+2025-07-07 15:20:33.712 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform)'
+2025-07-07 15:20:33.712 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-07-07 15:20:34.012 +05:30 [INF] Route matched with {action = "GetAllCategoryNames", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategoryNames() on controller CategoryController (bloggingplatform).
+2025-07-07 15:20:34.012 +05:30 [INF] Route matched with {action = "GetByEmail", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetByEmail(System.String) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-07-07 15:20:34.013 +05:30 [INF] Route matched with {action = "GetFilteredPosts", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredPosts(BlogPlatform.Models.DTOs.PostQueryParamsDto) on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:20:35.008 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-07-07 15:20:35.010 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-07-07 15:20:35.208 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Name"
+FROM "Categories" AS c
+2025-07-07 15:20:35.208 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", s."CategoriesId", s."PostsId", s."Id", s."Name", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "Posts" AS p
+INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s ON p."Id" = s."PostsId"
+LEFT JOIN "Images" AS i ON p."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON p."Id" = c0."PostId"
+WHERE NOT (p."IsDeleted")
+ORDER BY p."Id", u."Email", s."CategoriesId", s."PostsId", s."Id", i."Id"
+2025-07-07 15:20:35.225 +05:30 [INF] Executed DbCommand (46ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u0."Email", u0."Bio", u0."CreatedAt", u0."IsDeleted", u0."IsSuspended", u0."Location", u0."Name", u0."PasswordHash", u0."ProfileImage", u0."Role", u0."Status", u0."SuspendedUntil", u0."SuspensionReason", u0."Website", p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", c."Id", c."Content", c."CreatedAt", c."IsDeleted", c."PostId", c."Status", c."UserEmail", c.iseditied
+FROM (
+    SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+    FROM "Users" AS u
+    WHERE u."Email" = @__key_0
+    LIMIT 2
+) AS u0
+LEFT JOIN "Posts" AS p ON u0."Email" = p."UserEmail"
+LEFT JOIN "Comments" AS c ON u0."Email" = c."UserEmail"
+ORDER BY u0."Email", p."Id"
+2025-07-07 15:20:35.289 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:20:35.312 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User'.
+2025-07-07 15:20:35.319 +05:30 [INF] Executed action CategoryController.GetAllCategoryNames (bloggingplatform) in 1302.1343ms
+2025-07-07 15:20:35.319 +05:30 [INF] Executed endpoint 'CategoryController.GetAllCategoryNames (bloggingplatform)'
+2025-07-07 15:20:35.320 +05:30 [INF] HTTP GET /api/v1/category/names responded 200 in 1722.5879 ms
+2025-07-07 15:20:35.321 +05:30 [INF] HTTP GET /api/v1/category/names responded 200 in 1722ms - User: Anonymous
+2025-07-07 15:20:35.335 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/category/names - 200 null application/json; charset=utf-8 1745.3644ms
+2025-07-07 15:20:35.359 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform) in 1345.4031ms
+2025-07-07 15:20:35.359 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetByEmail (bloggingplatform)'
+2025-07-07 15:20:35.359 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya1234@gmail.com responded 200 in 1761.0971 ms
+2025-07-07 15:20:35.359 +05:30 [INF] HTTP GET /api/v1/users/get/sandhya1234@gmail.com responded 200 in 1761ms - User: Anonymous
+2025-07-07 15:20:35.360 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/get/sandhya1234@gmail.com - 200 null application/json; charset=utf-8 1770.558ms
+2025-07-07 15:20:35.423 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`5[[System.Collections.Generic.List`1[[BlogPlatform.Models.Post, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:20:35.944 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform) in 1930.4447ms
+2025-07-07 15:20:35.944 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform)'
+2025-07-07 15:20:35.944 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 2346.1556 ms
+2025-07-07 15:20:35.945 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 2346ms - User: Anonymous
+2025-07-07 15:20:35.946 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?status=Published&searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 2356.1588ms
+2025-07-07 15:20:36.105 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/by-user?userEmail=sandhya1234@gmail.com - null null
+2025-07-07 15:20:36.106 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=25be6e0d-caa0-424e-979b-1d131f58fc15 - null null
+2025-07-07 15:20:36.106 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=138e91ba-95c1-4e79-9bea-bf1999ebf8b6 - null null
+2025-07-07 15:20:36.106 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:36.106 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:36.106 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:36.106 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=4a96b649-e971-4867-ade8-eee057f3d7b2 - null null
+2025-07-07 15:20:36.106 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/by-user?userEmail=sandhya1234@gmail.com - 204 null null 0.9509ms
+2025-07-07 15:20:36.106 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=138e91ba-95c1-4e79-9bea-bf1999ebf8b6 - 204 null null 0.4883ms
+2025-07-07 15:20:36.106 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=25be6e0d-caa0-424e-979b-1d131f58fc15 - 204 null null 0.8573ms
+2025-07-07 15:20:36.108 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:36.108 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/postlike/by-user?userEmail=sandhya1234@gmail.com - null null
+2025-07-07 15:20:36.108 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/postlike/count?postId=4a96b649-e971-4867-ade8-eee057f3d7b2 - 204 null null 2.1523ms
+2025-07-07 15:20:36.108 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=138e91ba-95c1-4e79-9bea-bf1999ebf8b6 - null null
+2025-07-07 15:20:36.108 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=25be6e0d-caa0-424e-979b-1d131f58fc15 - null null
+2025-07-07 15:20:36.109 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:36.109 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=4a96b649-e971-4867-ade8-eee057f3d7b2 - null null
+2025-07-07 15:20:36.109 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:36.110 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:36.110 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:36.110 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:36 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 15:20:36.110 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:36 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 15:20:36.110 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:36 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 15:20:36.110 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:36 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-07 15:20:36.111 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:36 AM'.
+2025-07-07 15:20:36.111 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:36 AM'.
+2025-07-07 15:20:36.112 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:36 AM'.
+2025-07-07 15:20:36.112 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 3:34:23 PM', Current time (UTC): '7/7/2025 9:50:36 AM'.
+2025-07-07 15:20:36.112 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:20:36.112 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:20:36.112 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.PostLikeController.GetAllLikesByUser (bloggingplatform)'
+2025-07-07 15:20:36.112 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:20:36.116 +05:30 [INF] Route matched with {action = "GetAllLikesByUser", controller = "PostLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllLikesByUser(System.String) on controller BlogPlatform.Controllers.PostLikeController (bloggingplatform).
+2025-07-07 15:20:36.116 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "PostLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.PostLikeController (bloggingplatform).
+2025-07-07 15:20:36.116 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "PostLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.PostLikeController (bloggingplatform).
+2025-07-07 15:20:36.117 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "PostLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.PostLikeController (bloggingplatform).
+2025-07-07 15:20:36.205 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__postId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "PostLikes" AS p
+WHERE p."PostId" = @__postId_0
+2025-07-07 15:20:36.205 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__postId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "PostLikes" AS p
+WHERE p."PostId" = @__postId_0
+2025-07-07 15:20:36.206 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__userEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."LikedAt", p."PostId", p."UserEmail", p0."Id", p0."Content", p0."IsDeleted", p0."Slug", p0."Status", p0."Title", p0."UserEmail", p0."Views", p0."createdAt"
+FROM "PostLikes" AS p
+INNER JOIN "Posts" AS p0 ON p."PostId" = p0."Id"
+WHERE p."UserEmail" = @__userEmail_0
+2025-07-07 15:20:36.207 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 15:20:36.207 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 15:20:36.208 +05:30 [INF] Executed action BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform) in 90.8148ms
+2025-07-07 15:20:36.208 +05:30 [INF] Executed action BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform) in 91.1334ms
+2025-07-07 15:20:36.208 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:20:36.208 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:20:36.209 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 98.4696 ms
+2025-07-07 15:20:36.209 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 98.5895 ms
+2025-07-07 15:20:36.209 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 99ms - User: Anonymous
+2025-07-07 15:20:36.209 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 99ms - User: Anonymous
+2025-07-07 15:20:36.210 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=25be6e0d-caa0-424e-979b-1d131f58fc15 - 200 null application/json; charset=utf-8 101.4457ms
+2025-07-07 15:20:36.210 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=4a96b649-e971-4867-ade8-eee057f3d7b2 - 200 null application/json; charset=utf-8 101.2282ms
+2025-07-07 15:20:36.216 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__postId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "PostLikes" AS p
+WHERE p."PostId" = @__postId_0
+2025-07-07 15:20:36.217 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 15:20:36.217 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BlogPlatform.Models.PostLike, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-07 15:20:36.217 +05:30 [INF] Executed action BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform) in 100.0187ms
+2025-07-07 15:20:36.217 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.PostLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:20:36.217 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 107.3386 ms
+2025-07-07 15:20:36.218 +05:30 [INF] HTTP GET /api/v1/postlike/count responded 200 in 107ms - User: Anonymous
+2025-07-07 15:20:36.218 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/postlike/count?postId=138e91ba-95c1-4e79-9bea-bf1999ebf8b6 - 200 null application/json; charset=utf-8 109.8025ms
+2025-07-07 15:20:36.221 +05:30 [INF] Executed action BlogPlatform.Controllers.PostLikeController.GetAllLikesByUser (bloggingplatform) in 103.8448ms
+2025-07-07 15:20:36.221 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.PostLikeController.GetAllLikesByUser (bloggingplatform)'
+2025-07-07 15:20:36.221 +05:30 [INF] HTTP GET /api/v1/postlike/by-user responded 200 in 111.4668 ms
+2025-07-07 15:20:36.221 +05:30 [INF] HTTP GET /api/v1/postlike/by-user responded 200 in 111ms - User: Anonymous
+2025-07-07 15:20:36.222 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/postlike/by-user?userEmail=sandhya1234@gmail.com - 200 null application/json; charset=utf-8 113.6114ms
+2025-07-07 15:20:47.500 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - null null
+2025-07-07 15:20:47.500 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:47.501 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/login - 204 null null 1.0057ms
+2025-07-07 15:20:47.502 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/api/v1/login - application/json 59
+2025-07-07 15:20:47.502 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:47.503 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-07-07 15:20:47.508 +05:30 [INF] Route matched with {action = "UserLogin", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[BlogPlatform.Models.DTOs.UserLoginResponse]] UserLogin(BlogPlatform.Models.DTOs.UserLoginRequest) on controller BlogPlatform.Controllers.AuthenticationController (bloggingplatform).
+2025-07-07 15:20:47.529 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u0."Email", u0."Bio", u0."CreatedAt", u0."IsDeleted", u0."IsSuspended", u0."Location", u0."Name", u0."PasswordHash", u0."ProfileImage", u0."Role", u0."Status", u0."SuspendedUntil", u0."SuspensionReason", u0."Website", p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", c."Id", c."Content", c."CreatedAt", c."IsDeleted", c."PostId", c."Status", c."UserEmail", c.iseditied
+FROM (
+    SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+    FROM "Users" AS u
+    WHERE u."Email" = @__key_0
+    LIMIT 2
+) AS u0
+LEFT JOIN "Posts" AS p ON u0."Email" = p."UserEmail"
+LEFT JOIN "Comments" AS c ON u0."Email" = c."UserEmail"
+ORDER BY u0."Email", p."Id"
+2025-07-07 15:20:47.841 +05:30 [INF] Login attempt: sandhya1234@gmail.com
+2025-07-07 15:20:47.841 +05:30 [INF] User found: True
+2025-07-07 15:20:47.841 +05:30 [INF] Password valid: True
+2025-07-07 15:20:47.956 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RefreshTokens" ("Id", "Expires", "IsRevoked", "Token", "UserEmail")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-07-07 15:20:47.967 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.UserLoginResponse'.
+2025-07-07 15:20:47.968 +05:30 [INF] Executed action BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform) in 459.7795ms
+2025-07-07 15:20:47.969 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.AuthenticationController.UserLogin (bloggingplatform)'
+2025-07-07 15:20:47.969 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 466.3172 ms
+2025-07-07 15:20:47.969 +05:30 [INF] HTTP POST /api/v1/login responded 200 in 466ms - User: Anonymous
+2025-07-07 15:20:47.969 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/api/v1/login - 200 null application/json; charset=utf-8 467.4948ms
+2025-07-07 15:20:47.995 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/getall/filtered?sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:20:47.995 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts - null null
+2025-07-07 15:20:47.995 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:47.995 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:47.995 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/comments/filter - null null
+2025-07-07 15:20:47.996 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts - 204 null null 0.5829ms
+2025-07-07 15:20:47.996 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/getall/filtered?sortOrder=asc&pageNumber=1&pageSize=10 - 204 null null 1.0339ms
+2025-07-07 15:20:47.996 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:47.996 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/comments/filter - 204 null null 0.9406ms
+2025-07-07 15:20:47.997 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts - null null
+2025-07-07 15:20:47.997 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/getall/filtered?sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:20:47.998 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/comments/filter - null null
+2025-07-07 15:20:47.998 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:47.998 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:47.998 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:48.010 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetFilteredUsers (bloggingplatform)'
+2025-07-07 15:20:48.010 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform)'
+2025-07-07 15:20:48.014 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform)'
+2025-07-07 15:20:48.015 +05:30 [INF] Route matched with {action = "GetFilteredUsers", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredUsers(System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32]) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-07-07 15:20:48.016 +05:30 [INF] Route matched with {action = "GetFilteredComments", controller = "Comment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredComments(BlogPlatform.Models.DTOs.CommentQueryParamsDto) on controller BlogPlatform.Controllers.CommentController (bloggingplatform).
+2025-07-07 15:20:48.018 +05:30 [INF] Route matched with {action = "GetAllpost", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllpost() on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:20:48.034 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", s."CategoriesId", s."PostsId", s."Id", s."Name", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "Posts" AS p
+INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s ON p."Id" = s."PostsId"
+LEFT JOIN "Images" AS i ON p."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON p."Id" = c0."PostId"
+WHERE NOT (p."IsDeleted")
+ORDER BY p."Id", u."Email", s."CategoriesId", s."PostsId", s."Id", i."Id"
+2025-07-07 15:20:48.035 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/getall - null null
+2025-07-07 15:20:48.036 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:48.036 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/getall - 204 null null 0.9079ms
+2025-07-07 15:20:48.037 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/category/names - null null
+2025-07-07 15:20:48.037 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:48.037 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/category/names - 204 null null 0.8768ms
+2025-07-07 15:20:48.038 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/getall - null null
+2025-07-07 15:20:48.038 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/filter?searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:20:48.039 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:48.039 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:48.039 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/filter?searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - 204 null null 1.0714ms
+2025-07-07 15:20:48.040 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetAll (bloggingplatform)'
+2025-07-07 15:20:48.040 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/category/names - null null
+2025-07-07 15:20:48.085 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:20:48.085 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:48.086 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:48.087 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform)'
+2025-07-07 15:20:48.087 +05:30 [INF] Executing endpoint 'CategoryController.GetAllCategoryNames (bloggingplatform)'
+2025-07-07 15:20:48.087 +05:30 [INF] Route matched with {action = "GetFilteredPosts", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredPosts(BlogPlatform.Models.DTOs.PostQueryParamsDto) on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:20:48.087 +05:30 [INF] Route matched with {action = "GetAllCategoryNames", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategoryNames() on controller CategoryController (bloggingplatform).
+2025-07-07 15:20:48.093 +05:30 [INF] Route matched with {action = "GetAll", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-07-07 15:20:48.104 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Name"
+FROM "Categories" AS c
+2025-07-07 15:20:48.105 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:20:48.106 +05:30 [INF] Executed action CategoryController.GetAllCategoryNames (bloggingplatform) in 18.3725ms
+2025-07-07 15:20:48.106 +05:30 [INF] Executed endpoint 'CategoryController.GetAllCategoryNames (bloggingplatform)'
+2025-07-07 15:20:48.107 +05:30 [INF] HTTP GET /api/v1/category/names responded 200 in 20.6956 ms
+2025-07-07 15:20:48.108 +05:30 [INF] HTTP GET /api/v1/category/names responded 200 in 21ms - User: Anand
+2025-07-07 15:20:48.108 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/category/names - 200 null application/json; charset=utf-8 68.3053ms
+2025-07-07 15:20:48.110 +05:30 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted")
+2025-07-07 15:20:48.113 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", s."CategoriesId", s."PostsId", s."Id", s."Name", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "Posts" AS p
+INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s ON p."Id" = s."PostsId"
+LEFT JOIN "Images" AS i ON p."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON p."Id" = c0."PostId"
+WHERE NOT (p."IsDeleted")
+ORDER BY p."Id", u."Email", s."CategoriesId", s."PostsId", s."Id", i."Id"
+2025-07-07 15:20:48.121 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Content", c."CreatedAt", c."IsDeleted", c."PostId", c."Status", c."UserEmail", c.iseditied, p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Comments" AS c
+INNER JOIN "Posts" AS p ON c."PostId" = p."Id"
+INNER JOIN "Users" AS u ON c."UserEmail" = u."Email"
+WHERE NOT (c."IsDeleted")
+2025-07-07 15:20:48.124 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.PaginatedUserResult'.
+2025-07-07 15:20:48.145 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetFilteredUsers (bloggingplatform) in 130.2951ms
+2025-07-07 15:20:48.146 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetFilteredUsers (bloggingplatform)'
+2025-07-07 15:20:48.146 +05:30 [INF] HTTP GET /api/v1/users/getall/filtered responded 200 in 148.0933 ms
+2025-07-07 15:20:48.146 +05:30 [INF] HTTP GET /api/v1/users/getall/filtered responded 200 in 148ms - User: Anand
+2025-07-07 15:20:48.147 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/getall/filtered?sortOrder=asc&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 149.2243ms
+2025-07-07 15:20:48.167 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted")
+2025-07-07 15:20:48.177 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User[]'.
+2025-07-07 15:20:48.192 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetAll (bloggingplatform) in 99.4474ms
+2025-07-07 15:20:48.193 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetAll (bloggingplatform)'
+2025-07-07 15:20:48.193 +05:30 [INF] HTTP GET /api/v1/users/getall responded 200 in 153.7341 ms
+2025-07-07 15:20:48.193 +05:30 [INF] HTTP GET /api/v1/users/getall responded 200 in 154ms - User: Anand
+2025-07-07 15:20:48.194 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/getall - 200 null application/json; charset=utf-8 155.6681ms
+2025-07-07 15:20:48.293 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Collections.Generic.IEnumerable`1[[BlogPlatform.Models.Comment, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:20:48.379 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BlogPlatform.Models.Post, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-07 15:20:48.388 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts - null null
+2025-07-07 15:20:48.388 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:20:48.395 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform)'
+2025-07-07 15:20:48.396 +05:30 [INF] Route matched with {action = "GetAllpost", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllpost() on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:20:48.473 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`5[[System.Collections.Generic.List`1[[BlogPlatform.Models.Post, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:20:48.635 +05:30 [INF] Executed DbCommand (237ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", s."CategoriesId", s."PostsId", s."Id", s."Name", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "Posts" AS p
+INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s ON p."Id" = s."PostsId"
+LEFT JOIN "Images" AS i ON p."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON p."Id" = c0."PostId"
+WHERE NOT (p."IsDeleted")
+ORDER BY p."Id", u."Email", s."CategoriesId", s."PostsId", s."Id", i."Id"
+2025-07-07 15:20:48.917 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BlogPlatform.Models.Post, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-07 15:20:49.342 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform) in 1323.9792ms
+2025-07-07 15:20:49.347 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform)'
+2025-07-07 15:20:49.348 +05:30 [INF] HTTP GET /api/v1/posts responded 200 in 1349.5030 ms
+2025-07-07 15:20:49.348 +05:30 [INF] HTTP GET /api/v1/posts responded 200 in 1350ms - User: Anand
+2025-07-07 15:20:49.352 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts - 200 null application/json; charset=utf-8 1354.0711ms
+2025-07-07 15:20:49.420 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform) in 1332.1134ms
+2025-07-07 15:20:49.510 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform)'
+2025-07-07 15:20:49.510 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 1423.8493 ms
+2025-07-07 15:20:49.510 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 1424ms - User: Anand
+2025-07-07 15:20:49.511 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 1428.6541ms
+2025-07-07 15:20:50.569 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform) in 2172.1413ms
+2025-07-07 15:20:50.569 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform)'
+2025-07-07 15:20:50.569 +05:30 [INF] HTTP GET /api/v1/posts responded 200 in 2180.8488 ms
+2025-07-07 15:20:50.569 +05:30 [INF] HTTP GET /api/v1/posts responded 200 in 2181ms - User: Anand
+2025-07-07 15:20:50.570 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts - 200 null application/json; charset=utf-8 2182.3591ms
+2025-07-07 15:20:52.176 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform) in 4159.075ms
+2025-07-07 15:20:52.176 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform)'
+2025-07-07 15:20:52.176 +05:30 [INF] HTTP GET /api/v1/comments/filter responded 200 in 4177.8434 ms
+2025-07-07 15:20:52.176 +05:30 [INF] HTTP GET /api/v1/comments/filter responded 200 in 4177ms - User: Anand
+2025-07-07 15:20:52.177 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/comments/filter - 200 null application/json; charset=utf-8 4178.8347ms
+2025-07-07 15:21:24.183 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 - null null
+2025-07-07 15:21:24.183 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/comments/filter?postId=25be6e0d-caa0-424e-979b-1d131f58fc15&status=Available&pageNumber=1&pageSize=5&sortOrder=desc - null null
+2025-07-07 15:21:24.184 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:24.184 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:24.184 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/comments/filter?postId=25be6e0d-caa0-424e-979b-1d131f58fc15&status=Available&pageNumber=1&pageSize=5&sortOrder=desc - 204 null null 1.2881ms
+2025-07-07 15:21:24.184 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 - 204 null null 1.4619ms
+2025-07-07 15:21:24.186 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 - null null
+2025-07-07 15:21:24.186 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/comments/filter?postId=25be6e0d-caa0-424e-979b-1d131f58fc15&status=Available&pageNumber=1&pageSize=5&sortOrder=desc - null null
+2025-07-07 15:21:24.186 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:24.186 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:24.186 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform)'
+2025-07-07 15:21:24.186 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetPostById (bloggingplatform)'
+2025-07-07 15:21:24.187 +05:30 [INF] Route matched with {action = "GetFilteredComments", controller = "Comment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredComments(BlogPlatform.Models.DTOs.CommentQueryParamsDto) on controller BlogPlatform.Controllers.CommentController (bloggingplatform).
+2025-07-07 15:21:24.192 +05:30 [INF] Route matched with {action = "GetPostById", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPostById(System.Guid) on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:21:24.196 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Content", c."CreatedAt", c."IsDeleted", c."PostId", c."Status", c."UserEmail", c.iseditied, p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Comments" AS c
+INNER JOIN "Posts" AS p ON c."PostId" = p."Id"
+INNER JOIN "Users" AS u ON c."UserEmail" = u."Email"
+WHERE NOT (c."IsDeleted")
+2025-07-07 15:21:24.209 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-07-07 15:21:24.210 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Collections.Generic.IEnumerable`1[[BlogPlatform.Models.Comment, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:21:24.314 +05:30 [INF] Executed DbCommand (50ms) [Parameters=[@__key_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Content", s."IsDeleted", s."Slug", s."Status", s."Title", s."UserEmail", s."Views", s."createdAt", s."Email", s0."CategoriesId", s0."PostsId", s0."Id", s0."Name", s."Bio", s."CreatedAt0", s."IsDeleted0", s."IsSuspended", s."Location", s."Name", s."PasswordHash", s."ProfileImage", s."Role", s."Status0", s."SuspendedUntil", s."SuspensionReason", s."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM (
+    SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", u."Bio", u."CreatedAt" AS "CreatedAt0", u."IsDeleted" AS "IsDeleted0", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status" AS "Status0", u."SuspendedUntil", u."SuspensionReason", u."Website"
+    FROM "Posts" AS p
+    INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+    WHERE p."Id" = @__key_0
+    LIMIT 2
+) AS s
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s0 ON s."Id" = s0."PostsId"
+LEFT JOIN "Images" AS i ON s."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON s."Id" = c0."PostId"
+ORDER BY s."Id", s."Email", s0."CategoriesId", s0."PostsId", s0."Id", i."Id"
+2025-07-07 15:21:24.443 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.Post'.
+2025-07-07 15:21:24.552 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetPostById (bloggingplatform) in 360.3302ms
+2025-07-07 15:21:24.553 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetPostById (bloggingplatform)'
+2025-07-07 15:21:24.553 +05:30 [INF] HTTP GET /api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 responded 200 in 366.7949 ms
+2025-07-07 15:21:24.553 +05:30 [INF] HTTP GET /api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 responded 200 in 366ms - User: Anand
+2025-07-07 15:21:24.553 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 - 200 null application/json; charset=utf-8 367.8374ms
+2025-07-07 15:21:24.599 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 - null null
+2025-07-07 15:21:24.600 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:24.600 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 - 204 null null 0.6743ms
+2025-07-07 15:21:24.601 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5147/api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 - multipart/form-data; boundary=----WebKitFormBoundary2VyMuOQYJ0E3EgVZ 241
+2025-07-07 15:21:24.602 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:24.606 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.UpdatePost (bloggingplatform)'
+2025-07-07 15:21:24.612 +05:30 [INF] Route matched with {action = "UpdatePost", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdatePost(System.Guid, BlogPlatform.Models.DTOs.PostUpdateDto) on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:21:24.637 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__key_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Content", s."IsDeleted", s."Slug", s."Status", s."Title", s."UserEmail", s."Views", s."createdAt", s."Email", s0."CategoriesId", s0."PostsId", s0."Id", s0."Name", s."Bio", s."CreatedAt0", s."IsDeleted0", s."IsSuspended", s."Location", s."Name", s."PasswordHash", s."ProfileImage", s."Role", s."Status0", s."SuspendedUntil", s."SuspensionReason", s."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM (
+    SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", u."Bio", u."CreatedAt" AS "CreatedAt0", u."IsDeleted" AS "IsDeleted0", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status" AS "Status0", u."SuspendedUntil", u."SuspensionReason", u."Website"
+    FROM "Posts" AS p
+    INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+    WHERE p."Id" = @__key_0
+    LIMIT 2
+) AS s
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s0 ON s."Id" = s0."PostsId"
+LEFT JOIN "Images" AS i ON s."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON s."Id" = c0."PostId"
+ORDER BY s."Id", s."Email", s0."CategoriesId", s0."PostsId", s0."Id", i."Id"
+2025-07-07 15:21:24.795 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u0."Email", u0."Bio", u0."CreatedAt", u0."IsDeleted", u0."IsSuspended", u0."Location", u0."Name", u0."PasswordHash", u0."ProfileImage", u0."Role", u0."Status", u0."SuspendedUntil", u0."SuspensionReason", u0."Website", p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", c."Id", c."Content", c."CreatedAt", c."IsDeleted", c."PostId", c."Status", c."UserEmail", c.iseditied
+FROM (
+    SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+    FROM "Users" AS u
+    WHERE u."Email" = @__key_0
+    LIMIT 2
+) AS u0
+LEFT JOIN "Posts" AS p ON u0."Email" = p."UserEmail"
+LEFT JOIN "Comments" AS c ON u0."Email" = c."UserEmail"
+ORDER BY u0."Email", p."Id"
+2025-07-07 15:21:24.803 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__key_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Content", s."IsDeleted", s."Slug", s."Status", s."Title", s."UserEmail", s."Views", s."createdAt", s."Email", s0."CategoriesId", s0."PostsId", s0."Id", s0."Name", s."Bio", s."CreatedAt0", s."IsDeleted0", s."IsSuspended", s."Location", s."Name", s."PasswordHash", s."ProfileImage", s."Role", s."Status0", s."SuspendedUntil", s."SuspensionReason", s."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM (
+    SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", u."Bio", u."CreatedAt" AS "CreatedAt0", u."IsDeleted" AS "IsDeleted0", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status" AS "Status0", u."SuspendedUntil", u."SuspensionReason", u."Website"
+    FROM "Posts" AS p
+    INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+    WHERE p."Id" = @__key_0
+    LIMIT 2
+) AS s
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s0 ON s."Id" = s0."PostsId"
+LEFT JOIN "Images" AS i ON s."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON s."Id" = c0."PostId"
+ORDER BY s."Id", s."Email", s0."CategoriesId", s0."PostsId", s0."Id", i."Id"
+2025-07-07 15:21:24.932 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Posts" SET "Views" = @p0
+WHERE "Id" = @p1;
+2025-07-07 15:21:24.963 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "PostAuditLogs" ("Id", "Action", "Changes", "PerformedAt", "PerformedBy", "PostId")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-07-07 15:21:24.964 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.Post'.
+2025-07-07 15:21:25.002 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.UpdatePost (bloggingplatform) in 389.9102ms
+2025-07-07 15:21:25.002 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.UpdatePost (bloggingplatform)'
+2025-07-07 15:21:25.002 +05:30 [INF] HTTP PUT /api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 responded 200 in 400.2437 ms
+2025-07-07 15:21:25.002 +05:30 [INF] HTTP PUT /api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 responded 200 in 400ms - User: Anand
+2025-07-07 15:21:25.002 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5147/api/v1/posts/25be6e0d-caa0-424e-979b-1d131f58fc15 - 200 null application/json; charset=utf-8 401.2333ms
+2025-07-07 15:21:25.138 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform) in 950.758ms
+2025-07-07 15:21:25.138 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform)'
+2025-07-07 15:21:25.138 +05:30 [INF] HTTP GET /api/v1/comments/filter responded 200 in 951.6779 ms
+2025-07-07 15:21:25.138 +05:30 [INF] HTTP GET /api/v1/comments/filter responded 200 in 951ms - User: Anand
+2025-07-07 15:21:25.138 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/comments/filter?postId=25be6e0d-caa0-424e-979b-1d131f58fc15&status=Available&pageNumber=1&pageSize=5&sortOrder=desc - 200 null application/json; charset=utf-8 952.6653ms
+2025-07-07 15:21:25.467 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/by-user?userEmail=sandhya1234@gmail.com - null null
+2025-07-07 15:21:25.467 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=78b4b73e-8225-4daa-81d1-1aad300abb78 - null null
+2025-07-07 15:21:25.468 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.468 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.468 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/by-user?userEmail=sandhya1234@gmail.com - 204 null null 1.4702ms
+2025-07-07 15:21:25.468 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=78b4b73e-8225-4daa-81d1-1aad300abb78 - 204 null null 1.0692ms
+2025-07-07 15:21:25.470 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=43b4eab6-e352-4baf-af77-1300381684fb - null null
+2025-07-07 15:21:25.472 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=843e291b-69ce-4117-b212-f1c102e503a3 - null null
+2025-07-07 15:21:25.474 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=5a1dcf82-4983-44a8-aef7-4fb7070d2eea - null null
+2025-07-07 15:21:25.475 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=9e0d39a6-3adc-48eb-923c-869f087d9819 - null null
+2025-07-07 15:21:25.474 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=78b4b73e-8225-4daa-81d1-1aad300abb78 - null null
+2025-07-07 15:21:25.475 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.474 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/by-user?userEmail=sandhya1234@gmail.com - null null
+2025-07-07 15:21:25.475 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.475 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.475 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.475 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.475 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=5a1dcf82-4983-44a8-aef7-4fb7070d2eea - 204 null null 1.1099ms
+2025-07-07 15:21:25.476 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.476 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=9e0d39a6-3adc-48eb-923c-869f087d9819 - 204 null null 1.2003ms
+2025-07-07 15:21:25.476 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=843e291b-69ce-4117-b212-f1c102e503a3 - 204 null null 3.8165ms
+2025-07-07 15:21:25.476 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/commentlike/count?commentId=43b4eab6-e352-4baf-af77-1300381684fb - 204 null null 6.1574ms
+2025-07-07 15:21:25.477 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.477 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentLikeController.GetAllLikesByUser (bloggingplatform)'
+2025-07-07 15:21:25.481 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=843e291b-69ce-4117-b212-f1c102e503a3 - null null
+2025-07-07 15:21:25.481 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=5a1dcf82-4983-44a8-aef7-4fb7070d2eea - null null
+2025-07-07 15:21:25.482 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=9e0d39a6-3adc-48eb-923c-869f087d9819 - null null
+2025-07-07 15:21:25.481 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=43b4eab6-e352-4baf-af77-1300381684fb - null null
+2025-07-07 15:21:25.481 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.482 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.482 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.482 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:25.483 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.484 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.483 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.483 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.487 +05:30 [INF] Route matched with {action = "GetAllLikesByUser", controller = "CommentLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllLikesByUser(System.String) on controller BlogPlatform.Controllers.CommentLikeController (bloggingplatform).
+2025-07-07 15:21:25.487 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "CommentLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.CommentLikeController (bloggingplatform).
+2025-07-07 15:21:25.490 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "CommentLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.CommentLikeController (bloggingplatform).
+2025-07-07 15:21:25.490 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "CommentLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.CommentLikeController (bloggingplatform).
+2025-07-07 15:21:25.490 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "CommentLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.CommentLikeController (bloggingplatform).
+2025-07-07 15:21:25.490 +05:30 [INF] Route matched with {action = "GetLikeCount", controller = "CommentLike"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLikeCount(System.Guid) on controller BlogPlatform.Controllers.CommentLikeController (bloggingplatform).
+2025-07-07 15:21:25.513 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__commentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "CommentLikes" AS c
+WHERE c."CommentId" = @__commentId_0
+2025-07-07 15:21:25.513 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__commentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "CommentLikes" AS c
+WHERE c."CommentId" = @__commentId_0
+2025-07-07 15:21:25.513 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__commentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "CommentLikes" AS c
+WHERE c."CommentId" = @__commentId_0
+2025-07-07 15:21:25.513 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__commentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "CommentLikes" AS c
+WHERE c."CommentId" = @__commentId_0
+2025-07-07 15:21:25.513 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__commentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "CommentLikes" AS c
+WHERE c."CommentId" = @__commentId_0
+2025-07-07 15:21:25.513 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 15:21:25.513 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 15:21:25.513 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 15:21:25.513 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 15:21:25.514 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform) in 22.7817ms
+2025-07-07 15:21:25.514 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform) in 26.6088ms
+2025-07-07 15:21:25.514 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform) in 23.1857ms
+2025-07-07 15:21:25.514 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform) in 23.5789ms
+2025-07-07 15:21:25.514 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Int32'.
+2025-07-07 15:21:25.514 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.514 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.515 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform) in 23.7994ms
+2025-07-07 15:21:25.514 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.515 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 32.0590 ms
+2025-07-07 15:21:25.514 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.515 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 32ms - User: Anand
+2025-07-07 15:21:25.515 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 38.6647 ms
+2025-07-07 15:21:25.516 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=5a1dcf82-4983-44a8-aef7-4fb7070d2eea - 200 null application/json; charset=utf-8 34.1453ms
+2025-07-07 15:21:25.515 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 32.5732 ms
+2025-07-07 15:21:25.515 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 32.3464 ms
+2025-07-07 15:21:25.515 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentLikeController.GetLikeCount (bloggingplatform)'
+2025-07-07 15:21:25.516 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 39ms - User: Anand
+2025-07-07 15:21:25.516 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 33ms - User: Anand
+2025-07-07 15:21:25.516 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=78b4b73e-8225-4daa-81d1-1aad300abb78 - 200 null application/json; charset=utf-8 42.2059ms
+2025-07-07 15:21:25.516 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 33ms - User: Anand
+2025-07-07 15:21:25.516 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 33.6430 ms
+2025-07-07 15:21:25.517 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=843e291b-69ce-4117-b212-f1c102e503a3 - 200 null application/json; charset=utf-8 35.7126ms
+2025-07-07 15:21:25.517 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=43b4eab6-e352-4baf-af77-1300381684fb - 200 null application/json; charset=utf-8 36.1126ms
+2025-07-07 15:21:25.517 +05:30 [INF] HTTP GET /api/v1/commentlike/count responded 200 in 34ms - User: Anand
+2025-07-07 15:21:25.518 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/count?commentId=9e0d39a6-3adc-48eb-923c-869f087d9819 - 200 null application/json; charset=utf-8 36.6278ms
+2025-07-07 15:21:25.528 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__userEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CommentId", c."LikedAt", c."UserEmail", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "CommentLikes" AS c
+INNER JOIN "Comments" AS c0 ON c."CommentId" = c0."Id"
+WHERE c."UserEmail" = @__userEmail_0
+2025-07-07 15:21:25.537 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BlogPlatform.Models.CommentLike, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-07 15:21:25.538 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentLikeController.GetAllLikesByUser (bloggingplatform) in 51.5055ms
+2025-07-07 15:21:25.539 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentLikeController.GetAllLikesByUser (bloggingplatform)'
+2025-07-07 15:21:25.539 +05:30 [INF] HTTP GET /api/v1/commentlike/by-user responded 200 in 62.1981 ms
+2025-07-07 15:21:25.539 +05:30 [INF] HTTP GET /api/v1/commentlike/by-user responded 200 in 62ms - User: Anand
+2025-07-07 15:21:25.539 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/commentlike/by-user?userEmail=sandhya1234@gmail.com - 200 null application/json; charset=utf-8 64.951ms
+2025-07-07 15:21:33.461 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/getall/filtered?sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:21:33.461 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts - null null
+2025-07-07 15:21:33.461 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.462 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/comments/filter - null null
+2025-07-07 15:21:33.462 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.462 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/getall/filtered?sortOrder=asc&pageNumber=1&pageSize=10 - 204 null null 1.3206ms
+2025-07-07 15:21:33.462 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.462 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts - 204 null null 0.749ms
+2025-07-07 15:21:33.462 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/getall - null null
+2025-07-07 15:21:33.463 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/comments/filter - 204 null null 0.8272ms
+2025-07-07 15:21:33.463 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts - null null
+2025-07-07 15:21:33.463 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.464 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.464 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/users/getall - 204 null null 1.3598ms
+2025-07-07 15:21:33.464 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts - 204 null null 0.7993ms
+2025-07-07 15:21:33.464 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/category/names - null null
+2025-07-07 15:21:33.465 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.465 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/category/names - 204 null null 0.4908ms
+2025-07-07 15:21:33.469 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/getall/filtered?sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:21:33.470 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.470 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/category/names - null null
+2025-07-07 15:21:33.470 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.470 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetFilteredUsers (bloggingplatform)'
+2025-07-07 15:21:33.470 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/comments/filter - null null
+2025-07-07 15:21:33.470 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts - null null
+2025-07-07 15:21:33.470 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/filter?searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:21:33.470 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/users/getall - null null
+2025-07-07 15:21:33.471 +05:30 [INF] Executing endpoint 'CategoryController.GetAllCategoryNames (bloggingplatform)'
+2025-07-07 15:21:33.471 +05:30 [INF] Route matched with {action = "GetFilteredUsers", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredUsers(System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32]) on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-07-07 15:21:33.471 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.472 +05:30 [INF] Route matched with {action = "GetAllCategoryNames", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCategoryNames() on controller CategoryController (bloggingplatform).
+2025-07-07 15:21:33.471 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.472 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.472 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform)'
+2025-07-07 15:21:33.471 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.472 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/api/v1/posts/filter?searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - 204 null null 2.2312ms
+2025-07-07 15:21:33.472 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.UsersController.GetAll (bloggingplatform)'
+2025-07-07 15:21:33.473 +05:30 [INF] Route matched with {action = "GetFilteredComments", controller = "Comment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredComments(BlogPlatform.Models.DTOs.CommentQueryParamsDto) on controller BlogPlatform.Controllers.CommentController (bloggingplatform).
+2025-07-07 15:21:33.473 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform)'
+2025-07-07 15:21:33.473 +05:30 [INF] Route matched with {action = "GetAll", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller BlogPlatform.Controllers.v1.UsersController (bloggingplatform).
+2025-07-07 15:21:33.474 +05:30 [INF] Route matched with {action = "GetAllpost", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllpost() on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:21:33.474 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - null null
+2025-07-07 15:21:33.476 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.476 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform)'
+2025-07-07 15:21:33.477 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Name"
+FROM "Categories" AS c
+2025-07-07 15:21:33.477 +05:30 [INF] Route matched with {action = "GetFilteredPosts", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetFilteredPosts(BlogPlatform.Models.DTOs.PostQueryParamsDto) on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:21:33.479 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:21:33.479 +05:30 [INF] Executed action CategoryController.GetAllCategoryNames (bloggingplatform) in 7.4331ms
+2025-07-07 15:21:33.480 +05:30 [INF] Executed endpoint 'CategoryController.GetAllCategoryNames (bloggingplatform)'
+2025-07-07 15:21:33.480 +05:30 [INF] HTTP GET /api/v1/category/names responded 200 in 9.5062 ms
+2025-07-07 15:21:33.480 +05:30 [INF] HTTP GET /api/v1/category/names responded 200 in 9ms - User: Anand
+2025-07-07 15:21:33.481 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/category/names - 200 null application/json; charset=utf-8 10.8656ms
+2025-07-07 15:21:33.481 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted")
+2025-07-07 15:21:33.490 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.DTOs.PaginatedUserResult'.
+2025-07-07 15:21:33.492 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Content", c."CreatedAt", c."IsDeleted", c."PostId", c."Status", c."UserEmail", c.iseditied, p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Comments" AS c
+INNER JOIN "Posts" AS p ON c."PostId" = p."Id"
+INNER JOIN "Users" AS u ON c."UserEmail" = u."Email"
+WHERE NOT (c."IsDeleted")
+2025-07-07 15:21:33.492 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website"
+FROM "Users" AS u
+WHERE NOT (u."IsDeleted")
+2025-07-07 15:21:33.493 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", s."CategoriesId", s."PostsId", s."Id", s."Name", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "Posts" AS p
+INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s ON p."Id" = s."PostsId"
+LEFT JOIN "Images" AS i ON p."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON p."Id" = c0."PostId"
+WHERE NOT (p."IsDeleted")
+ORDER BY p."Id", u."Email", s."CategoriesId", s."PostsId", s."Id", i."Id"
+2025-07-07 15:21:33.497 +05:30 [INF] Executing OkObjectResult, writing value of type 'BlogPlatform.Models.User[]'.
+2025-07-07 15:21:33.499 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetFilteredUsers (bloggingplatform) in 27.6264ms
+2025-07-07 15:21:33.500 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetFilteredUsers (bloggingplatform)'
+2025-07-07 15:21:33.500 +05:30 [INF] HTTP GET /api/v1/users/getall/filtered responded 200 in 29.9542 ms
+2025-07-07 15:21:33.500 +05:30 [INF] HTTP GET /api/v1/users/getall/filtered responded 200 in 30ms - User: Anand
+2025-07-07 15:21:33.501 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/getall/filtered?sortOrder=asc&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 31.9464ms
+2025-07-07 15:21:33.503 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.UsersController.GetAll (bloggingplatform) in 28.9838ms
+2025-07-07 15:21:33.503 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.UsersController.GetAll (bloggingplatform)'
+2025-07-07 15:21:33.503 +05:30 [INF] HTTP GET /api/v1/users/getall responded 200 in 31.2837 ms
+2025-07-07 15:21:33.504 +05:30 [INF] HTTP GET /api/v1/users/getall responded 200 in 31ms - User: Anand
+2025-07-07 15:21:33.504 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/users/getall - 200 null application/json; charset=utf-8 34.5426ms
+2025-07-07 15:21:33.532 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Collections.Generic.IEnumerable`1[[BlogPlatform.Models.Comment, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:21:33.537 +05:30 [INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", s."CategoriesId", s."PostsId", s."Id", s."Name", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "Posts" AS p
+INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s ON p."Id" = s."PostsId"
+LEFT JOIN "Images" AS i ON p."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON p."Id" = c0."PostId"
+WHERE NOT (p."IsDeleted")
+ORDER BY p."Id", u."Email", s."CategoriesId", s."PostsId", s."Id", i."Id"
+2025-07-07 15:21:33.794 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BlogPlatform.Models.Post, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-07 15:21:33.805 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5147/api/v1/posts - null null
+2025-07-07 15:21:33.806 +05:30 [INF] CORS policy execution successful.
+2025-07-07 15:21:33.806 +05:30 [INF] Executing endpoint 'BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform)'
+2025-07-07 15:21:33.807 +05:30 [INF] Route matched with {action = "GetAllpost", controller = "Post"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllpost() on controller BlogPlatform.Controllers.v1.PostController (bloggingplatform).
+2025-07-07 15:21:33.836 +05:30 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."Content", p."IsDeleted", p."Slug", p."Status", p."Title", p."UserEmail", p."Views", p."createdAt", u."Email", s."CategoriesId", s."PostsId", s."Id", s."Name", u."Bio", u."CreatedAt", u."IsDeleted", u."IsSuspended", u."Location", u."Name", u."PasswordHash", u."ProfileImage", u."Role", u."Status", u."SuspendedUntil", u."SuspensionReason", u."Website", i."Id", i."Content", i."IsDeleted", i."Name", i."PostId", i."UploadedAt", c0."Id", c0."Content", c0."CreatedAt", c0."IsDeleted", c0."PostId", c0."Status", c0."UserEmail", c0.iseditied
+FROM "Posts" AS p
+INNER JOIN "Users" AS u ON p."UserEmail" = u."Email"
+LEFT JOIN (
+    SELECT p0."CategoriesId", p0."PostsId", c."Id", c."Name"
+    FROM "PostCategories" AS p0
+    INNER JOIN "Categories" AS c ON p0."CategoriesId" = c."Id"
+) AS s ON p."Id" = s."PostsId"
+LEFT JOIN "Images" AS i ON p."Id" = i."PostId"
+LEFT JOIN "Comments" AS c0 ON p."Id" = c0."PostId"
+WHERE NOT (p."IsDeleted")
+ORDER BY p."Id", u."Email", s."CategoriesId", s."PostsId", s."Id", i."Id"
+2025-07-07 15:21:33.840 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`5[[System.Collections.Generic.List`1[[BlogPlatform.Models.Post, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-07 15:21:34.029 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BlogPlatform.Models.Post, bloggingplatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-07 15:21:34.815 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform) in 1337.6801ms
+2025-07-07 15:21:34.816 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetFilteredPosts (bloggingplatform)'
+2025-07-07 15:21:34.816 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 1340.1862 ms
+2025-07-07 15:21:34.816 +05:30 [INF] HTTP GET /api/v1/posts/filter responded 200 in 1340ms - User: Anand
+2025-07-07 15:21:34.817 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts/filter?searchTerm=&sortOrder=asc&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 1342.6519ms
+2025-07-07 15:21:34.822 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform) in 1347.2203ms
+2025-07-07 15:21:34.822 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform)'
+2025-07-07 15:21:34.822 +05:30 [INF] HTTP GET /api/v1/posts responded 200 in 1349.5290 ms
+2025-07-07 15:21:34.823 +05:30 [INF] HTTP GET /api/v1/posts responded 200 in 1350ms - User: Anand
+2025-07-07 15:21:34.823 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts - 200 null application/json; charset=utf-8 1353.1206ms
+2025-07-07 15:21:35.242 +05:30 [INF] Executed action BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform) in 1435.0885ms
+2025-07-07 15:21:35.242 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.v1.PostController.GetAllpost (bloggingplatform)'
+2025-07-07 15:21:35.242 +05:30 [INF] HTTP GET /api/v1/posts responded 200 in 1436.7582 ms
+2025-07-07 15:21:35.243 +05:30 [INF] HTTP GET /api/v1/posts responded 200 in 1437ms - User: Anand
+2025-07-07 15:21:35.243 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/posts - 200 null application/json; charset=utf-8 1438.0761ms
+2025-07-07 15:21:37.257 +05:30 [INF] Executed action BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform) in 3783.6282ms
+2025-07-07 15:21:37.258 +05:30 [INF] Executed endpoint 'BlogPlatform.Controllers.CommentController.GetFilteredComments (bloggingplatform)'
+2025-07-07 15:21:37.258 +05:30 [INF] HTTP GET /api/v1/comments/filter responded 200 in 3785.9316 ms
+2025-07-07 15:21:37.258 +05:30 [INF] HTTP GET /api/v1/comments/filter responded 200 in 3786ms - User: Anand
+2025-07-07 15:21:37.258 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/api/v1/comments/filter - 200 null application/json; charset=utf-8 3788.2649ms
+2025-07-07 17:43:34.919 +05:30 [INF] Application is shutting down...
+2025-07-07 17:43:34.925 +05:30 [INF] Connection id "0HNDT7ERMFMIQ", Request id "0HNDT7ERMFMIQ:00000001": the application aborted the connection.
+2025-07-07 17:43:34.933 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5147/notification/negotiate?negotiateVersion=1 - null null
+2025-07-07 17:43:34.934 +05:30 [INF] CORS policy execution successful.
+2025-07-07 17:43:34.934 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5147/notification/negotiate?negotiateVersion=1 - 204 null null 0.5521ms
+2025-07-07 17:43:34.935 +05:30 [INF] Executed endpoint '/notification'
+2025-07-07 17:43:34.935 +05:30 [INF] HTTP GET /notification responded 101 in 8581126.7265 ms
+2025-07-07 17:43:34.935 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5147/notification/negotiate?negotiateVersion=1 - null 0
+2025-07-07 17:43:34.935 +05:30 [INF] HTTP GET /notification responded 101 in 8581126ms - User: Anonymous
+2025-07-07 17:43:34.935 +05:30 [INF] CORS policy execution successful.
+2025-07-07 17:43:34.935 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5147/notification?id=19-nghzFk7Iz22kcb4be2Q - 101 null null 8581128.418ms
+2025-07-07 17:43:34.936 +05:30 [INF] Executing endpoint '/notification/negotiate'
+2025-07-07 17:43:34.936 +05:30 [INF] Executed endpoint '/notification/negotiate'
+2025-07-07 17:43:34.936 +05:30 [INF] HTTP POST /notification/negotiate responded 200 in 0.7144 ms
+2025-07-07 17:43:34.936 +05:30 [INF] HTTP POST /notification/negotiate responded 200 in 0ms - User: Anonymous
+2025-07-07 17:43:34.936 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5147/notification/negotiate?negotiateVersion=1 - 200 316 application/json 1.4661ms

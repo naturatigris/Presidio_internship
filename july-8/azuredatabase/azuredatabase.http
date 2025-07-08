@@ -1,0 +1,6 @@
+@azuredatabase_HostAddress = http://localhost:5256
+
+GET {{azuredatabase_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
