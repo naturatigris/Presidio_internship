@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "4e+Y2vmh3ug=",
+  "success": true,
+  "projectFilePath": "/Users/sandhyaanand/Documents/GitHub/Presidio_internship/july-9/MyApiApp/MyApiApp.csproj",
+  "expectedPackageFiles": [
+    "/Users/sandhyaanand/.nuget/packages/microsoft.aspnetcore.openapi/9.0.5/microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
+    "/Users/sandhyaanand/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
