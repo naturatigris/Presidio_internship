@@ -74,5 +74,6 @@ describe('Admindashboardanalytics', () => {
   afterEach(() => {
     const canvas = document.getElementById('postBlogChart');
     if (canvas) canvas.remove();
+    TestBed.resetTestingModule();
   });
 });

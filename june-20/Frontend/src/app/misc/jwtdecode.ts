@@ -34,3 +34,29 @@ export function getUserName(): string | null {
   return decoded?.name ?? null;
 }
 
+export class AuthTokenService {
+  private getDecodedToken(): JwtPayload | null {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    try {
+      return jwtDecode<JwtPayload>(token);
+    } catch (error) {
+      console.error('Invalid token:', error);
+      return null;
+    }
+  }
+
+  getUserRole(): string | null {
+    return this.getDecodedToken()?.role ?? null;
+  }
+
+  getUserEmail(): string | null {
+    return this.getDecodedToken()?.email ?? null;
+  }
+
+  getUserName(): string | null {
+    return this.getDecodedToken()?.name ?? null;
+  }
+
+}
