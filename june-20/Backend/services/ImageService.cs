@@ -2,6 +2,7 @@ using BlogPlatform.Interfaces;
 using BlogPlatform.Models;
 using BlogPlatform.Models.AuditLogs;
 using System.Text.Json;
+using BlogPlatform.Services;
 
 namespace BlogPlatform.Services
 {
@@ -9,11 +10,15 @@ namespace BlogPlatform.Services
     {
         private readonly IRepository<Guid, Image> _imageRepository;
         private readonly IImageAuditLogRepository _imageAuditLogRepository;
+        private readonly BlogStorageService _blogStorageService;
 
-        public ImageService(IRepository<Guid, Image> imageRepository, IImageAuditLogRepository imageAuditLogRepository)
+
+        public ImageService(IRepository<Guid, Image> imageRepository, IImageAuditLogRepository imageAuditLogRepository, BlogStorageService blogStorageService)
         {
             _imageRepository = imageRepository;
             _imageAuditLogRepository = imageAuditLogRepository;
+                _blogStorageService = blogStorageService;
+
         }
 
         public async Task<List<Image>> SaveImagesAsync(List<IFormFile> files, Guid postId, string performedByEmail)
@@ -24,13 +29,22 @@ namespace BlogPlatform.Services
             {
                 using var ms = new MemoryStream();
                 await file.CopyToAsync(ms);
+                ms.Position = 0;
+
+                var content = ms.ToArray();
+                ms.Position = 0;
+
+
+                var blobUrl = await _blogStorageService.UploadFileAsync(ms, $"{Guid.NewGuid()}_{file.FileName}");
+
 
                 var image = new Image
                 {
                     Id = Guid.NewGuid(),
                     Name = file.FileName,
                     PostId = postId,
-                    Content = ms.ToArray(),
+                    Content = content,
+                    imageurl=blobUrl,
                     UploadedAt = DateTime.UtcNow
                 };
 

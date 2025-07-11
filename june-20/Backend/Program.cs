@@ -111,12 +111,11 @@ builder.Services.AddApiVersioning(options =>
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)  // This line is important!
     .Enrich.FromLogContext()
-    .WriteTo.Console() // Write to terminal
-    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day) // File log
     .CreateLogger();
 
-builder.Host.UseSerilog(); // Plug Serilog into ASP.NET Core
+builder.Host.UseSerilog(); 
 
 //authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -170,6 +169,8 @@ builder.Services.AddScoped<RefreshTokenService>();
 builder.Services.AddScoped<SanitizeInputFilter>();
 builder.Services.AddScoped<CommentLikeService>();
 builder.Services.AddScoped<PostLikeService>();
+builder.Services.AddScoped < BlogStorageService>();
+
 
 
 

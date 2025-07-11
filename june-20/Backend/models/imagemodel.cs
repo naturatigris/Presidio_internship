@@ -15,11 +15,14 @@ namespace BlogPlatform.Models
         public string Name { get; set; } 
                 
         [Required]
-        public byte[] Content { get; set; } 
+        public byte[] Content { get; set; }
+
+        public string imageurl { get; set; } = string.Empty;
 
         public bool IsDeleted { get; set; } = false;
 
         public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
+
 
         public Post Post { get; set; }
     }
