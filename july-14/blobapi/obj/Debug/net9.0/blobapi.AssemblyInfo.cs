@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("blobapi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c483f6125dc895ab4d9c5a9bb3c01d91970b059")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1308888cda5e3e238e25a5f7aca9693fd654751d")]
 [assembly: System.Reflection.AssemblyProductAttribute("blobapi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("blobapi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

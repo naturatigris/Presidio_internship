@@ -20,6 +20,8 @@ using BlogPlatform.Filters;
 using BlogPlatform.Middleware;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 
 
 
@@ -31,9 +33,18 @@ using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 //dbcontext
+var kvUri = builder.Configuration["AzureBlob:KeyVaultUrl"];
+
+var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+
+KeyVaultSecret secret = client.GetSecret("DefaultConnectionString");
+string connectionString = secret.Value;
 builder.Services.AddDbContext<BlogPlatformContext>(opts =>
-    opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+    opts.UseNpgsql(connectionString)
 );
+// builder.Services.AddDbContext<BlogPlatformContext>(opts =>
+//     opts.UseNpgsql(builder.Configuration.GetConnectionString())
+// );
 // Controllers + JSON
 builder.Services.AddControllers(options =>
 {
