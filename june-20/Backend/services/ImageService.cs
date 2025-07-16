@@ -10,14 +10,14 @@ namespace BlogPlatform.Services
     {
         private readonly IRepository<Guid, Image> _imageRepository;
         private readonly IImageAuditLogRepository _imageAuditLogRepository;
-        private readonly BlogStorageService _blogStorageService;
+        //private readonly BlogStorageService _blogStorageService;
 
 
-        public ImageService(IRepository<Guid, Image> imageRepository, IImageAuditLogRepository imageAuditLogRepository, BlogStorageService blogStorageService)
+        public ImageService(IRepository<Guid, Image> imageRepository, IImageAuditLogRepository imageAuditLogRepository)
         {
             _imageRepository = imageRepository;
             _imageAuditLogRepository = imageAuditLogRepository;
-                _blogStorageService = blogStorageService;
+               // _blogStorageService = blogStorageService;
 
         }
 
@@ -35,7 +35,8 @@ namespace BlogPlatform.Services
                 ms.Position = 0;
 
 
-                var blobUrl = await _blogStorageService.UploadFileAsync(ms, $"{Guid.NewGuid()}_{file.FileName}");
+                //var blobUrl = await _blogStorageService.UploadFileAsync(ms, $"{Guid.NewGuid()}_{file.FileName}");
+                var blobUrl = "";
 
 
                 var image = new Image

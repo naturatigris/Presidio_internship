@@ -32,19 +32,19 @@ using Azure.Security.KeyVault.Secrets;
 
 
 var builder = WebApplication.CreateBuilder(args);
-//dbcontext
-var kvUri = builder.Configuration["AzureBlob:KeyVaultUrl"];
+// //dbcontext
+// var kvUri = builder.Configuration["AzureBlob:KeyVaultUrl"];
 
-var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+// var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
 
-KeyVaultSecret secret = client.GetSecret("DefaultConnectionString");
-string connectionString = secret.Value;
-builder.Services.AddDbContext<BlogPlatformContext>(opts =>
-    opts.UseNpgsql(connectionString)
-);
+// KeyVaultSecret secret = client.GetSecret("DefaultConnectionString");
+// string connectionString = secret.Value;
 // builder.Services.AddDbContext<BlogPlatformContext>(opts =>
-//     opts.UseNpgsql(builder.Configuration.GetConnectionString())
+//     opts.UseNpgsql(connectionString)
 // );
+builder.Services.AddDbContext<BlogPlatformContext>(opts =>
+    opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 // Controllers + JSON
 builder.Services.AddControllers(options =>
 {
@@ -180,7 +180,7 @@ builder.Services.AddScoped<RefreshTokenService>();
 builder.Services.AddScoped<SanitizeInputFilter>();
 builder.Services.AddScoped<CommentLikeService>();
 builder.Services.AddScoped<PostLikeService>();
-builder.Services.AddScoped < BlogStorageService>();
+//builder.Services.AddScoped < BlogStorageService>();
 
 
 

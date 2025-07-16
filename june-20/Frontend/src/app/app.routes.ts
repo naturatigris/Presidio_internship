@@ -16,6 +16,7 @@ import { Notifications } from './notifications/notifications';
 import { Admindashboard } from './admindashboard/admindashboard';
 import { Adminpostcomponent } from './admindashboard-component/adminpostcomponent/adminpostcomponent';
 import { RenderMode } from '@angular/ssr';
+import { RedirectComponent } from './redirect';
 export const routes: Routes = [
     { path: 'home', component: Home },
       {path:'login',component:Login},
@@ -26,7 +27,8 @@ export const routes: Routes = [
       canActivate: [AuthGuard],
 
     children: [
-      {path:'',redirectTo:'dashboard',pathMatch:'full',data: { renderMode: 'dynamic' }},
+            { path: '', component: RedirectComponent }, 
+
       {path: 'dashboard', component: Dashboard },
       {path:'dashboard/admin',component:Admindashboard,canActivate: [AdminGuard] },
       {path:'dashboard/admin/posts',component:Adminpostcomponent,canActivate: [AdminGuard] },

@@ -6,7 +6,7 @@
   <div class="profile-header">
 <div class="profile-image-wrapper">
   <img [src]="profileImageSrc" alt="profile image" class="profile-image">
-  <i class="bx bx-edit edit-icon" (click)="triggerFileInput()"></i>
+  <i class="bx bx-edit edit-icon" *ngIf="role !== 'Admin' || role == user?.role" (click)="triggerFileInput()"></i>
   <input type="file" #fileInput accept="image/*" (change)="onImageSelected($event)" style="display: none;" />
 </div>
 
@@ -41,7 +41,7 @@
 
   <!-- Bio Section -->
   <div class="profile-section">
-    <h3>Bio <i class="bx bx-edit section-edit"  *ngIf="role !== 'Admin'"  (click)="showBioModal = true"></i></h3>
+    <h3>Bio <i class="bx bx-edit section-edit"  *ngIf="role !== 'Admin' || role == user?.role" (click)="showBioModal = true"></i></h3>
     <p>{{ user?.bio}}</p>
   </div>
   <app-bio-edit
@@ -54,7 +54,7 @@
 
   <!-- Location Section -->
   <div class="profile-section">
-    <h3>Location <i class="bx bx-edit section-edit"  *ngIf="role !== 'Admin'" (click)="showLocationModal = true"></i></h3>
+    <h3>Location <i class="bx bx-edit section-edit"  *ngIf="role !== 'Admin' || role == user?.role" (click)="showLocationModal = true"></i></h3>
     <p>{{ user?.location}}</p>
   </div>
   <app-location-edit
@@ -96,7 +96,7 @@
 
   <!-- Security Section -->
   <div class="profile-section">
-    <h3>Password <i class="bx bx-edit section-edit"  *ngIf="role !== 'Admin'" (click)="showPasswordModal = true"></i></h3>
+    <h3>Password <i class="bx bx-edit section-edit" *ngIf="role !== 'Admin' || role == user?.role"(click)="showPasswordModal = true"></i></h3>
     <p>********</p>
   </div>
   <app-password-edit

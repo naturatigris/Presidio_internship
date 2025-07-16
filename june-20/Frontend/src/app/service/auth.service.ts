@@ -14,7 +14,7 @@ export class AuthService {
   login(user: UserLogin): Observable<string> {
     return this.http.post<UserLoginResponse>(`${this.apiUrl}`, user).pipe(
       tap(response => {
-          console.log('Login Response:', response); // <-- debug log
+          console.log('Login Response:', response); 
 
         if (response.token) {
 
