@@ -4,5 +4,7 @@
     "azureFunctions.projectLanguage": "C#",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "publish (functions)"
+    "azureFunctions.preDeployTask": "publish (functions)",
+    "appService.defaultWebAppToDeploy": "/subscriptions/e34397b2-486a-417d-bd5a-b9113a4a1b0c/resourceGroups/sandhya-rg/providers/Microsoft.Web/sites/sandhya-webapp",
+    "appService.deploySubpath": "july-21/azure deploymanet app"
 }

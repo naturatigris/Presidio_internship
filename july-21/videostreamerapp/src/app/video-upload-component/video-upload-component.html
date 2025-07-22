@@ -1,0 +1,29 @@
+<div class="upload-container mat-elevation-z3">
+  <h2>Upload Training Video</h2>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Video Title</mat-label>
+    <input matInput type="text" [(ngModel)]="title" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput rows="4" [(ngModel)]="description"></textarea>
+  </mat-form-field>
+
+  <div class="file-input">
+    <label for="fileUpload" class="file-label">
+      <mat-icon>cloud_upload</mat-icon> Choose Video File
+    </label>
+    <input id="fileUpload" type="file" (change)="onFileSelected($event)" hidden />
+    <span *ngIf="file">{{ file.name }}</span>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="uploading">
+    Upload
+  </button>
+
+  <div class="loader-container" *ngIf="uploading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</div>

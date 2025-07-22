@@ -1,0 +1,65 @@
+.video-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.header-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between
+}
+.upload-page{
+    padding: 15px;
+    background-color: #1976d2;
+    color: #fff;
+
+}
+
+.header-card h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #1976d2;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+
+.video-card {
+  background-color: #fff;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-info {
+  padding: 15px;
+}
+
+.video-info h4 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.video-info p {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+}

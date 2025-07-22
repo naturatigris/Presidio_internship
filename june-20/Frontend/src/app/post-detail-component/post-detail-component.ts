@@ -204,6 +204,8 @@ updatview(id:string,post:PostUpdate){
           this.postview = {
           views: ((this.post?.views??0) + 1),
           deleteImages:false,
+          status:this.post?.status,
+        
 
         images: [],
 

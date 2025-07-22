@@ -1,0 +1,7 @@
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/july-21/azureapp/publish/azureapp
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/july-21/azureapp/publish/appsettings.Development.json
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/july-21/azureapp/publish/appsettings.json
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/july-21/azureapp/publish/azureapp.dll
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/july-21/azureapp/publish/azureapp.deps.json
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/july-21/azureapp/publish/azureapp.runtimeconfig.json
+/Users/sandhyaanand/Documents/GitHub/Presidio_internship/july-21/azureapp/publish/azureapp.pdb
