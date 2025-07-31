@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/current-user/current-user.state.ts"],
+  "sourcesContent": ["import { Injectable } from '@angular/core';\nimport { State, Action, Selector, StateContext } from '@ngxs/store';\nimport { SetCurrentUserAction, RemoveCurrentUserAction } from './current-user.actions';\nimport { UserModel } from '../models/user.model';\n\nexport interface CurrentUserStateModel {\n  user : UserModel | null\n}\n\n@State<CurrentUserStateModel>({\n  name: 'currentUser',\n  defaults: {\n    user: null\n  }\n})\n@Injectable()\nexport class CurrentUserState {\n\n  @Selector()\n  static getUser(state: CurrentUserStateModel) {\n    return state.user;\n  }\n\n  @Action(SetCurrentUserAction)\n  set(ctx: StateContext<CurrentUserStateModel>, { payload }: SetCurrentUserAction) {\n    // let stateModel = ctx.getState();\n    // stateModel.user =  payload;\n    // console.log(payload);\n    ctx.setState({user: payload});\n  }\n  @Action(RemoveCurrentUserAction)\n  remove(ctx: StateContext<CurrentUserStateModel>) {\n    ctx.setState({user:null});\n  }\n\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;IAgBa;;;;;AAhBb;AACA;AACA;AAcO,IAAM,mBAAN,MAAMA,kBAAgB;MAG3B,OAAO,QAAQ,OAA4B;AACzC,eAAO,MAAM;MACf;MAGA,IAAI,KAA0C,EAAE,QAAO,GAAwB;AAI7E,YAAI,SAAS,EAAC,MAAM,QAAO,CAAC;MAC9B;MAEA,OAAO,KAAwC;AAC7C,YAAI,SAAS,EAAC,MAAK,KAAI,CAAC;MAC1B;;AATA,eAAA;MADC,OAAO,oBAAoB;;AAQ5B,eAAA;MADC,OAAO,uBAAuB;;AAXxB,eAAA;MADN,SAAQ;;AAFE,uBAAgB,WAAA;MAP5B,MAA6B;QAC5B,MAAM;QACN,UAAU;UACR,MAAM;;OAET;MACA,WAAU;OACE,gBAAgB;;;",
+  "names": ["CurrentUserState"]
+}

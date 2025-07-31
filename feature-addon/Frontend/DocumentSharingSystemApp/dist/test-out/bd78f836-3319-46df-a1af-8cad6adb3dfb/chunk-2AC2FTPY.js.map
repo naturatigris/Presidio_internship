@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/models/document.search.model.ts"],
+  "sourcesContent": ["export class DocumentSearchModel {\n    constructor(\n        public searchByOriginalFileName : string | null = null,\n        public searchByCreatedUserEmail : string | null = null,\n        public searchByCreatedTime : string | null = null,\n        public SortBy : string | null = null,\n        public SortOrder : string | null = null,\n        public pageNo : number | null = null,\n        public pageSize : number | null = null,\n        public view : string | null = 'All'\n    ){}\n}"],
+  "mappings": ";;;;;AAAA,IAAa;AAAb;;;AAAM,IAAO,sBAAP,MAA0B;MAEjB;MACA;MACA;MACA;MACA;MACA;MACA;MACA;MARX,YACW,2BAA2C,MAC3C,2BAA2C,MAC3C,sBAAsC,MACtC,SAAyB,MACzB,YAA4B,MAC5B,SAAyB,MACzB,WAA2B,MAC3B,OAAuB,OAAK;AAP5B,aAAA,2BAAA;AACA,aAAA,2BAAA;AACA,aAAA,sBAAA;AACA,aAAA,SAAA;AACA,aAAA,YAAA;AACA,aAAA,SAAA;AACA,aAAA,WAAA;AACA,aAAA,OAAA;MACT;;;;",
+  "names": []
+}

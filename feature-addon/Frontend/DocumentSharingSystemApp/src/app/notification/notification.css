@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+    padding:40px;
+}
+#main { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.message {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 500px;
+    padding: 10px;
+    padding-left: 30px;
+    gap: 10px;
+    margin-top: 20px;
+    box-shadow: 2px 3px 3px rgba(0,0,0,0.4);
+}
+.header {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.alert-card {
+  margin: 10px 0;
+}
+
+.alert-red {
+  background-color: #d9adb4; 
+}
+mat-card{
+    width: 70%;
+    margin: auto;
+}
+
+mat-card-title {
+  font-weight: bold;
+  align-self: center;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+@media (max-width : 768px) {
+    .message {
+        width: 300px;
+    }
+}

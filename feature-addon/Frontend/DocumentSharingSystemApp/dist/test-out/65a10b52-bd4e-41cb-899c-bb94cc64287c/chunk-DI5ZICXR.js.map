@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/models/user.update.model.ts", "src/app/models/user.add.model.ts"],
+  "sourcesContent": ["export class UserUpdateModel {\n    constructor(public name : string = '', public email : string = \"\", public teamId : number =0, public password : string | null = null ){}\n}", "export class UserAddModel {\n    constructor(\n        public name : string = '', \n        public role : string = 'User', \n        public email : string = \"\", \n        public teamId : number = 0,\n        public password : string = \"\"\n    ){}\n}"],
+  "mappings": ";;;;;AAAA,IAAa;AAAb;;;AAAM,IAAO,kBAAP,MAAsB;MACL;MAA2B;MAA4B;MAA2B;MAArG,YAAmB,OAAgB,IAAW,QAAiB,IAAW,SAAiB,GAAU,WAA2B,MAAI;AAAjH,aAAA,OAAA;AAA2B,aAAA,QAAA;AAA4B,aAAA,SAAA;AAA2B,aAAA,WAAA;MAAkC;;;;;;ACD3I,IAAa;AAAb;;;AAAM,IAAO,eAAP,MAAmB;MAEV;MACA;MACA;MACA;MACA;MALX,YACW,OAAgB,IAChB,OAAgB,QAChB,QAAiB,IACjB,SAAkB,GAClB,WAAoB,IAAE;AAJtB,aAAA,OAAA;AACA,aAAA,OAAA;AACA,aAAA,QAAA;AACA,aAAA,SAAA;AACA,aAAA,WAAA;MACT;;;;",
+  "names": []
+}

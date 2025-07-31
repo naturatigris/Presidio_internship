@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/navbar/navbar.css"],
+  "sourcesContent": [".navbar {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n}\n\n.toolbar-title {\n  font-weight: 500;\n  font-size: 18px;\n  cursor: pointer;\n}\n\n.nav-buttons {\n  display: flex;\n  gap: 8px;\n}\n\n.spacer {\n    flex : 1 1 auto;\n}\n.menu-button {\n  display: none; /* hidden by default */\n}\n\n@media screen and (max-width: 768px) {\n  .navbar {\n    width: 100%;\n  }\n  .nav-buttons {\n    display: none; /* hide inline nav buttons on small screens */\n  }\n\n  .menu-button {\n    display: inline-flex; /* show hamburger */\n  }\n\n  .toolbar-title {\n    font-size: 16px;\n  }\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,WAAS;AACT,aAAW;AACX,eAAa;AACf;AAEA,CAAC;AACC,eAAa;AACb,aAAW;AACX,UAAQ;AACV;AAEA,CAAC;AACC,WAAS;AACT,OAAK;AACP;AAEA,CAAC;AACG,QAAO,EAAE,EAAE;AACf;AACA,CAAC;AACC,WAAS;AACX;AAEA,OAAO,OAAO,IAAI,CAAC,SAAS,EAAE;AAC5B,GAzBD;AA0BG,WAAO;AACT;AACA,GAhBD;AAiBG,aAAS;AACX;AAEA,GAZD;AAaG,aAAS;AACX;AAEA,GA9BD;AA+BG,eAAW;AACb;AACF;",
+  "names": []
+}

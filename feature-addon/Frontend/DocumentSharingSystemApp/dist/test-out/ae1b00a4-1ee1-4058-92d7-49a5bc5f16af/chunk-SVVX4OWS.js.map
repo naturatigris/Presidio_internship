@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/models/user.search.model.ts"],
+  "sourcesContent": ["export class UserSearchModel {\n    constructor ( \n        public searchQuery : string | null, \n        public sortOrder : string |null ,\n        public role : string | null,\n        public teamId : number | null,\n    ){}\n}"],
+  "mappings": ";;;;;AAAA,IAAa;AAAb;;;AAAM,IAAO,kBAAP,MAAsB;MAEb;MACA;MACA;MACA;MAJX,YACW,aACA,WACA,MACA,QAAsB;AAHtB,aAAA,cAAA;AACA,aAAA,YAAA;AACA,aAAA,OAAA;AACA,aAAA,SAAA;MACT;;;;",
+  "names": []
+}

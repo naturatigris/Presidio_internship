@@ -1,0 +1,32 @@
+/* document-restore-status.component.scss */
+
+.restore-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.restore-card {
+  
+  padding: 10px;
+}
+
+.card-section {
+  margin-bottom: 10px;
+}
+
+.status-approved {
+  color: green;
+  font-weight: 600;
+}
+
+.status-rejected {
+  color: red;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: orange;
+  font-weight: 600;
+}

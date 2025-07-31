@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/models/team.model.ts"],
+  "sourcesContent": ["export class TeamModel {\n    constructor(\n        public id : number =0,\n        public name : string = \"\",\n        public isDeleted : boolean = false,\n        public createdByUserId : string = \"\",\n        public createdByUserName : string = \"\",\n        public createdByUserEmail : string = \"\",\n        public createdAt : Date = new Date(),\n        public lastUpdatedByUserId : string = \"\",\n        public lastUpdatedByUserName : string = \"\",\n        public lastUpdatedByUserEmail : string = \"\",\n        public lastUpdatedAt : Date = new Date()\n    ){}\n}"],
+  "mappings": ";;;;;AAAA,IAAa;AAAb;;;AAAM,IAAO,YAAP,MAAgB;MAEP;MACA;MACA;MACA;MACA;MACA;MACA;MACA;MACA;MACA;MACA;MAXX,YACW,KAAa,GACb,OAAgB,IAChB,YAAsB,OACtB,kBAA2B,IAC3B,oBAA6B,IAC7B,qBAA8B,IAC9B,YAAmB,oBAAI,KAAI,GAC3B,sBAA+B,IAC/B,wBAAiC,IACjC,yBAAkC,IAClC,gBAAuB,oBAAI,KAAI,GAAE;AAVjC,aAAA,KAAA;AACA,aAAA,OAAA;AACA,aAAA,YAAA;AACA,aAAA,kBAAA;AACA,aAAA,oBAAA;AACA,aAAA,qBAAA;AACA,aAAA,YAAA;AACA,aAAA,sBAAA;AACA,aAAA,wBAAA;AACA,aAAA,yBAAA;AACA,aAAA,gBAAA;MACT;;;;",
+  "names": []
+}

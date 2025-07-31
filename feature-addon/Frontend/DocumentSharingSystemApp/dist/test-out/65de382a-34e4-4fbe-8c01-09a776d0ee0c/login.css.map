@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/login/login.css"],
+  "sourcesContent": [".main{\n    width: 100%;\n    height: 98vh;\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: space-evenly;\n\n}\n.welcome {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}\n.login {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    padding : 20px;\n    margin : 20px;\n    border: 2px solid #3c67d2;\n    border-radius: 8px;\n    gap:30px;\n}\nh1 {\n    color: #3c67d2;\n}\n.input {\n    width: 300px;\n}"],
+  "mappings": ";AAAA,CAAC;AACG,SAAO;AACP,UAAQ;AACR,WAAS;AACT,aAAW;AACX,eAAa;AACb,mBAAiB;AAErB;AACA,CAAC;AACG,WAAS;AACT,kBAAgB;AAChB,eAAa;AACjB;AACA,CAAC;AACG,WAAS;AACT,kBAAgB;AAChB,eAAa;AACb,WAAU;AACV,UAAS;AACT,UAAQ,IAAI,MAAM;AAClB,iBAAe;AACf,OAAI;AACR;AACA;AACI,SAAO;AACX;AACA,CAAC;AACG,SAAO;AACX;",
+  "names": []
+}

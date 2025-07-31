@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="main">
+    <div class="header">
+        <h1>Notifications</h1>
+    </div>
+    <div>
+     @for (alert of alerts; track $index) {
+    <mat-card class="mat-elevation-z3 alert-red">
+      <mat-card-title>{{ alert.user.name }}</mat-card-title>
+      <mat-card-content>
+        <p>Alert:Your account has been inactive for {{-alert.daysInactive}}days. Your documents will be archived soon if no action is taken.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button color="warn" (click)="dismissAlert(alert?.id!)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>}
+    </div>
+    <div id="main">
+        @for (notification of notifications; track $index) {
+            <div class="message">
+                <h3>{{notification.user}}</h3>
+                <p>{{notification.message}}</p>
+                <div>
+                <mat-card-actions>
+                <button mat-icon-button color="warn" (click)="dismissNotification($index)">
+                <mat-icon>close</mat-icon>
+                </button>
+                </mat-card-actions>
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>

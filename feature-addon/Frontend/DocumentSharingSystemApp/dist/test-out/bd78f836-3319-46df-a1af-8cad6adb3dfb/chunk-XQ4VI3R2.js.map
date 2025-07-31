@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/models/user.login.model.ts"],
+  "sourcesContent": ["export class UserLoginModel {\n    email : string = \"\";\n    password : string = \"\";\n}"],
+  "mappings": ";;;;;AAAA,IAAa;AAAb;;;AAAM,IAAO,iBAAP,MAAqB;MACvB,QAAiB;MACjB,WAAoB;;;;",
+  "names": []
+}

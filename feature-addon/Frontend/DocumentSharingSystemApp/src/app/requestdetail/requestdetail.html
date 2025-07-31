@@ -1,0 +1,20 @@
+<div class="overlay">
+  <div class="request-detail-modal">
+    <button class="close-btn" (click)="onClose()">✕</button>
+
+    <h2>Restore Request Details</h2>
+
+    <ng-container *ngIf="request; else loading">
+      <p><strong>Requested By:</strong> {{ request.requestedByUserName }}</p>
+      <p><strong>Reason:</strong> {{ request.reason }}</p>
+      <p><strong>Status:</strong> {{ request.status }}</p>
+      <p><strong>Requested At:</strong> {{ request.requestedAt | date:'medium' }}</p>
+      <p *ngIf="request.reviewedAt"><strong>Reviewed At:</strong> {{ request.reviewedAt | date:'medium' }}</p>
+      <p *ngIf="request.reviewedByUserName"><strong>Reviewed By:</strong> {{ request.reviewedByUserName }}</p>
+    </ng-container>
+
+    <ng-template #loading>
+      <p>Loading request details...</p>
+    </ng-template>
+  </div>
+</div>

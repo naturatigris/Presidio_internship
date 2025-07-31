@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/environments/environment.ts"],
+  "sourcesContent": ["export const environment = {\n serverUrl : \"https://localhost:7120/api/v1\"\n}"],
+  "mappings": ";;;;;AAAA,IAAa;AAAb;;;AAAO,IAAM,cAAc;MAC1B,WAAY;;;;",
+  "names": []
+}

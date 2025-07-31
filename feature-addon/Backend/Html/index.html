@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>SignalR Document Upload History</h1>
+    <hr/>
+    <div id="main">
+    </div>
+
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+    <script>
+        var connection = new signalR.HubConnectionBuilder()
+                                        .withUrl("https://localhost:7120/notification", {withCredentials : true})
+                                        .withAutomaticReconnect()
+                                        .build();                           
+        connection.start().then(()=>{
+            connection.invoke("SendMessage","Client","Connected");
+        }).catch(err => console.log(err.message));
+
+         const main = document.querySelector("#main");
+        connection.on("RecieveMessage",(user,message) => {
+            let div = document.createElement("div");
+            div.classList.add("message");
+            let h3 = document.createElement("h3");
+            h3.innerText = `${user}`;
+            let p = document.createElement("p");
+            p.innerText = `${message}`;
+            console.log(`${user} : ${message}`);
+            
+            div.appendChild(h3);
+            div.appendChild(p);
+            main.appendChild(div);
+        });
+
+        const sendMessage =() =>{
+            let user = document.querySelector("#user").value;
+            let message = document.querySelector("#message").value;
+            connection.invoke("SendMessage",user,message);
+        }
+    </script>
+</body>
+</html>

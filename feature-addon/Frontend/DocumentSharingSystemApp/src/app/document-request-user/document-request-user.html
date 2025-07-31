@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="main">
+  <div class="header spacer">
+    <h1 style="margin:0;">Restore Requests</h1>
+  </div>
+
+<div class="restore-container">
+  <mat-card *ngFor="let request of requests" class="restore-card">
+    <mat-card-header>
+      <mat-card-title>{{ request?.originalFileName || 'N/A' }}</mat-card-title>
+      <mat-card-subtitle>{{ request.requestedAt | date:'medium' }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      
+
+      <div class="card-section">
+        <strong>Reason:</strong> {{ request.reason }}
+      </div>
+
+      <div class="card-section">
+        <strong>Status:</strong>
+        <span [ngClass]="getStatusClass(request.status)">
+          {{ request.status }}
+        </span>
+      </div>
+
+      <div class="card-section" *ngIf="request.reviewedAt">
+        <strong>Reviewed At:</strong> {{ request.reviewedAt | date:'medium' }}
+      </div>
+
+      <div class="card-section" *ngIf="request.reviewedByUserName">
+        <strong>Reviewed By:</strong> {{ request.reviewedByUserName }}
+      </div>
+    </mat-card-content>
+
+  
+  </mat-card>
+</div>

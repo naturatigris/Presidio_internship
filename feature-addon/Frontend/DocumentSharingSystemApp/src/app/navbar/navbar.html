@@ -1,0 +1,64 @@
+<mat-toolbar class="navbar">
+    <button matIconButton class="menu-button" [matMenuTriggerFor]="navMenu" >
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span 
+    class="toolbar-title"
+    (click)="navigate('/documents')">
+        Document Sharing System
+    </span>
+    
+    <span class="spacer"></span>
+
+    <div class="nav-buttons">
+
+      <button [matButton]="currentUrl() == 'documents'? 'filled' : 'text' "  (click)="navigate('/documents')">
+          Documents
+        </button>
+        <button [matButton]="currentUrl() == 'users'? 'filled' : 'text' "  (click)="navigate('/users')">
+            Users
+        </button>
+        @if(currentUser?.role == "Admin"){
+            <button [matButton]="currentUrl() == 'teams'? 'filled' : 'text' "  (click)="navigate('/teams')">
+                Teams
+            </button>
+        }
+        <button [matButton]="currentUrl() == 'notifications'? 'filled' : 'text' "  (click)="navigate('/notifications')">
+            Notifications
+        </button>
+        @if(currentUser?.role == "Admin"){
+            <button [matButton]="currentUrl() == 'requests'? 'filled' : 'text' "  (click)="navigate('/requests')">
+                ViewRequests
+            </button>
+        }@else{
+            <button [matButton]="currentUrl() == 'requests'? 'filled' : 'text' "  (click)="navigate('/requests/users')">
+                ViewRequests
+            </button>
+        }
+        </div>
+
+    <button matButton="text" [matMenuTriggerFor]="profileMenu">
+        <mat-icon>account_circle</mat-icon>
+        {{currentUser?.name}}
+    </button>
+  
+    <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item (click)="editUser()">
+            <mat-icon>switch_account</mat-icon>
+            Update Profile
+        </button>
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+        </button>
+    </mat-menu>
+
+    <mat-menu #navMenu="matMenu">
+        <button mat-menu-item (click)="navigate('/documents')">Documents</button>
+        <button mat-menu-item (click)="navigate('/users')">Users</button>
+        @if(currentUser?.role == "Admin"){
+            <button mat-menu-item (click)="navigate('/teams')">Teams</button>
+        }
+        <button mat-menu-item (click)="navigate('/notifications')">Notifications</button>
+    </mat-menu>
+</mat-toolbar>

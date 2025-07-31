@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/teams-modal/teams-modal.css"],
+  "sourcesContent": [".content {\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\ninput {\n    margin: 20px;\n}\ninput[type=\"file\"]::file-selector-button {\n  border-radius: 16px;\n  padding: 0 16px;\n  height: 40px;\n  cursor: pointer;\n  background-color: #dbe3f8;\n  border: 1px solid rgba(0, 0, 0, 0.16);\n  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);\n  transition: background-color 200ms;\n}\n\n/* file upload button hover state */\ninput[type=\"file\"]::file-selector-button:hover {\n  background-color: rgb(181, 202, 247);\n}\n\n/* file upload button active state */\ninput[type=\"file\"]::file-selector-button:active {\n  background-color: #3c67d2;\n}\nh2{\n    text-align: center;\n}\n.input{\n    width: 300px;\n}"],
+  "mappings": ";AAAA,CAAC;AACG,WAAS;AACT,WAAS;AACT,kBAAgB;AAChB,eAAa;AACb,mBAAiB;AACrB;AACA;AACI,UAAQ;AACZ;AACA,KAAK,CAAC,UAAY;AAChB,iBAAe;AACf,WAAS,EAAE;AACX,UAAQ;AACR,UAAQ;AACR,oBAAkB;AAClB,UAAQ,IAAI,MAAM,KAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE;AAChC,cAAY,IAAI,IAAI,IAAI,KAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE;AACtC,cAAY,iBAAiB;AAC/B;AAGA,KAAK,CAAC,UAAY,sBAAsB;AACtC,oBAAkB,IAAI,GAAG,EAAE,GAAG,EAAE;AAClC;AAGA,KAAK,CAAC,UAAY,sBAAsB;AACtC,oBAAkB;AACpB;AACA;AACI,cAAY;AAChB;AACA,CAAC;AACG,SAAO;AACX;",
+  "names": []
+}

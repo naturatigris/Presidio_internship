@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/requestdetail/requestdetail.css"],
+  "sourcesContent": ["/* Overlay full screen */\n.overlay {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0,0,0,0.5);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 1000;\n}\n\n/* Modal box */\n.request-detail-modal {\n  background: white;\n  padding: 20px;\n  width: 400px;\n  border-radius: 10px;\n  position: relative;\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);\n}\n\n/* Close button */\n.close-btn {\n  position: absolute;\n  top: 10px;\n  right: 15px;\n  background: transparent;\n  border: none;\n  font-size: 18px;\n  cursor: pointer;\n}\n"],
+  "mappings": ";AACA,CAAC;AACC,YAAU;AACV,OAAK;AACL,QAAM;AACN,SAAO;AACP,UAAQ;AACR,cAAY,KAAK,CAAC,EAAC,CAAC,EAAC,CAAC,EAAC;AACvB,WAAS;AACT,eAAa;AACb,mBAAiB;AACjB,WAAS;AACX;AAGA,CAAC;AACC,cAAY;AACZ,WAAS;AACT,SAAO;AACP,iBAAe;AACf,YAAU;AACV,cAAY,EAAE,KAAK,KAAK,KAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE;AACxC;AAGA,CAAC;AACC,YAAU;AACV,OAAK;AACL,SAAO;AACP,cAAY;AACZ,UAAQ;AACR,aAAW;AACX,UAAQ;AACV;",
+  "names": []
+}
