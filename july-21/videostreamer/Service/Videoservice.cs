@@ -26,10 +26,8 @@ namespace TrainingVideoPortal.Services
     if (video == null || string.IsNullOrEmpty(video.BlobUrl))
         return (null, null);
 
-    // Extract blob name from URL
     var blobUri = new Uri(video.BlobUrl);
-    var blobName = Path.GetFileName(blobUri.LocalPath); // This assumes your blob URL ends with the blob name
-
+    var blobName = Path.GetFileName(blobUri.LocalPath); 
     var blobServiceClient = new BlobServiceClient(_configuration.GetConnectionString("AzureBlobStorage"));
     var containerClient = blobServiceClient.GetBlobContainerClient("training-videos");
     var blobClient = containerClient.GetBlobClient(blobName);
