@@ -1,0 +1,119 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "migratedprojectapp": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css",
+              "src/assets/Content/style.css",
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "src/assets/Content/Site.css",
+                 "src/assets/Content/PagedList.css"
+
+            ],
+            "scripts": [
+        "src/assets/Scripts/jquery-1.10.2.min.js",
+        "src/assets/Scripts/jquery.validate.min.js",        
+        "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+
+        "src/assets/Scripts/jquery.validate.js",
+        "src/assets/Scripts/jquery.validate.unobtrusive.js",
+        "src/assets/Scripts/jquery.validate.unobtrusive.min.js",
+        "src/assets/Scripts/respond.js",
+        "src/assets/Scripts/respond.min.js"
+
+
+
+      ],
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "ssr": {
+              "entry": "src/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "migratedprojectapp:build:production"
+            },
+            "development": {
+              "buildTarget": "migratedprojectapp:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "e23302e8-7cbb-488c-a12b-500a0078dbcb"
+  }
+}

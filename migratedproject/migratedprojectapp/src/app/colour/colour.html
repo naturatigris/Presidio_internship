@@ -1,0 +1,25 @@
+
+<h2>Index</h2>
+
+<p>
+  <a [routerLink]="['/colors/color/create']">Create New</a>
+</p>
+<table class="table">
+  <tbody>
+        <th>
+           Color
+        </th>
+        <th></th>
+    </tbody>
+
+
+<tr *ngFor="let item of colorlist">
+    <td>{{ item.color1 }}</td>
+    <td>
+      <a [routerLink]="['/colors/color/edit', item.colorId]">Edit</a> |
+      <a [routerLink]="['/colors/color/details', item.colorId]">Details</a> |
+      <button class="buttonLink" (click)="deletecolour(item.colorId)">Delete</button>
+    </td>
+  </tr>
+
+</table>

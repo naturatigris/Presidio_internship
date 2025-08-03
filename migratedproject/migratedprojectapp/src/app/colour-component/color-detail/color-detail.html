@@ -1,0 +1,20 @@
+<h2>Details</h2>
+
+<div>
+  <h4>Color</h4>
+  <hr />
+  <dl class="dl-horizontal">
+    <dt>
+      Name
+    </dt>
+
+    <dd>
+      {{ color?.color1 }}
+    </dd>
+  </dl>
+</div>
+
+<p>
+  <a [routerLink]="['/colors/color/edit', color?.colorId]">Edit</a> |
+  <a (click)="goBack()">Back to List</a>
+</p>

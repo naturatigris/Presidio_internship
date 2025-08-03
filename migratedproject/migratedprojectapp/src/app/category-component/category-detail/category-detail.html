@@ -1,0 +1,20 @@
+<h2>Details</h2>
+
+<div>
+  <h4>Category</h4>
+  <hr />
+  <dl class="dl-horizontal">
+    <dt>
+      Name
+    </dt>
+
+    <dd>
+      {{ category?.name }}
+    </dd>
+  </dl>
+</div>
+
+<p>
+  <a [routerLink]="['/categories/edit', category?.categoryId]">Edit</a> |
+  <a (click)="goBack()">Back to List</a>
+</p>
