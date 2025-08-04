@@ -77,7 +77,6 @@ namespace BlogPlatform.Services
             await _userValidationService.ValidateUserEmail(performedBy);
 
             var comment = await _commentRepo.Get(id);
-
             if (comment == null)
                 throw new Exception("Comment not found");
 
@@ -102,23 +101,22 @@ namespace BlogPlatform.Services
                 {
 
                     var comments = await _commentRepo.GetAll();
-
                     var query = comments
                         .Where(c => !c.IsDeleted)
                         .AsQueryable();
                         if (postId.HasValue)
                             query = query.Where(c => c.PostId == postId.Value);
 
-            if (!string.IsNullOrEmpty(userEmail))
-            {
-                await _userValidationService.ValidateUserEmail(userEmail);
+                    if (!string.IsNullOrEmpty(userEmail))
+                    {
+                        await _userValidationService.ValidateUserEmail(userEmail);
 
-                query = query.Where(c => c.UserEmail == userEmail);
-            }
+                        query = query.Where(c => c.UserEmail == userEmail);
+                    }
 
                     if (!string.IsNullOrEmpty(status))
                         query = query.Where(c => c.Status.Equals(status, StringComparison.OrdinalIgnoreCase));
-                    int totalCount = query.Count(); // total before pagination
+                    int totalCount = query.Count(); 
 
                     query = sortOrder?.ToLower() == "desc"
                         ? query.OrderByDescending(c => c.CreatedAt)

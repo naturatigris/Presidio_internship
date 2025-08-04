@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using Microsoft.AspNetCore.SignalR;
-
 namespace BlogPlatform.Tests.Controllers
 {
     [TestFixture]
@@ -24,6 +23,11 @@ namespace BlogPlatform.Tests.Controllers
         private Mock<IMapper> _mockMapper;
         private PostController _controller;
         private Mock<IHubContext<PostHub>> _mockHubContext;
+        private Mock<ICategoryService> _mockCategoryService;
+        private Mock<IHubClients> _mockClients;
+        private Mock<IClientProxy> _mockClientProxy;
+        
+
 
 
         [SetUp]
@@ -33,10 +37,19 @@ namespace BlogPlatform.Tests.Controllers
             _mockImageService = new Mock<IImageService>();
             _mockMapper = new Mock<IMapper>();
             _mockHubContext = new Mock<IHubContext<PostHub>>();
+            _mockCategoryService = new Mock<ICategoryService>();
+            _mockClients = new Mock<IHubClients>();
+            _mockClientProxy = new Mock<IClientProxy>();
+            _mockHubContext.Setup(x => x.Clients).Returns(_mockClients.Object);
+            _mockClients.Setup(x => x.All).Returns(_mockClientProxy.Object);
+            _mockClientProxy
+                .Setup(x => x.SendCoreAsync("EditedPost", It.IsAny<object[]>(), default))
+                .Returns(Task.CompletedTask);
 
 
-            _controller = new PostController(_mockPostService.Object, _mockMapper.Object, _mockImageService.Object,    _mockHubContext.Object
-);
+
+
+            _controller = new PostController(_mockPostService.Object, _mockMapper.Object, _mockImageService.Object,_mockHubContext.Object,_mockCategoryService.Object);
         }
 
         [Test]
@@ -70,16 +83,17 @@ namespace BlogPlatform.Tests.Controllers
         {
             var postId = Guid.NewGuid();
             var email = "user@example.com";
-            Post p = new Post{ Id=postId,UserEmail=email};
+            Post p = new Post { Id = postId, UserEmail = email };
 
             SetupUserWithClaims(email, "Admin");
             _mockPostService.Setup(s => s.GetPostByID(postId)).ReturnsAsync(p); // If needed
 
-            _mockPostService.Setup(s => s.DeletePost(postId,email)).ReturnsAsync(p);
+            _mockPostService.Setup(s => s.DeletePost(postId, email)).ReturnsAsync(p);
 
             var result = await _controller.DeletePost(postId);
 
             Assert.That(result, Is.TypeOf<OkObjectResult>());
+            
         }
 
         [Test]
@@ -91,10 +105,15 @@ namespace BlogPlatform.Tests.Controllers
             var email = "admin@example.com";
 
             SetupUserWithClaims(email, "Admin");
-    _mockPostService.Setup(s => s.GetPostByID(postId)).ReturnsAsync(updatedPost); // If needed
+            _mockPostService.Setup(s => s.GetPostByID(postId)).ReturnsAsync(updatedPost);
 
-    _mockMapper.Setup(m => m.Map<Post>(dto)).Returns(updatedPost);
-    _mockPostService.Setup(s => s.UpdatePost(postId, email, updatedPost, dto.Images)).ReturnsAsync(updatedPost);
+            _mockMapper.Setup(m => m.Map<Post>(dto)).Returns(updatedPost);
+            _mockClientProxy
+            .Setup(x => x.SendCoreAsync("EditedPost", It.IsAny<object[]>(), default))
+            .Returns(Task.CompletedTask);
+
+            _mockPostService.Setup(s => s.UpdatePost(postId, email, updatedPost, dto.Images, dto.deleteImages)).ReturnsAsync(updatedPost);
+
 
             var result = await _controller.UpdatePost(postId, dto);
 

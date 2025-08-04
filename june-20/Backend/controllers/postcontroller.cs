@@ -18,8 +18,10 @@ public class PostController : ControllerBase
     private readonly IPostService _postService;
     private readonly IMapper _mapper;
     private readonly IImageService _imageService;
-        private readonly IHubContext<PostHub> _hubContext;
-        private readonly ICategoryService _categoryservice;
+    private readonly IHubContext<PostHub> _hubContext;
+    private readonly ICategoryService _categoryservice;
+    
+
 
 
         public PostController(IPostService postService, IMapper mapper, IImageService imageService, IHubContext<PostHub> hubContext, ICategoryService categoryservice

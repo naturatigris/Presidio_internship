@@ -1,12 +1,9 @@
 using BlogPlatform.Interfaces;
 using BlogPlatform.Models;
-using BlogPlatform.Contexts;
-using BlogPlatform.Repositories;
 using BlogPlatform.Models.AuditLogs;
 using BlogPlatform.Services;
 using Moq;
 using NUnit.Framework;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,132 +12,137 @@ using System.Threading.Tasks;
 [TestFixture]
 public class PostServiceTests
 {
-    private BlogPlatformContext _context;
-    private PostService _postService;
-    private IRepository<Guid, Post> _postRepository;
-    private IRepository<Guid, Comment> _commentRepository;
-    private IRepository<Guid, Image> _imageRepository;
-    private IRepository<string, User> _userRepository;
-
+    private Mock<IRepository<Guid, Post>> _postRepositoryMock;
+    private Mock<IRepository<Guid, Comment>> _commentRepositoryMock;
+    private Mock<IRepository<Guid, Image>> _imageRepositoryMock;
+    private Mock<IRepository<string, User>> _userRepositoryMock;
     private Mock<IImageService> _imageServiceMock;
     private Mock<IPostAuditLogRepository> _auditLogRepositoryMock;
     private Mock<IUserValidationService> _userValidationServiceMock;
 
+    private PostService _postService;
+
     [SetUp]
     public void SetUp()
     {
-        var options = new DbContextOptionsBuilder<BlogPlatformContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-            .Options;
-
-        _context = new BlogPlatformContext(options);
-        _context.Database.EnsureCreated();
-
-        _postRepository = new PostRepository(_context);
-        _commentRepository = new CommentRepository(_context);
-        _imageRepository = new ImageRepository(_context);
-        _userRepository = new UserRepository(_context);
-
+        _postRepositoryMock = new Mock<IRepository<Guid, Post>>();
+        _commentRepositoryMock = new Mock<IRepository<Guid, Comment>>();
+        _imageRepositoryMock = new Mock<IRepository<Guid, Image>>();
+        _userRepositoryMock = new Mock<IRepository<string, User>>();
         _imageServiceMock = new Mock<IImageService>();
         _auditLogRepositoryMock = new Mock<IPostAuditLogRepository>();
         _userValidationServiceMock = new Mock<IUserValidationService>();
 
+        _userValidationServiceMock
+            .Setup(s => s.ValidateUserEmail(It.IsAny<string>()))
+            .Returns(Task.CompletedTask);
+
+        _auditLogRepositoryMock
+            .Setup(r => r.AddAsync(It.IsAny<PostAuditLog>()))
+            .Returns(Task.CompletedTask);
+
         _postService = new PostService(
-            _postRepository,
+            _postRepositoryMock.Object,
             _auditLogRepositoryMock.Object,
-            _commentRepository,
-            _imageRepository,
-            _userRepository,
+            _commentRepositoryMock.Object,
+            _imageRepositoryMock.Object,
+            _userRepositoryMock.Object,
             _imageServiceMock.Object,
-            _context,
+            null, // DbContext is no longer needed
             _userValidationServiceMock.Object
         );
     }
 
-    [TearDown]
-    public void TearDown()
-    {
-        _context.Database.EnsureDeleted();
-        _context.Dispose();
-    }
-
     [Test]
-    public async Task AddPost_ShouldStoreInDb()
+    public async Task AddPost_ShouldAddPostAndAuditLog()
     {
+        // Arrange
         var post = new Post
         {
             Id = Guid.NewGuid(),
             Title = "Test Post",
             Content = "Some content",
-            UserEmail = "test@example.com",
-            Slug="test_post"
+            UserEmail = "user@example.com",
+            Slug = "test-post"
         };
 
-        _userValidationServiceMock.Setup(s => s.ValidateUserEmail(It.IsAny<string>())).Returns(Task.CompletedTask);
+        _postRepositoryMock.Setup(r => r.Add(It.IsAny<Post>())).ReturnsAsync((Post p) => p);
+        _postRepositoryMock.Setup(r => r.Get(post.Id)).ReturnsAsync(post);
 
+        // Act
         var result = await _postService.AddPost(post, "admin@example.com");
 
-        var fromDb = await _postRepository.Get(result.Id);
-        Assert.That(fromDb.Title, Is.EqualTo("Test Post"));
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Title, Is.EqualTo("Test Post"));
+
+        _auditLogRepositoryMock.Verify(x => x.AddAsync(It.Is<PostAuditLog>(a =>
+            a.Action == "Created" &&
+            a.PerformedBy == "admin@example.com" &&
+            a.PostId == post.Id
+        )), Times.Once);
     }
+
     [Test]
-public async Task DeletePost_ShouldMarkPostAsDeleted_AndLogAudit()
-{
-    // Arrange
-    var postId = Guid.NewGuid();
-    var post = new Post { Id = postId, IsDeleted = false, UserEmail = "user@test.com",Title="hello",Slug="H",Content="hello this is a post"};
-    
-    // Add post to in-memory DB
-    await _postRepository.Add(post);
+    public async Task DeletePost_ShouldMarkPostAsDeleted_AndLogAudit()
+    {
+        // Arrange
+        var postId = Guid.NewGuid();
+        var post = new Post { Id = postId, IsDeleted = false, UserEmail = "user@test.com", Title = "hello", Slug = "H", Content = "hello this is a post" };
 
-    _userValidationServiceMock.Setup(s => s.ValidateUserEmail(It.IsAny<string>())).Returns(Task.CompletedTask);
-    
-    // Act
-    var result = await _postService.DeletePost(postId, "admin@test.com");
+        _postRepositoryMock.Setup(r => r.Get(postId)).ReturnsAsync(post);
+        _postRepositoryMock.Setup(r => r.Update(postId, It.IsAny<Post>())).ReturnsAsync((Guid postId, Post post) => post);
+        // Act
+        var result = await _postService.DeletePost(postId, "admin@test.com");
 
-    // Fetch fresh from DB
-    var updatedPost = await _postRepository.Get(postId);
+        // Assert
+        Assert.That(result.IsDeleted, Is.True);
+        _postRepositoryMock.Verify(r => r.Update(postId, It.Is<Post>(p => p.IsDeleted)), Times.Once);
+        _auditLogRepositoryMock.Verify(x => x.AddAsync(It.Is<PostAuditLog>(a =>
+            a.Action == "Deleted" &&
+            a.PerformedBy == "admin@test.com" &&
+            a.PostId == postId
+        )), Times.Once);
+    }
 
-    // Assert
-    Assert.That(updatedPost.IsDeleted, Is.True);
-    Assert.That(result.IsDeleted, Is.True);
-}
+    [Test]
+    public async Task GetPostById_ShouldReturnPost()
+    {
+        // Arrange
+        var postId = Guid.NewGuid();
+        var post = new Post { Id = postId, Title = "Sample Title", UserEmail = "user@test.com", Slug = "h", Content = "hello this is a post" };
 
-[Test]
-public async Task GetPostById_ShouldReturnPost()
-{
-    // Arrange
-    var postId = Guid.NewGuid();
-    var post = new Post { Id = postId, Title = "Sample Title" ,UserEmail = "user@test.com",Slug="h",Content="hello this is a post"};
+        _postRepositoryMock.Setup(r => r.Get(postId)).ReturnsAsync(post);
 
-    await _postRepository.Add(post);
+        // Act
+        var result = await _postService.GetPostByID(postId);
 
-    // Act
-    var result = await _postService.GetPostByID(postId);
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Id, Is.EqualTo(postId));
+        Assert.That(result.Title, Is.EqualTo("Sample Title"));
+    }
 
-    // Assert
-    Assert.That(result, Is.Not.Null);
-    Assert.That(result.Id, Is.EqualTo(postId));
-    Assert.That(result.Title, Is.EqualTo("Sample Title"));
-}
+    [Test]
+    public async Task UpdatePost_ShouldReturnUpdatedValue()
+    {
+        // Arrange
+        var postId = Guid.NewGuid();
+        var originalPost = new Post { Id = postId, Content = "hello", UserEmail = "user@test.com", Title = "Post", Slug = "p" };
 
-[Test]
-public async Task UpdatePost_ShouldReturnUpdatedValue()
-{
-    // Arrange
-    var postId = Guid.NewGuid();
-    var post = new Post { Id = postId, Content = "hello", UserEmail = "user@test.com" ,Title="Post",Slug="p"};
-    await _postRepository.Add(post);
+        _postRepositoryMock.Setup(r => r.Get(postId)).ReturnsAsync(originalPost);
+        _postRepositoryMock.Setup(r => r.Update(postId, It.IsAny<Post>())).ReturnsAsync((Guid postId , Post post) => post);
 
-    // Act
-    var postToUpdate = await _postRepository.Get(postId);
-    postToUpdate.Content = "changed";
-    await _postRepository.Update(postId, postToUpdate);
+        // Act
+        var postToUpdate = await _postService.GetPostByID(postId);
+        postToUpdate.Content = "changed";
 
-    var updatedPost = await _postService.GetPostByID(postId);
+        await _postRepositoryMock.Object.Update(postId, postToUpdate);
+        _postRepositoryMock.Setup(r => r.Get(postId)).ReturnsAsync(postToUpdate);
 
-    // Assert
-    Assert.That(updatedPost.Content, Is.EqualTo("changed"));
-}
+        var updatedPost = await _postService.GetPostByID(postId);
 
+        // Assert
+        Assert.That(updatedPost.Content, Is.EqualTo("changed"));
+    }
 }

@@ -11,6 +11,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using System.IO;
+using System.Text;
+
 
 
 namespace BlogPlatform.Tests
@@ -93,7 +96,14 @@ public async Task UpdateUser_ReturnsOk_WhenUserIsUpdated()
     var dto = new UpdateUserDto { Name = "Updated User", Password = "newpass" };
     var user = new User { Email = email };
     var performer = new User { Email = performerEmail, Role = "Admin" };
-
+    var content = "Fake image content";
+    var fileName = "test.jpg";
+    var stream = new MemoryStream(Encoding.UTF8.GetBytes(content));
+    var formFile = new FormFile(stream, 0, stream.Length, "profileImage", fileName)
+    {
+        Headers = new HeaderDictionary(),
+        ContentType = "image/jpeg"
+    };
     var claims = new List<Claim>
     {
         new Claim(ClaimTypes.Email, performerEmail),
@@ -109,7 +119,7 @@ public async Task UpdateUser_ReturnsOk_WhenUserIsUpdated()
     _mapperMock.Setup(m => m.Map(dto, user));
     _passwordHasherMock.Setup(h => h.HashPassword(dto.Password)).Returns("hashed-pass");
 
-    var result = await _controller.UpdateUser(email, dto);
+    var result = await _controller.UpdateUser(email, dto,formFile);
 
     Assert.That(result, Is.TypeOf<OkObjectResult>());
     Assert.That(((OkObjectResult)result).Value, Is.EqualTo(user));
@@ -123,10 +133,10 @@ public async Task UpdateUser_ReturnsOk_WhenUserIsUpdated()
             var user = new User { Email = email };
 
             var claims = new List<Claim>
-    {
-        new Claim(ClaimTypes.Email, performerEmail),
-        new Claim(ClaimTypes.Role, "Admin")
-    };
+            {
+                new Claim(ClaimTypes.Email, performerEmail),
+                new Claim(ClaimTypes.Role, "Admin")
+            };
             var identity = new ClaimsIdentity(claims);
             var claimsPrincipal = new ClaimsPrincipal(identity);
             _controller.ControllerContext.HttpContext = new DefaultHttpContext { User = claimsPrincipal };
