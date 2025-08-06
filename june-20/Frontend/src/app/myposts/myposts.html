@@ -51,7 +51,7 @@
           <button *ngIf="post?.id" (click)="viewPost(post!.id)" class="readmore">Read More</button>
           <div class="like-box">
             <i 
-              class='bx bx-like' 
+              class='bx bxs-like' 
               [class.liked]="likedPostIds.has(post.id!)" 
               (click)="togglePostLike(post.id!)">
             </i>

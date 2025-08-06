@@ -14,7 +14,7 @@ export interface Post {
   isDeleted?: boolean;
   createdAt?:Date;
   views?:number;
-  user?: UserProfile;             // optional, included only if populated
+  user?: UserProfile;             
   comments?: Comment[];
   categories?: Category[];
   images?: Image[];

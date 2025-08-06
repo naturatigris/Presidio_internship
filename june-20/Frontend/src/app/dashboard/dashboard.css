@@ -137,13 +137,13 @@
   cursor: pointer;
 }
 
-.bx-like {
+.bxs-like {
   font-size: 20px;
   color: gray;
   transition: color 0.2s;
 }
 
-.bx-like.liked {
+.bxs-like.liked {
   color: #007bff;
 }
 @media (max-width: 480px) {
@@ -171,10 +171,10 @@
 .post-preview{
   font-size: 14px;
 }
-.bx-like{
+.bxs-like{
   font-size: 15px;
 }
-.bx-like.liked{
+.bxs-like.liked{
   font-size: 15px;
 }
 .tag {

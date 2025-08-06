@@ -2,20 +2,29 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { getUserRole } from './misc/jwtdecode';
+import { UserService } from './service/user.service';
+import { UserProfile } from './models/userprofilemodel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  user:UserProfile|null=null;
   constructor(
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private userservice:UserService
   ) {}
 
   canActivate(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
-      if (token) return true;
+      this.userservice.user$.subscribe(user => {
+      this.user = user;
+            
+      });
+      
+      if (token && !this.user?.isSuspended) return true;
     }
 
     this.router.navigate(['/login']);
@@ -37,7 +46,7 @@ export class AdminGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['/login']); // or redirect to homepage
+    this.router.navigate(['/login']); 
     return false;
   }
 }

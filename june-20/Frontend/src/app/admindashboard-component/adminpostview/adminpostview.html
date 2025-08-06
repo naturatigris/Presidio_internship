@@ -5,7 +5,8 @@
   </div>
 
   <ul class="blog-list">
-    <li *ngFor="let post of posts" class="blog-item">
+    <li *ngFor="let post of posts"class="blog-item">
+      <div class="blog-item" *ngIf="post.status==='Published'">
       <img
         [src]="'data:image/jpeg;base64,' + post.images?.[0]?.content"
         class="post-image"
@@ -26,8 +27,13 @@
             <i class='bx  bx-show'  ></i>             
             <span>{{ post?.views|| 0 }} Views</span>
           </div>
+          <div class="meta-item">
+            <i class='bx  bx-like'  ></i>             
+            <span>{{  postLikes[post.id!]|| 0 }} likes</span>
+          </div>
 
         </div>
+      </div>
       </div>
     </li>
   </ul>

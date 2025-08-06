@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter,OnChanges,SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { getUserRole } from '../../misc/jwtdecode';
+import { getUserEmail, getUserRole } from '../../misc/jwtdecode';
 
 @Component({
   selector: 'app-profile-header-edit',
@@ -20,6 +20,7 @@ export class ProfileHeaderEdit implements OnChanges {
 
   profileForm!: FormGroup;
 userrole: string = '';
+useremail:string='';
 
   constructor(private fb: FormBuilder) {}
 
@@ -31,10 +32,11 @@ userrole: string = '';
 
   initForm() {
     this.userrole = getUserRole() ?? '';
+    this.useremail=getUserEmail()??'';
 
     this.profileForm = this.fb.group({
       name: new FormControl(
-        { value: this.name, disabled: this.userrole !== 'User' },
+        { value: this.name,disabled: !(this.useremail === this.email) },
         Validators.required
       ),
       role: new FormControl(

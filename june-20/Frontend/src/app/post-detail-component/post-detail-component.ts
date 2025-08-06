@@ -108,6 +108,7 @@ addComment(postId?: string) {
   if (postId){
   const content = this.postcontent;
   if (!content) return;
+  this.postcontent='';
 
   const email=getUserEmail();
   if(email){
@@ -145,6 +146,7 @@ cancelEdit() {
 saveComment(commentId: string) {
   const trimmed = this.editContent.trim();
   if (!trimmed) return;
+  this.editContent = '';
 
   this.updateComment(commentId, trimmed);
   this.editingCommentId = null;

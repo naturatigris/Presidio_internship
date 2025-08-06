@@ -47,6 +47,7 @@
 
 
   <!-- Filtering Section -->
+   <div style="display: flex; justify-content: space-between;" class="filter-section-model">
   <div class="filter-section">
     <label>Role:
       <select [(ngModel)]="filters.role">
@@ -65,8 +66,16 @@
     </label>
 
     <button (click)="applyFilters()">Apply</button>
+    
   </div>
-
+  <button class="add-button" (click)="openCreateUserModal()">
+  <i class="bx bx-user"></i> Add Users
+</button>
+</div>
+<app-admin-create-user
+  *ngIf="isCreateUserOpen"
+  (closeModal)="handleModalClose()">
+</app-admin-create-user>
   <!-- User List Table -->
   <div class="user-table">
     <table>

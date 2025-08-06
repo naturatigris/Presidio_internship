@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../service/category.service';
 import { RouterModule } from '@angular/router';
+import { PostLikeService } from '../../service/postlike.service';
 
 @Component({
   selector: 'app-adminpostview',
@@ -19,9 +20,10 @@ export class Adminpostview {
   totalPages: number = 1;
 currentPage: number = 1;
 totalItems: number = 0;
+postLikes: { [postId: string]: number } = {};
 
   fetchedCategories:string[]=[];
-      constructor(private postService: PostService,private router: Router,private categoryservice:CategoryService) {}
+      constructor(private postService: PostService,private router: Router,private categoryservice:CategoryService,private postLikeService:PostLikeService) {}
     filteredParams:PostQueryParams={  
       searchTerm:'',
       sortOrder: 'asc',
@@ -93,6 +95,11 @@ applyFilters():void{
       this.totalPages = response.totalPages;
       this.totalItems = response.totalItems;
       this.currentPage = response.currentPage;
+       this.posts.forEach(post => {
+        this.postLikeService.getLikeCount(post.id!).subscribe(count => {
+          this.postLikes[post.id!] = count;
+        });
+      });
     },
     error: err => console.error('Error fetching posts', err)
   });

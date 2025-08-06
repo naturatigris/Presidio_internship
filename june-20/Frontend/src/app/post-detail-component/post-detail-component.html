@@ -50,7 +50,7 @@
   <!-- Comment Section -->
 <div class="comment-section">
   <!-- Add Comment Input -->
-  <div class="add-comment">
+  <div class="add-comment" >
     <input
       type="text"
       [(ngModel)]="postcontent"
@@ -61,7 +61,7 @@
   </div>
 
   <!-- Comments List -->
-<div class="comments-list" >
+<div class="comments-list">
   <!-- User's Own Comments First -->
   <ng-container *ngFor="let comment of userComments" class="usercomments">
     <div class="comment">
@@ -123,7 +123,8 @@
   <!-- Other Comments -->
   <ng-container *ngFor="let comment of otherComments">
     <div class="comment">
-      <div>
+      <div >
+      
       <div *ngIf="editingCommentId === comment.id; else viewContent">
         <input [(ngModel)]="editContent" class="edit-input" />
         <button (click)="saveComment(comment.id)">Save</button>
@@ -135,27 +136,9 @@
             <p class="comment-author">{{ comment.user.name }}</p>
 
       </div>
-
-      <!-- Three Dots Menu -->
-      <div class="comment-options" style="justify-self: end;" *ngIf="isAdmin">
-        <div class="dots" (click)="toggleMenu(comment.id)">
-          <i class='bx bx-dots-vertical-rounded'></i>
-        </div>
-
-        <div class="dropdown-menu" *ngIf="activeMenuId === comment.id">
-          <button (click)="editComment(comment)">
-            <i class="bx bx-edit-alt"></i> Edit
-          </button>
-          <button (click)="deleteComment(comment.id)">
-            <i class="bx bx-trash"></i> Delete
-          </button>
-        </div>
-
 <div style="display: flex; width: 200px;justify-content: space-between;">
-                      <!-- Like Button with Count -->
-      
-    </div>
-        </div>
+
+
         <div class="comment-like-section">
   <i 
     class='bx' 
@@ -176,6 +159,7 @@
 
       </div>
 </div>
+    </div>
 
 
   </ng-container>

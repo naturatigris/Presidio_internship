@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CommentService } from '../service/comment.service';
 import { PostService } from '../service/post.service';
+import { PostLike } from '../models/postlikemodel';
 @Component({
   selector: 'app-notifications',
   imports: [CommonModule],
@@ -15,6 +16,7 @@ import { PostService } from '../service/post.service';
 export class Notifications implements OnInit {
 posts: UINotification<Post>[] = [];
 comments: UINotification<Comment>[] = [];
+postlikes: UINotification<PostLike>[] = [];
 
   constructor(private notificationService: NotificationService,private router:Router,private postService:PostService,private commentService:CommentService) {}
 viewpost(postId: string) {
@@ -22,11 +24,14 @@ viewpost(postId: string) {
 }
   ngOnInit(): void {
   this.notificationService.posts$.subscribe(posts => {
-    this.posts = posts.filter(n => !n.read); // show only unread
+    this.posts = posts.filter(n => !n.read); 
   });
 
   this.notificationService.comments$.subscribe(comments => {
     this.comments = comments.filter(n => !n.read);;
+  });
+  this.notificationService.postsLike$.subscribe(postlikesval => {
+    this.postlikes = postlikesval.filter(n => !n.read);;
   });
   }
   markPostAsRead(postId: string) {

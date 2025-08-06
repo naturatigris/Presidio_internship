@@ -10,14 +10,17 @@ import { Adminpostview } from '../admindashboard-component/adminpostview/adminpo
 import { PostService } from '../service/post.service';
 import { CommentService } from '../service/comment.service';
 import { CommentQueryParams } from '../models/commentqueryparams';
+import { AdminCreateUser } from '../admin-create-user/admin-create-user';
 @Component({
   selector: 'app-admindashboard',
   templateUrl: './admindashboard.html',
   styleUrls: ['./admindashboard.css'],
-  imports:[CommonModule,ReactiveFormsModule,FormsModule,RouterModule,Adminpostcomponent,Admindashboardanalytics,Adminpostview]
+  imports:[CommonModule,AdminCreateUser,ReactiveFormsModule,FormsModule,RouterModule,Adminpostcomponent,Admindashboardanalytics,Adminpostview]
 
 })
 export class Admindashboard implements OnInit {
+    isCreateUserOpen = false;
+
   users: User[] = [];
   totalUsers = 0;
   totalPosts = 0;       
@@ -126,5 +129,12 @@ loadUsers() {
       this.pageNumber--;
       this.loadUsers();
     }
+  }
+  openCreateUserModal() {
+    this.isCreateUserOpen = true;
+  }
+
+  handleModalClose() {
+    this.isCreateUserOpen = false;
   }
 }

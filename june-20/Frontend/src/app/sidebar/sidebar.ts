@@ -40,7 +40,7 @@ export class Sidebar implements OnInit{
     checkScreenSize() {
     this.isMobile = window.innerWidth <= 768;
     if (!this.isMobile) {
-      this.isSidebarOpen = true; // always open on desktop
+      this.isSidebarOpen = true; 
     }
   }
 
@@ -48,6 +48,10 @@ export class Sidebar implements OnInit{
 toggleDropdown() {
   this.dropdownOpen = !this.dropdownOpen;
 }
+ toggleDropdownOut(){
+    this.dropdownOpen = !this.dropdownOpen;
+
+ }
 
 viewProfile() {
   this.router.navigate(['/profile']); 

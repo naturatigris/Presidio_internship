@@ -1,5 +1,7 @@
 using BlogPlatform.Contexts;
+using BlogPlatform.Hubs;
 using BlogPlatform.Models;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogPlatform.Services
@@ -7,10 +9,12 @@ namespace BlogPlatform.Services
     public class PostLikeService
     {
         private readonly BlogPlatformContext _context;
+        private readonly IHubContext<PostHub> _hubcontext;
 
-        public PostLikeService(BlogPlatformContext context)
+        public PostLikeService(BlogPlatformContext context, IHubContext<PostHub> hubcontext)
         {
             _context = context;
+            _hubcontext = hubcontext;
         }
 
         public async Task<bool> LikePost(Guid postId, string userEmail)
@@ -28,6 +32,8 @@ namespace BlogPlatform.Services
 
             _context.PostLikes.Add(like);
             await _context.SaveChangesAsync();
+            await _hubcontext.Clients.All.SendAsync("ReceivePostLike", like);
+
             return true;
         }
 

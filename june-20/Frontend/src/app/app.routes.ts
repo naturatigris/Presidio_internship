@@ -18,6 +18,7 @@ import { Adminpostcomponent } from './admindashboard-component/adminpostcomponen
 import { RenderMode } from '@angular/ssr';
 import { RedirectComponent } from './redirect';
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, 
     { path: 'home', component: Home },
       {path:'login',component:Login},
       {path: 'signup',component:Register},
@@ -27,12 +28,11 @@ export const routes: Routes = [
       canActivate: [AuthGuard],
 
     children: [
-            { path: '', component: RedirectComponent }, 
 
       {path: 'dashboard', component: Dashboard },
       {path:'dashboard/admin',component:Admindashboard,canActivate: [AdminGuard] },
       {path:'dashboard/admin/posts',component:Adminpostcomponent,canActivate: [AdminGuard] },
-            { path: 'dashboard/admin/**', redirectTo: 'dashboard/admin' },
+      { path: 'dashboard/admin/**', redirectTo: 'dashboard/admin' },
 
 
       {path:'profile',component:Profile},

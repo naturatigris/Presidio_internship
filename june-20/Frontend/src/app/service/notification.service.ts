@@ -3,6 +3,7 @@ import { BehaviorSubject,combineLatest,map } from 'rxjs';
 import * as signalR from '@microsoft/signalr';
 import { Post } from '../models/postmodel';
 import { Comment } from '../models/commentmodel';
+import { PostLike } from '../models/postlikemodel';
 
 export interface UINotification<T> {
   item: T;
@@ -17,6 +18,9 @@ export class NotificationService {
 
 private postsSubject = new BehaviorSubject<UINotification<Post>[]>([]);
 posts$ = this.postsSubject.asObservable();
+private postsLikeSubject = new BehaviorSubject<UINotification<PostLike>[]>([]);
+postsLike$ = this.postsLikeSubject.asObservable();
+
 
 private commentsSubject = new BehaviorSubject<UINotification<Comment>[]>([]);
 comments$ = this.commentsSubject.asObservable();
@@ -41,6 +45,10 @@ this.hubConnection.on('ReceivePost', (post: Post) => {
   const current = this.postsSubject.value;
   this.postsSubject.next([{ item: post, read: false }, ...current.slice(0, 4)]);
 });
+this.hubConnection.on('ReceivePostLike', (post: PostLike) => {
+  const current = this.postsLikeSubject.value;
+  this.postsLikeSubject.next([{ item: post, read: false }, ...current.slice(0, 4)]);
+});
 
 this.hubConnection.on('ReceiveComment', (comment: Comment) => {
   const current = this.commentsSubject.value;
@@ -51,7 +59,7 @@ this.hubConnection.on('ReceiveComment', (comment: Comment) => {
   const updated = this.postsSubject.value.map(n =>
     n.item.id === postId ? { ...n, read: true } : n
   );
-  this.postsSubject.next([...updated]); // <--- trigger change detection
+  this.postsSubject.next([...updated]); 
 }
 
 markCommentAsRead(commentId: string) {

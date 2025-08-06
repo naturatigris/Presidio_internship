@@ -158,11 +158,12 @@
   padding: 6px;
   font-size: 20px;
   color: #444;
+  z-index: 200;
 }
 .dropdown-menu {
   position: absolute;
   top: 30px;
-  right: 0;
+  right:0;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 6px;

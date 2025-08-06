@@ -176,7 +176,7 @@ updateLocation(newLocation: any) {
 }
 
 updateStatus(data: { isSuspended: boolean, suspensionReason: string | null, suspendedUntil: Date | null }) {
-const updateDto = new UpdateUserDto({ isSuspended: data.isSuspended,suspensionReason:data.suspensionReason,suspendedUntil:data.suspendedUntil });
+const updateDto = new UpdateUserDto({ status:'Suspended',isSuspended: data.isSuspended,suspensionReason:data.suspensionReason,suspendedUntil:data.suspendedUntil });
   if (this.user)
   this.userservice.updateUserSection(this.user?.email, updateDto).subscribe({
       next: (res) => {

@@ -11,7 +11,7 @@
     <textarea formControlName="content" rows="5"></textarea>
   </label>
 
-  <label>Status:
+  <label *ngIf="statusval==='Draft'">Status:
     <select formControlName="status">
       <option value="Published">Published</option>
       <option value="Draft">Draft</option>

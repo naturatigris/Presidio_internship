@@ -20,50 +20,43 @@ public SanitizeInputFilter()
     _sanitizer.AllowedTags.Add("em");
 }
 
-    public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+   public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+{
+    foreach (var key in context.ActionArguments.Keys.ToList())
     {
-        foreach (var key in context.ActionArguments.Keys.ToList())
+        var argument = context.ActionArguments[key];
+        if (argument == null) continue;
+
+        if (argument is string strValue)
         {
-            var argument = context.ActionArguments[key];
-            if (argument == null) continue;
+            var sanitized = _sanitizer.Sanitize(strValue);
 
-            // Handle string parameters (primitives)
-            if (argument is string strValue)
+            if (sanitized != strValue)
             {
-                var decoded = WebUtility.UrlDecode(strValue);
-                var sanitized = _sanitizer.Sanitize(decoded);
-
-                if (sanitized != decoded)
-                {
-                    context.Result = new BadRequestObjectResult(
-                        $"Invalid input in parameter '{key}': possible XSS content."
-                    );
-                    return;
-                }
-
-                context.ActionArguments[key] = sanitized;
+                context.Result = new BadRequestObjectResult(
+                    $"Invalid input in parameter '{key}': possible XSS content."
+                );
+                return;
             }
-            // Handle complex objects (models)
-            else
+
+            context.ActionArguments[key] = sanitized;
+        }
+        else
+        {
+            var props = argument.GetType().GetProperties()
+                .Where(p => p.PropertyType == typeof(string) && p.CanRead && p.CanWrite);
+
+            foreach (var prop in props)
             {
-                var props = argument.GetType().GetProperties()
-                    .Where(p => p.PropertyType == typeof(string) && p.CanRead && p.CanWrite);
+                var rawValue = prop.GetValue(argument) as string;
+                if (rawValue == null) continue;
 
-                foreach (var prop in props)
-                {
-                    var rawValue = prop.GetValue(argument) as string;
-                    if (rawValue == null) continue;
-
-                    var decoded = WebUtility.UrlDecode(rawValue);
-                    var sanitized = _sanitizer.Sanitize(decoded);
-
-                    prop.SetValue(argument, sanitized); // Safe overwrite
-
-                    prop.SetValue(argument, sanitized);
-                }
+                var sanitized = _sanitizer.Sanitize(rawValue);
+                prop.SetValue(argument, sanitized);
             }
         }
-
-        await next();
     }
+
+    await next();
+}
 }

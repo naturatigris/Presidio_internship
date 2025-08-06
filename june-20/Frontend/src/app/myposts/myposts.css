@@ -134,7 +134,7 @@
   text-decoration: none;
   color: black;
   font-size: 20px;
-    display: inline-block; /* Add this */
+    display: inline-block;
 
 }
 
@@ -154,13 +154,13 @@ font-size: 1.5rem;
   cursor: pointer;
 }
 
-.bx-like {
+.bxs-like {
   font-size: 20px;
   color: gray;
   transition: color 0.2s;
 }
 
-.bx-like.liked {
+.bxs-like.liked {
   color: #007bff;
 }
 @media (max-width: 480px) {
@@ -188,10 +188,10 @@ font-size: 1.5rem;
 .post-preview{
   font-size: 14px;
 }
-.bx-like{
+.bxs-like{
   font-size: 15px;
 }
-.bx-like.liked{
+.bxs-like.liked{
   font-size: 15px;
 }
 .tag {

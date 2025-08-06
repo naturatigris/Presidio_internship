@@ -2,6 +2,8 @@ using BlogPlatform.Models;
 using BlogPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using BlogPlatform.Hubs;
 
 
 namespace BlogPlatform.Controllers
@@ -12,9 +14,11 @@ namespace BlogPlatform.Controllers
     {
         private readonly PostLikeService _postLikeService;
 
+
         public PostLikeController(PostLikeService postLikeService)
         {
             _postLikeService = postLikeService;
+
         }
         [Authorize]
         [HttpPost("like")]
@@ -22,7 +26,9 @@ namespace BlogPlatform.Controllers
         {
             var result = await _postLikeService.LikePost(postId, userEmail);
             if (!result) return BadRequest("User already liked this post.");
+
             return Ok("Post liked successfully.");
+
         }
         [Authorize]
         [HttpPost("unlike")]

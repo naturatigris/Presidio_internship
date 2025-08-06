@@ -14,7 +14,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 .card {
   flex: 1 1 250px;
   padding: 1.5rem;
@@ -162,7 +161,6 @@
   color: #1976d2;
 }
 
-/* Pagination */
 .pagination-controls {
   margin-top: 1rem;
   display: flex;
@@ -195,10 +193,23 @@
 .action-button:hover {
   color: #1976d2;
 }
+.add-button {
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+padding: 0.4rem;
+margin-bottom: 20px;
+  background: transparent;
+ cursor: pointer;
+}
+.bx-user{
+  font-size: 8x;
+}
+
 .confirm-toast {
+  position: fixed;
   background: #fff;
   border: 1px solid #ccc;
-  border-left: 6px solid #e53935;
   color: #333;
   padding: 1rem;
   margin: 1rem 0;
@@ -207,7 +218,9 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
+  top: 10px;
   animation: fadeSlideIn 0.4s ease-in-out;
+  z-index: 1000;
 }
 
 .confirm-toast p {
@@ -358,6 +371,20 @@
   .cancel-btn {
     width: 100%;
   }
+  .add-button {
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+
+padding: 0.1rem;
+margin-bottom: 20px;
+  background: transparent;
+ cursor: pointer;
+}
+.bx-user{
+  font-size: 5x;
+}
+
 }
 
 /* Very Small Devices (<=480px) */
@@ -384,4 +411,22 @@
   .chart_post{
     display: block;
   }
+  .add-button {
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+
+padding: 0.1rem;
+margin-left : 20px;
+  background: transparent;
+ cursor: pointer;
+ height: fit-content;
+}
+.bx-user{
+  font-size: 5x;
+}
+.filter-section-model{
+  display: flex;
+  flex-direction: column;
+}
 }

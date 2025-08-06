@@ -54,7 +54,7 @@ coverFile: File | null = null;
   const allImages = [...this.images];
 
   if (this.coverFile) {
-  allImages.unshift(this.coverFile); // add cover photo at the beginning
+  allImages.unshift(this.coverFile); 
 }
 
 
@@ -69,15 +69,19 @@ coverFile: File | null = null;
   };
 
   this.postService.WritePost(post).subscribe({
-    next: res => alert('Post created successfully!'),
+    next: res => {
+      alert('Post created successfully!');
+      this.postForm.reset();
+    },
     error: err => alert('Failed: ' + err.message)
   });
+  
 
 }
 onCoverChange(event: any) {
   const file = event.target.files[0];
   if (file) {
-    this.coverFile = file; // Save the file here
+    this.coverFile = file; 
     const reader = new FileReader();
     reader.onload = e => this.coverPreview = reader.result as string;
     reader.readAsDataURL(file);
@@ -104,9 +108,14 @@ onFileChange(event: any) {
   }
 sanitizeInput(input: string): string {
   return DOMPurify.sanitize(input, {
-    ALLOWED_TAGS: [], // strips all HTML tags
+    ALLOWED_TAGS: [], 
     ALLOWED_ATTR: [],
   });
 }
+removeImage(index: number): void {
+  this.images.splice(index, 1);
+  this.imagePreviews.splice(index, 1);
+}
+
 
 }

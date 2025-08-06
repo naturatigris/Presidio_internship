@@ -15,6 +15,7 @@ export class UpdatePostComponent implements OnInit {
   updateForm!: FormGroup;
   postId!: string;
 existingImages: File[] = []; // ✅ Not { id?: string, content: string }[]
+statusval:string='';
 
   selectedFiles: File[] = [];
 
@@ -47,6 +48,7 @@ this.existingImages=(post.images || []).map((img: { id?: string; content: string
       `existing-image-${index}.jpg`
     )
   );
+  this.statusval=post.status;
 
     });
   }

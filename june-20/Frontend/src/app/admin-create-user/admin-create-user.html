@@ -1,0 +1,64 @@
+<div class="overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2>Create User</h2>
+      <p>Enter user details below</p>
+      <button class="close-btn" (click)="close()">×</button>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+          <div class="input-group">
+
+        <input formControlName="name" id="name" placeholder="Full name" />
+          <div *ngIf="userForm.get('name')?.touched && userForm.get('name')?.errors?.['required']" class="error">
+                  Name is required.
+            </div>
+
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+          <div class="input-group">
+        <input formControlName="email" id="email" placeholder="Email address" />
+        <div *ngIf=" userForm.get('email')?.touched && userForm.get('email')?.errors?.['required']" class="error">Email is required.</div>
+      <div *ngIf="userForm.get('email')?.errors?.['email']" class="error">Invalid email format.</div>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+         <div class="input-group">
+        <input type="password" formControlName="password" id="password" placeholder="Password" />
+        <div *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['required']" class="error">Password is required.</div>
+      <div *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['minlength']" class="error">Minimum 8 characters required.</div>
+      <div *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['weakPassword']" class="error">
+        Must include at least one uppercase and one special character.
+      </div>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmpassword">Confirm Password</label>
+         <div class="input-group">
+        <input type="password" formControlName="confirmpassword" id="confirmpassword" placeholder="Confirm Password" />
+        <div *ngIf="userForm.get('confirmpassword')?.touched && userForm.errors?.['passwordMismatch']" class="error">
+      Passwords do not match.
+    </div>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select formControlName="role" id="role">
+          <option value="User">User</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+
+      <button class="submit-btn" type="submit" [disabled]="userForm.invalid">Create User</button>
+    </form>
+  </div>
+</div>
